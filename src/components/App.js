@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import Auth from "../hoc/auth";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import CommunityPage from "./views/CommunityPage/CommunityPage";
@@ -23,29 +22,17 @@ function App() {
       <NavBar />
       <div style={{ paddingTop: "69px", minHeight: "calc(100vh - 80px)" }}>
         <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route
-            exact
-            path="/community"
-            component={Auth(CommunityPage, null)}
-          />
-          <Route
-            exact
-            path="/community/1"
-            component={Auth(CommunitySectionPage1, null)}
-          />
-          <Route exact path="/login" component={Auth(LoginPage, false)} />
-          <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/community" component={CommunityPage} />
+          <Route exact path="/community/1" component={CommunitySectionPage1} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/join" component={RegisterPage} />
           <Route
             exact
             path="/community/upload"
-            component={Auth(CommunityUploadePage, true)}
+            component={CommunityUploadePage}
           />
-          <Route
-            exact
-            path="/file/:fileId"
-            component={Auth(FileDetailPage, null)}
-          />
+          <Route exact path="/file/:fileId" component={FileDetailPage} />
         </Switch>
       </div>
       <Footer />

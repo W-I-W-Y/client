@@ -36,23 +36,17 @@ function RegisterPage(props) {
     <Formik
       initialValues={{
         email: "",
-        lastName: "",
         name: "",
         password: "",
-        confirmPassword: "",
       }}
       validationSchema={Yup.object().shape({
         name: Yup.string().required("Name is required"),
-        lastName: Yup.string().required("Last Name is required"),
         email: Yup.string()
           .email("Email is invalid")
           .required("Email is required"),
         password: Yup.string()
           .min(6, "Password must be at least 6 characters")
           .required("Password is required"),
-        confirmPassword: Yup.string()
-          .oneOf([Yup.ref("password"), null], "Passwords must match")
-          .required("Confirm Password is required"),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -60,7 +54,6 @@ function RegisterPage(props) {
             email: values.email,
             password: values.password,
             name: values.name,
-            lastname: values.lastname,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
           };
 
@@ -115,25 +108,6 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item required label="Last Name">
-                <Input
-                  id="lastName"
-                  placeholder="Enter your Last Name"
-                  type="text"
-                  value={values.lastName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.lastName && touched.lastName
-                      ? "text-input error"
-                      : "text-input"
-                  }
-                />
-                {errors.lastName && touched.lastName && (
-                  <div className="input-feedback">{errors.lastName}</div>
-                )}
-              </Form.Item>
-
               <Form.Item
                 required
                 label="Email"
@@ -183,25 +157,6 @@ function RegisterPage(props) {
                 />
                 {errors.password && touched.password && (
                   <div className="input-feedback">{errors.password}</div>
-                )}
-              </Form.Item>
-
-              <Form.Item required label="Confirm" hasFeedback>
-                <Input
-                  id="confirmPassword"
-                  placeholder="Enter your confirmPassword"
-                  type="password"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.confirmPassword && touched.confirmPassword
-                      ? "text-input error"
-                      : "text-input"
-                  }
-                />
-                {errors.confirmPassword && touched.confirmPassword && (
-                  <div className="input-feedback">{errors.confirmPassword}</div>
                 )}
               </Form.Item>
 
