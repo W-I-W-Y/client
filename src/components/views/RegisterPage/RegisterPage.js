@@ -36,11 +36,11 @@ function RegisterPage(props) {
     <Formik
       initialValues={{
         email: "",
-        name: "",
+        username: "",
         password: "",
       }}
       validationSchema={Yup.object().shape({
-        name: Yup.string().required("Name is required"),
+        username: Yup.string().required("Name is required"),
         email: Yup.string()
           .email("Email is invalid")
           .required("Email is required"),
@@ -53,7 +53,7 @@ function RegisterPage(props) {
           let dataToSubmit = {
             email: values.email,
             password: values.password,
-            name: values.name,
+            username: values.username,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
           };
 
@@ -61,7 +61,7 @@ function RegisterPage(props) {
             if (response.payload.success) {
               props.history.push("/login");
             } else {
-              alert(response.payload.err.errmsg);
+              alert(response.payload.err);
             }
           });
 
@@ -91,20 +91,20 @@ function RegisterPage(props) {
             >
               <Form.Item required label="Name">
                 <Input
-                  id="name"
+                  id="username"
                   placeholder="Enter your name"
                   type="text"
-                  value={values.name}
+                  value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
-                    errors.name && touched.name
+                    errors.username && touched.username
                       ? "text-input error"
                       : "text-input"
                   }
                 />
-                {errors.name && touched.name && (
-                  <div className="input-feedback">{errors.name}</div>
+                {errors.username && touched.username && (
+                  <div className="input-feedback">{errors.username}</div>
                 )}
               </Form.Item>
 
