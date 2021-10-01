@@ -11,6 +11,8 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import CommunityUploadePage from "./views/CommunityUploadePage/CommunityUploadePage";
 import FileDetailPage from "./views/FileDetailPage/FileDetailPage";
+import AddBoard from "./views/BoardPage/AddBoard.js";
+import DeleteBoard from "./views/BoardPage/DeleteBoard.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -23,6 +25,8 @@ function App() {
       <div style={{ paddingTop: "69px", minHeight: "calc(100vh - 80px)" }}>
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/board/add" component={AddBoard} />
+          <Route exact path="/board/delete" component={DeleteBoard} />
           <Route exact path="/community" component={CommunityPage} />
           <Route exact path="/community/1" component={CommunitySectionPage1} />
           <Route exact path="/login" component={LoginPage} />

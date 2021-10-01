@@ -3,6 +3,7 @@ import { Typography, Button, Form, message, Input, Icon } from "antd";
 import Dropzone from "react-dropzone";
 import Axios from "axios";
 import { useSelector } from "react-redux";
+import { USER_SERVER } from "../../Config";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -75,20 +76,23 @@ function CommunityUploadePage(props) {
     e.preventDefault();
 
     const variable = {
-      writer: user.userData._id,
-      title: videoTitle,
-      description: description,
-      privacy: prvite,
-      filePath: filePath,
-      category: category,
+      postName: videoTitle,
+      content: description,
+      boardId: 1,
+
+      // privacy: prvite,
+      // filePath: filePath,
+      // category: category,
     };
 
-    Axios.post("/api/community/uploadvideo", variable).then((response) => {
-      if (response.data.success) {
+    Axios.post(`${USER_SERVER}/api/post/add/1`, variable).then((response) => {
+      console.log("포스트 확인");
+      console.log(response);
+      if (response) {
         message.success("성공적으로 업로드했습니다");
 
         setTimeout(() => {
-          props.history.push("/community");
+          props.history.push("/community/1");
         }, 3000);
       } else {
         alert("파일 업로드에 실패했습니다.");
@@ -103,8 +107,8 @@ function CommunityUploadePage(props) {
       </div>
 
       <Form onSubmit={onSubmit}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          {/* {Drop Zone} */}
+        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+       
           <Dropzone onDrop={onDrop} multiple={false} maxSize={1000000000}>
             {({ getRootProps, getInputProps }) => (
               <div
@@ -129,7 +133,7 @@ function CommunityUploadePage(props) {
               <img src={`http://localhost:5000/${filePath}`} alt="fileImage" />
             </div>
           )}
-        </div>
+        </div> */}
 
         <br />
         <br />
@@ -142,7 +146,7 @@ function CommunityUploadePage(props) {
         <br />
         <br />
 
-        <select onChange={onPrivateChange}>
+        {/* <select onChange={onPrivateChange}>
           {PrivateOptions.map((item, index) => (
             <option key={index} value={item.value}>
               {item.label}
@@ -157,7 +161,7 @@ function CommunityUploadePage(props) {
               {item.label}
             </option>
           ))}
-        </select>
+        </select> */}
         <br />
         <br />
         <Button type="primary" size="large" onClick={onSubmit}>

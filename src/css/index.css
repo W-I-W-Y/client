@@ -4429,3 +4429,44 @@ button:disabled,
 /* .linkpage {
   display: block;
 } */
+.tabel-list {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+}
+.table-head {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.table-head tr {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 100%;
+  justify-content: space-between;
+}
+.table-body {
+  width: 100%;
+  display: inline;
+  height: 70px;
+}
+.card {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.table-content {
+  display: flex;
+  border-bottom: 1px rgb(167, 167, 167) solid;
+  padding-top: 20px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.table-content tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center;
+}
+.thtitle {
+  text-align: left;
+}
