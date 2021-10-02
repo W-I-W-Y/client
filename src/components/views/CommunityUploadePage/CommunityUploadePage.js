@@ -25,18 +25,18 @@ const CategoryOptions = [
 function CommunityUploadePage(props) {
   const boardId = props.match.params.boardId;
   const user = useSelector((state) => state.user);
-  const [videoTitle, setVideoTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [postName, setPostName] = useState("");
+  const [content, setContent] = useState("");
   const [prvite, setPrvite] = useState(0);
   const [category, setCategory] = useState("Film & Animation");
   const [filePath, setFilePath] = useState("");
 
   const onTitleChange = (e) => {
-    setVideoTitle(e.currentTarget.value);
+    setPostName(e.currentTarget.value);
   };
 
   const onDescriptionChange = (e) => {
-    setDescription(e.currentTarget.value);
+    setContent(e.currentTarget.value);
   };
 
   const onPrivateChange = (e) => {
@@ -77,28 +77,30 @@ function CommunityUploadePage(props) {
     e.preventDefault();
 
     const variable = {
-      postName: videoTitle,
-      content: description,
-      boardId: 1,
+      postName: postName,
+      content: content,
+      boardId: boardId,
 
       // privacy: prvite,
       // filePath: filePath,
       // category: category,
     };
 
-    Axios.post(`${USER_SERVER}/api/post/add/1`, variable).then((response) => {
-      console.log("포스트 확인");
-      console.log(response);
-      if (response) {
-        message.success("성공적으로 업로드했습니다");
+    Axios.post(`${USER_SERVER}/api/post/add/${boardId}`, variable).then(
+      (response) => {
+        console.log("포스트 확인");
+        console.log(response);
+        if (response === "addPost") {
+          message.success("성공적으로 업로드했습니다");
 
-        setTimeout(() => {
-          props.history.push("/community/" + boardId);
-        }, 3000);
-      } else {
-        alert("파일 업로드에 실패했습니다.");
+          setTimeout(() => {
+            props.history.push("/community/" + boardId);
+          }, 3000);
+        } else {
+          alert("파일 업로드에 실패했습니다.");
+        }
       }
-    });
+    );
   };
 
   return (
@@ -139,11 +141,11 @@ function CommunityUploadePage(props) {
         <br />
         <br />
         <label>Title</label>
-        <Input onChange={onTitleChange} value={videoTitle} />
+        <Input onChange={onTitleChange} value={postName} />
         <br />
         <br />
         <label>Description</label>
-        <TextArea onChange={onDescriptionChange} value={description}></TextArea>
+        <TextArea onChange={onDescriptionChange} value={content}></TextArea>
         <br />
         <br />
 
