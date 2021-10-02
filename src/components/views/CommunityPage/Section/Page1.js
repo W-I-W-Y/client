@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { USER_SERVER } from "../../../Config";
+import { Row, Col } from "antd";
 import Axios from "axios";
+import PostPage from "../../PostPage/PostPage";
+import { useHistory } from "react-router-dom";
 
 function Page1(props) {
   const boardId = props.match.params.boardId;
@@ -60,6 +63,11 @@ function Page1(props) {
     );
   }, []);
 
+  const history = useHistory();
+  const detailPost = (id) => {
+    history.push("../../../post/view/" + id);
+  };
+
   return (
     <div>
       <html>
@@ -74,36 +82,36 @@ function Page1(props) {
         <body>
           <div id="wrapper">
             <div id="main">
-              <div class="inner">
+              <div className="inner">
                 <header id="header">
-                  <a href="community.html" class="logo">
+                  <a href="community.html" className="logo">
                     <strong>{post.boardName}</strong>
                     <p>{post.description}</p>
                   </a>
-                  <ul class="icons">
+                  <ul className="icons">
                     <li>
-                      <a href="#" class="icon fa-twitter">
-                        <span class="label">Twitter</span>
+                      <a href="#" className="icon fa-twitter">
+                        <span className="label">Twitter</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-facebook">
-                        <span class="label">Facebook</span>
+                      <a href="#" className="icon fa-facebook">
+                        <span className="label">Facebook</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-snapchat-ghost">
-                        <span class="label">Snapchat</span>
+                      <a href="#" className="icon fa-snapchat-ghost">
+                        <span className="label">Snapchat</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-instagram">
-                        <span class="label">Instagram</span>
+                      <a href="#" className="icon fa-instagram">
+                        <span className="label">Instagram</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-medium">
-                        <span class="label">Medium</span>
+                      <a href="#" className="icon fa-medium">
+                        <span className="label">Medium</span>
                       </a>
                     </li>
                   </ul>
@@ -111,31 +119,26 @@ function Page1(props) {
                 <table className="tabel-list">
                   <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
                     <tr className="row align-items-sm-center text-center text-dark">
-                      <th className="col-sm-7">내용</th>
-                      <th className="col-sm-2">작성자</th>
-                      <th className="col-sm-3">작성일</th>
+                      <Col span={12}>내용</Col>
+                      <Col span={6}>작성자</Col>
+                      <Col span={6}>작성일</Col>
                     </tr>
                   </thead>
 
                   {post.map((post, index) => (
                     <tbody
+                      onClick={() => detailPost(post.id)}
+                      value={post.id}
                       key={index}
                       className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
-                      style={{ cursor: "pointer" }}
                     >
-                      <tr>
-                        <td id={index} className="col-sm-7 thtitle">
+                      <tr style={{ cursor: "pointer" }}>
+                        <Col span={12}>
                           {post.postName}
-                          <div className="tag">
-                            <p>{post.content}</p>
-                          </div>
-                        </td>
-                        <td id={index} className="col-sm-2">
-                          {post.username}
-                        </td>
-                        <td id={index} className="col-sm-3">
-                          {post.calculateTime}
-                        </td>
+                          <p>{post.content}</p>
+                        </Col>
+                        <Col span={6}>{post.username}</Col>
+                        <Col span={6}>{post.calculateTime}</Col>
                       </tr>
                     </tbody>
                   ))}
@@ -144,12 +147,6 @@ function Page1(props) {
                 <section>
                   <div class="posts">
                     <article>
-                      <div class="board">
-                        <a class="list" href="#">
-                          <time>{post.calculateTime}</time>
-                          <p>{post.content}</p>
-                        </a>
-                      </div>
                       <div className="pagination">
                         <ul>
                           {paginationNum.map((i, index) => {

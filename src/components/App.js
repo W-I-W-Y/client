@@ -13,6 +13,7 @@ import CommunityUploadePage from "./views/CommunityUploadePage/CommunityUploadeP
 import FileDetailPage from "./views/FileDetailPage/FileDetailPage";
 import AddBoard from "./views/BoardPage/AddBoard.js";
 import DeleteBoard from "./views/BoardPage/DeleteBoard.js";
+import PostPage from "./views/PostPage/PostPage.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -33,6 +34,7 @@ function App() {
             path="/board/:boardId/view/:pageNum"
             component={CommunitySectionPage1}
           />
+          <Route exact path="/post/view/:postId" component={PostPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/join" component={RegisterPage} />
           <Route
