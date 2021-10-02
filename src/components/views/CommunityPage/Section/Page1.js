@@ -5,7 +5,6 @@ import Axios from "axios";
 function Page1(props) {
   const boardId = props.match.params.boardId;
   const pageNum = props.match.params.pageNum;
-  console.log(boardId);
   // const variable = { boardId: boardId };
   //NOTE 전체 페이지 갯수
   const [pageTotalNum, setPageTotalNum] = useState(4);
@@ -35,7 +34,6 @@ function Page1(props) {
     Axios.get(`${USER_SERVER}/api/board/${boardId}/view/0`).then(
       (response, index) => {
         if (response.data !== null) {
-          console.log("data check");
           console.log(response.data);
           response.data.forEach((lists) => {
             setPost((state) => [

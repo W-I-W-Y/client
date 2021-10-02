@@ -5,6 +5,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Icon, Input, Button, Checkbox, Typography } from "antd";
 import { useDispatch } from "react-redux";
+import Axios from "axios";
+import { USER_SERVER } from "../../Config";
 
 const { Title } = Typography;
 
@@ -44,16 +46,18 @@ function LoginPage(props) {
             password: values.password,
           };
 
-          dispatch(loginUser(dataToSubmit))
+          Axios.post(`${USER_SERVER}/api/auth/login`, dataToSubmit)
             .then((response) => {
               if (response) {
-                // window.localStorage.setItem("userId", response.payload.userId);
+                console.log("===");
+                console.log(response.data);
+                window.localStorage.setItem("token", response.data.accessToken);
                 if (rememberMe === true) {
                   window.localStorage.setItem("rememberMe", values.id);
                 } else {
                   localStorage.removeItem("rememberMe");
                 }
-                props.history.push("/");
+                props.history.push("/community");
               } else {
                 setFormErrorMessage("Check out your Account or Password again");
               }

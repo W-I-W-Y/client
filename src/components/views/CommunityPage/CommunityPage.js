@@ -176,6 +176,7 @@ function CommunityPage() {
   const [board, setBoard] = useState([]);
 
   useEffect(() => {
+    //게시판 가져오기
     Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
       if (response.data !== null) {
         console.log("data check");

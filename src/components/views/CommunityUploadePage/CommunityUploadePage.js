@@ -86,21 +86,25 @@ function CommunityUploadePage(props) {
       // category: category,
     };
 
-    Axios.post(`${USER_SERVER}/api/post/add/${boardId}`, variable).then(
-      (response) => {
-        console.log("포스트 확인");
-        console.log(response);
-        if (response === "addPost") {
-          message.success("성공적으로 업로드했습니다");
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
 
-          setTimeout(() => {
-            props.history.push("/community/" + boardId);
-          }, 3000);
-        } else {
-          alert("파일 업로드에 실패했습니다.");
-        }
+    Axios.post(`${USER_SERVER}/api/post/add/${boardId}`, variable, {
+      headers,
+    }).then((response) => {
+      console.log("포스트 확인");
+      console.log(response);
+      if (response.data === "addPost") {
+        message.success("성공적으로 업로드했습니다");
+
+        setTimeout(() => {
+          props.history.push("../../board/" + boardId + "/view/0");
+        }, 3000);
+      } else {
+        alert("파일 업로드에 실패했습니다.");
       }
-    );
+    });
   };
 
   return (

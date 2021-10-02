@@ -13,11 +13,15 @@ import {
   Checkbox,
 } from "antd";
 import { USER_SERVER } from "../../Config";
+import { useHistory } from "react-router-dom";
+
 const { Title } = Typography;
 const { TextArea } = Input;
 
 function DeleteBoard() {
+  const history = useHistory();
   const [board, setBoard] = useState([]);
+  const [boardOption, setBoardOption] = useState("자유게시판");
 
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
@@ -44,7 +48,7 @@ function DeleteBoard() {
     e.preventDefault();
 
     const variable = {
-      boardName: board.boardName,
+      boardName: String(boardOption),
       //   description: "Hi",
       // privacy: prvite,
       // filePath: filePath,
@@ -56,13 +60,18 @@ function DeleteBoard() {
       console.log(response.data);
       if (response.data === "deleteBoard") {
         message.success("게시판을 성공적으로 삭제했습니다");
-        // setTimeout(() => {
-        //   history.push("/community");
-        // }, 3000);
+        setTimeout(() => {
+          history.push("/board/delete");
+        }, 3000);
+        window.location.reload();
       } else {
         alert("게시판 삭제를 실패했습니다.");
       }
     });
+  };
+
+  const onBoardChange = (e) => {
+    setBoardOption(e.currentTarget.value);
   };
 
   return (
@@ -80,23 +89,33 @@ function DeleteBoard() {
         </thead>
 
         {board.map((board, index) => (
-          <tbody
-            key={index}
-            className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
-            style={{ cursor: "pointer" }}
-          >
-            <tr>
-              <Checkbox />
-              <td id={index} className="col-sm-10 thtitle">
-                {board.boardName}
-              </td>
-              <td id={index} className="col-sm-14">
-                {board.description}
-              </td>
-            </tr>
-          </tbody>
+          <>
+            <tbody
+              key={index}
+              className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
+              style={{ cursor: "pointer" }}
+            >
+              <tr>
+                {/* <Checkbox key={index} name="board" /> */}
+                <td></td>
+                <td id={index} className="col-sm-10 thtitle">
+                  {board.boardName}
+                </td>
+                <td id={index} className="col-sm-14">
+                  {board.description}
+                </td>
+              </tr>
+            </tbody>
+          </>
         ))}
       </table>
+      <select onChange={onBoardChange}>
+        {board.map((board, index) => (
+          <option key={index} value={board.boardName}>
+            {board.boardName}
+          </option>
+        ))}
+      </select>
       <Button type="primary" size="large" onClick={onSubmit}>
         삭제하기
       </Button>
