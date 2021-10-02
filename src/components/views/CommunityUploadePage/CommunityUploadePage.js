@@ -23,6 +23,7 @@ const CategoryOptions = [
 ];
 
 function CommunityUploadePage(props) {
+  const boardId = props.match.params.boardId;
   const user = useSelector((state) => state.user);
   const [videoTitle, setVideoTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -92,7 +93,7 @@ function CommunityUploadePage(props) {
         message.success("성공적으로 업로드했습니다");
 
         setTimeout(() => {
-          props.history.push("/community/1");
+          props.history.push("/community/" + boardId);
         }, 3000);
       } else {
         alert("파일 업로드에 실패했습니다.");

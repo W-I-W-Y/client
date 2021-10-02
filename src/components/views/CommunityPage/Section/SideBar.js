@@ -32,15 +32,15 @@ function SideBar() {
 
   return (
     <div id="sidebar">
-      <div class="inner">
-        <section id="search" class="alt">
+      <div className="inner">
+        <section id="search" className="alt">
           <form method="post" action="#">
             <input type="text" name="query" id="query" placeholder="Search" />
           </form>
         </section>
 
         <nav id="menu">
-          <header class="major">
+          <header className="major">
             <h2>Menu</h2>
           </header>
           <ul>
@@ -48,7 +48,7 @@ function SideBar() {
               <a href="/">홈</a>
             </li>
             <li>
-              <span class="opener">게시판</span>
+              <span className="opener">게시판</span>
               <ul>
                 {BoardName.map((BoardName, index) => (
                   <li key={index}>
@@ -66,12 +66,12 @@ function SideBar() {
         </nav>
 
         <section>
-          <header class="major">
+          <header className="major">
             <h2>My page</h2>
           </header>
-          <div class="mini-posts">
+          <div className="mini-posts">
             <article id="mypage">
-              <a href="#" class="image">
+              <a href="#" className="image">
                 <img src={mypageImg} alt="" />
               </a>
               {/* <p>회원명 : {file.writer.name}</p> */}
@@ -82,14 +82,14 @@ function SideBar() {
               </p>
             </article>
           </div>
-          <ul class="actions" id="actions-more">
+          <ul className="actions" id="actions-more">
             <li>
-              <a href="../member/signIn.html" class="button">
+              <a href="../member/signIn.html" className="button">
                 Sign in
               </a>
             </li>
             <li>
-              <a href="../member/signUp.html" class="button">
+              <a href="../member/signUp.html" className="button">
                 Sign Up
               </a>
             </li>
@@ -97,14 +97,14 @@ function SideBar() {
         </section>
 
         <section>
-          <header class="major">
+          <header className="major">
             <h2>Information</h2>
           </header>
-          <div class="mini-posts">
+          <div className="mini-posts">
             <article>
               <a
                 href="https://blog.naver.com/mohw2016/222358574027"
-                class="image"
+                className="image"
               >
                 <img src={infoImg1} alt="" />
               </a>
@@ -112,7 +112,7 @@ function SideBar() {
             <article>
               <a
                 href="http://ncov.mohw.go.kr/infoBoardView.do?brdId=3&brdGubun=32&dataGubun=328&ncvContSeq=4720&contSeq=4720&board_id=&gubun="
-                class="image"
+                className="image"
               >
                 <img src={infoImg2} alt="" />
               </a>
@@ -120,15 +120,15 @@ function SideBar() {
             <article>
               <a
                 href="https://www.youtube.com/watch?v=6e3JLnOMPQk"
-                class="image"
+                className="image"
               >
                 <img src={infoImg3} alt="" />
               </a>
             </article>
           </div>
-          <ul class="actions" id="actions-more">
+          <ul className="actions" id="actions-more">
             <li>
-              <a href="#" class="button">
+              <a href="#" className="button">
                 More
               </a>
             </li>
@@ -136,7 +136,7 @@ function SideBar() {
         </section>
 
         <section>
-          <header class="major">
+          <header className="major">
             <h2>Get in touch</h2>
           </header>
           <p>
@@ -144,12 +144,12 @@ function SideBar() {
             WIWY팀이 창작한 것입니다. 수정 사항 및 요청 사항이 있으면 아래로
             연락 바랍니다.
           </p>
-          <ul class="contact">
-            <li class="fa-envelope-o">
+          <ul className="contact">
+            <li className="fa-envelope-o">
               <a href="#">spy03128@naver.com</a>
             </li>
-            <li class="fa-phone">010-4934-0543</li>
-            <li class="fa-home">
+            <li className="fa-phone">010-4934-0543</li>
+            <li className="fa-home">
               충청북도 청주시 서원구 충대로1
               <br />
               충북대학교, 28644
@@ -158,38 +158,38 @@ function SideBar() {
         </section>
 
         <footer id="footer">
-          homepage, made by <i class="fa fa-love"></i>
+          homepage, made by <i className="fa fa-love"></i>
           <a href="https://naver.com">WIWY</a>
-          <div class="footer-row">
-            <ul class="icons">
+          <div className="footer-row">
+            <ul className="icons">
               <li>
-                <a href="#" class="icon fa-twitter">
-                  <span class="label">Twitter</span>
+                <a href="#" className="icon fa-twitter">
+                  <span className="label">Twitter</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="icon fa-facebook">
-                  <span class="label">Facebook</span>
+                <a href="#" className="icon fa-facebook">
+                  <span className="label">Facebook</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="icon fa-instagram">
-                  <span class="label">Instagram</span>
+                <a href="#" className="icon fa-instagram">
+                  <span className="label">Instagram</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="icon fa-github">
-                  <span class="label">Github</span>
+                <a href="#" className="icon fa-github">
+                  <span className="label">Github</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="icon fa-dribbble">
-                  <span class="label">Dribbble</span>
+                <a href="#" className="icon fa-dribbble">
+                  <span className="label">Dribbble</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="icon fa-tumblr">
-                  <span class="label">Tumblr</span>
+                <a href="#" className="icon fa-tumblr">
+                  <span className="label">Tumblr</span>
                 </a>
               </li>
             </ul>

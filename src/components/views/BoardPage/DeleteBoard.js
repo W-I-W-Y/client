@@ -18,44 +18,41 @@ const { TextArea } = Input;
 
 function DeleteBoard() {
   const [board, setBoard] = useState([]);
-  const [BoardName, setBoardName] = useState([]);
 
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
       if (response.data !== null) {
+        console.log("data check");
         console.log(response.data);
-
-        setBoard(response.data);
         response.data.forEach((lists) => {
-          setBoardName((state) => [
+          setBoard((state) => [
             ...state,
             {
+              id: lists.id,
               boardName: lists.boardName,
+              description: lists.description,
             },
           ]);
         });
       } else {
-        alert("파일을 가져오는데 실패했습니다.");
+        alert("게시판을 가져오는데 실패했습니다.");
       }
     });
   }, []);
-
-  console.log(BoardName);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     const variable = {
-      boardName: "자유게시판",
-      //   description: description,
+      boardName: board.boardName,
+      //   description: "Hi",
       // privacy: prvite,
       // filePath: filePath,
       // category: category,
     };
 
-    console.log(variable.boardName);
-
     Axios.post(`${USER_SERVER}/api/board/delete`, variable).then((response) => {
+      console.log("======");
       console.log(response.data);
       if (response.data === "deleteBoard") {
         message.success("게시판을 성공적으로 삭제했습니다");

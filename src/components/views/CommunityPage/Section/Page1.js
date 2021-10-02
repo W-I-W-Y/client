@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { USER_SERVER } from "../../../Config";
+import Axios from "axios";
 
-function Page1() {
+function Page1(props) {
+  const boardId = props.match.params.boardId;
+  const pageNum = props.match.params.pageNum;
+  console.log(boardId);
+  // const variable = { boardId: boardId };
   //NOTE 전체 페이지 갯수
   const [pageTotalNum, setPageTotalNum] = useState(4);
 
@@ -22,12 +28,46 @@ function Page1() {
     console.log(Number(e.target.innerText) - 1);
     setPagingNum(Number(e.target.innerText) - 1);
   };
+
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    Axios.get(`${USER_SERVER}/api/board/${boardId}/view/0`).then(
+      (response, index) => {
+        if (response.data !== null) {
+          console.log("data check");
+          console.log(response.data);
+          response.data.forEach((lists) => {
+            setPost((state) => [
+              ...state,
+              {
+                id: lists.id,
+                postName: lists.postName,
+                content: lists.content,
+                calculateTime: lists.calculateTime,
+                createTime: lists.createTime,
+                viewCnt: lists.viewCnt,
+                likes: lists.likes,
+                hates: lists.hates,
+                username: lists.username,
+                boardName: lists.boardName,
+                comCounts: lists.comCounts,
+              },
+            ]);
+          });
+        } else {
+          alert("게시글을 가져오는데 실패했습니다.");
+        }
+      }
+    );
+  }, []);
+
   return (
     <div>
-      <html th="http://www.thymeleaf.org" src="http://www.w3.org/1999/xhtml">
+      <html>
         <head>
           <title>코로나 시대 살아남기</title>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=no"
@@ -39,7 +79,8 @@ function Page1() {
               <div class="inner">
                 <header id="header">
                   <a href="community.html" class="logo">
-                    <strong>자유게시판</strong>
+                    <strong>{post.boardName}</strong>
+                    <p>{post.description}</p>
                   </a>
                   <ul class="icons">
                     <li>
@@ -69,22 +110,46 @@ function Page1() {
                     </li>
                   </ul>
                 </header>
+                <table className="tabel-list">
+                  <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
+                    <tr className="row align-items-sm-center text-center text-dark">
+                      <th className="col-sm-7">내용</th>
+                      <th className="col-sm-2">작성자</th>
+                      <th className="col-sm-3">작성일</th>
+                    </tr>
+                  </thead>
+
+                  {post.map((post, index) => (
+                    <tbody
+                      key={index}
+                      className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <tr>
+                        <td id={index} className="col-sm-7 thtitle">
+                          {post.postName}
+                          <div className="tag">
+                            <p>{post.content}</p>
+                          </div>
+                        </td>
+                        <td id={index} className="col-sm-2">
+                          {post.username}
+                        </td>
+                        <td id={index} className="col-sm-3">
+                          {post.calculateTime}
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
+                </table>
 
                 <section>
                   <div class="posts">
                     <article>
                       <div class="board">
                         <a class="list" href="#">
-                          <time>방금</time>
-                          <p>가나다</p>
-                        </a>
-                        <a class="list" href="#">
-                          <time>방금</time>
-                          <p>가나다</p>
-                        </a>
-                        <a class="list" href="#">
-                          <time>방금</time>
-                          <p>가나다</p>
+                          <time>{post.calculateTime}</time>
+                          <p>{post.content}</p>
                         </a>
                       </div>
                       <div className="pagination">
@@ -101,6 +166,9 @@ function Page1() {
                     </article>
                   </div>
                 </section>
+                <a className="button" href={"/post/add/" + Number(boardId)}>
+                  글쓰기
+                </a>
               </div>
             </div>
           </div>

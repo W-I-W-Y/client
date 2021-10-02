@@ -28,12 +28,16 @@ function App() {
           <Route exact path="/board/add" component={AddBoard} />
           <Route exact path="/board/delete" component={DeleteBoard} />
           <Route exact path="/community" component={CommunityPage} />
-          <Route exact path="/community/1" component={CommunitySectionPage1} />
+          <Route
+            exact
+            path="/board/:boardId/view/:pageNum"
+            component={CommunitySectionPage1}
+          />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/join" component={RegisterPage} />
           <Route
             exact
-            path="/community/upload"
+            path="/post/add/:boardId"
             component={CommunityUploadePage}
           />
           <Route exact path="/file/:fileId" component={FileDetailPage} />

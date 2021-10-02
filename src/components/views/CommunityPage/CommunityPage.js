@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { USER_SERVER } from "../../Config";
+import Axios from "axios";
 import "../../../css/index.css";
 import covidLogo from "../../../images/covid.png";
 
 // import "../../../js/index";
 import $ from "jquery";
 import { Helmet } from "react-helmet";
-import PostPage from "./Section/PostPage";
 import SideBar from "./Section/SideBar";
-import axios from "axios";
+import { Col, Row } from "antd";
 
 function CommunityPage() {
   useEffect(() => {
@@ -172,21 +173,59 @@ function CommunityPage() {
     });
   }, []);
 
-  const [file, setFile] = useState([]);
+  const [board, setBoard] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/community/getFiles").then((response) => {
-      if (response.data.success) {
-        console.log(response.data.files);
-        setFile(response.data.files);
+    Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
+      if (response.data !== null) {
+        console.log("data check");
+        console.log(response.data);
+        response.data.forEach((lists) => {
+          setBoard((state) => [
+            ...state,
+            {
+              id: lists.id,
+              boardName: lists.boardName,
+              description: lists.description,
+            },
+          ]);
+        });
       } else {
-        alert("파일을 가져오는데 실패했습니다.");
+        alert("게시판을 가져오는데 실패했습니다.");
       }
     });
   }, []);
 
+  const renderCards = board.map((board, index) => {
+    return (
+      <Col key={index} lg={12} md={12} xs={24}>
+        <div className="posts">
+          <article>
+            <div className="board">
+              <h3>{board.boardName}</h3>
+              <a className="list" href="#">
+                <time>방금</time>
+                <p>가나다</p>
+              </a>
+            </div>
+            <ul className="actions" id="actions-more">
+              <li>
+                <a
+                  className="button"
+                  href={"/board/" + Number(board.id) + "/view/" + Number(0)}
+                >
+                  more
+                </a>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </Col>
+    );
+  });
+
   return (
-    <div>
+    <>
       <Helmet>
         <script src="../../../js/jquery.min.js"></script>
         <script src="../../../js/skel.min.js"></script>
@@ -197,7 +236,7 @@ function CommunityPage() {
       <html th="http://www.thymeleaf.org" src="http://www.w3.org/1999/xhtml">
         <head>
           <title>코로나 시대 살아남기</title>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=no"
@@ -206,42 +245,52 @@ function CommunityPage() {
         <body>
           <div id="wrapper">
             <div id="main">
-              <div class="inner">
+              <div className="inner">
+                <ul className="actions" id="actions-more">
+                  <li>
+                    <a className="button" href="/board/add">
+                      게시판 만들기
+                    </a>
+                    <a className="button" href="/board/delete">
+                      게시판 삭제하기
+                    </a>
+                  </li>
+                </ul>
                 <header id="header">
-                  <a href="community.html" class="logo">
+                  <a href="community.html" className="logo">
                     <strong>코로나 시대</strong> 살아남기
                   </a>
-                  <ul class="icons">
+                  <ul className="icons">
                     <li>
-                      <a href="#" class="icon fa-twitter">
-                        <span class="label">Twitter</span>
+                      <a href="#" className="icon fa-twitter">
+                        <span className="label">Twitter</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-facebook">
-                        <span class="label">Facebook</span>
+                      <a href="#" className="icon fa-facebook">
+                        <span className="label">Facebook</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-snapchat-ghost">
-                        <span class="label">Snapchat</span>
+                      <a href="#" className="icon fa-snapchat-ghost">
+                        <span className="label">Snapchat</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-instagram">
-                        <span class="label">Instagram</span>
+                      <a href="#" className="icon fa-instagram">
+                        <span className="label">Instagram</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="icon fa-medium">
-                        <span class="label">Medium</span>
+                      <a href="#" className="icon fa-medium">
+                        <span className="label">Medium</span>
                       </a>
                     </li>
                   </ul>
                 </header>
 
                 <section id="banner">
-                  <div class="content">
+                  <div className="content">
                     <header>
                       <h1>
                         코로나 시대를 살아가는 여러분들을 위한
@@ -257,47 +306,24 @@ function CommunityPage() {
                       더 나아가 코로나 백신 접종 현황까지 한 눈에 확인
                       가능합니다.
                     </p>
-                    <ul class="actions">
+                    <ul className="actions">
                       <li>
-                        <a href="/" class="button big">
+                        <a href="/" className="button big">
                           정보 알아보기
                         </a>
                       </li>
                     </ul>
                   </div>
-                  <span class="image object">
+                  <span className="image object">
                     <img src={covidLogo} alt="" />
                   </span>
                 </section>
 
                 <section>
-                  <header class="major">
+                  <header className="major">
                     <h2>게시판</h2>
                   </header>
-                  <div class="posts">
-                    <article>
-                      <div class="board">
-                        <h3>자유게시판</h3>
-                        <a class="list" href="#">
-                          <time>방금</time>
-                          <p>가나다</p>
-                        </a>
-                      </div>
-                      <ul class="actions" id="actions-more">
-                        <li>
-                          <a class="button" href="/board/add">
-                            게시판 만들기
-                          </a>
-                          <a class="button" href="/board/delete">
-                            게시판 삭제하기
-                          </a>
-                        </li>
-                      </ul>
-                    </article>
-                  </div>
-                </section>
-                <section>
-                  <PostPage />
+                  <Row gutter={16}>{renderCards}</Row>
                 </section>
               </div>
             </div>
@@ -305,7 +331,7 @@ function CommunityPage() {
           </div>
         </body>
       </html>
-    </div>
+    </>
   );
 }
 
