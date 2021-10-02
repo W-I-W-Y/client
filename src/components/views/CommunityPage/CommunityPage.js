@@ -173,23 +173,40 @@ function CommunityPage() {
     });
   }, []);
 
-  const [board, setBoard] = useState([]);
+  const [community, setCommunity] = useState([]);
+  const [communityPost, setCommunityPost] = useState([]);
 
   useEffect(() => {
-    //게시판 가져오기
-    Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
+    // const headers = {
+    //   Authorization: `Bearer ` + localStorage.getItem("token"),
+    // };
+
+    Axios.get(`${USER_SERVER}/api/community`).then((response, index) => {
       if (response.data !== null) {
         console.log("data check");
-        console.log(response.data);
+        // console.log(response.data[0].smallPostDTOS);
         response.data.forEach((lists) => {
-          setBoard((state) => [
+          console.log(lists.smallPostDTOS);
+          // console.log(lists.smallPostDTOS[0].postName);
+          setCommunity((state) => [
             ...state,
             {
-              id: lists.id,
+              smallPostDTOS: lists.smallPostDTOS,
               boardName: lists.boardName,
-              description: lists.description,
+              boardId: lists.boardId,
             },
           ]);
+
+          lists.smallPostDTOS.forEach((smallPostDTOS) => {
+            setCommunityPost((state) => [
+              ...state,
+              {
+                postName: smallPostDTOS.postName,
+                calculateTime: smallPostDTOS.calculateTime,
+              },
+            ]);
+          });
+          console.log(communityPost);
         });
       } else {
         alert("게시판을 가져오는데 실패했습니다.");
@@ -197,23 +214,28 @@ function CommunityPage() {
     });
   }, []);
 
-  const renderCards = board.map((board, index) => {
+  const renderCards = community.map((community, index) => {
+    console.log(community.boardId);
     return (
       <Col key={index} lg={12} md={12} xs={24}>
         <div className="posts">
           <article>
             <div className="board">
-              <h3>{board.boardName}</h3>
-              <a className="list" href="#">
-                <time>방금</time>
-                <p>가나다</p>
-              </a>
+              <h3>{community.boardName}</h3>
+              {community.smallPostDTOS.map((communityPost, index) => (
+                <a key={index} className="list" href="#">
+                  <time>{communityPost.calculateTime}</time>
+                  <p>{communityPost.postName}</p>
+                </a>
+              ))}
             </div>
             <ul className="actions" id="actions-more">
               <li>
                 <a
                   className="button"
-                  href={"/board/" + Number(board.id) + "/view/" + Number(0)}
+                  href={
+                    "/board/" + Number(community.boardId) + "/view/" + Number(0)
+                  }
                 >
                   more
                 </a>
