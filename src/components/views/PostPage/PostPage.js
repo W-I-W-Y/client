@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { USER_SERVER } from "../../Config";
-import { Row, Col, List, Avatar, message } from "antd";
+import { Row, Col, List, Avatar, message, Input, Text } from "antd";
 import LikeDislikes from "./Section/LikeDislikes";
 import Comment from "./Section/Comment";
+
+const { TextArea } = Input;
 
 function PostPage(props) {
   const postId = props.match.params.postId;
@@ -12,6 +14,19 @@ function PostPage(props) {
   const [detailPost, setDetailPost] = useState([]);
   const [like, setLike] = useState(false);
   const [hate, setHate] = useState(false);
+
+  const [postName, setPostName] = useState("");
+  const [content, setContent] = useState("");
+
+  const [ismodify, setIsmodify] = useState(false);
+
+  const onTitleChange = (e) => {
+    setPostName(e.currentTarget.value);
+  };
+
+  const onDescriptionChange = (e) => {
+    setContent(e.currentTarget.value);
+  };
 
   useEffect(() => {
     const headers = {
@@ -47,6 +62,43 @@ function PostPage(props) {
       }
     );
   }, []);
+  const modifyPost = () => {
+    setIsmodify(!ismodify);
+  };
+
+  const savePost = (e) => {
+    e.preventDefault();
+
+    const variable = {
+      postName: postName,
+      content: content,
+
+      // privacy: prvite,
+      // filePath: filePath,
+      // category: category,
+    };
+
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.patch(`${USER_SERVER}/api/post/modify/${postId}`, variable, {
+      headers,
+    }).then((response) => {
+      console.log("포스트 확인");
+      console.log(response);
+      if (response.data === "modifyPost") {
+        message.success("성공적으로 수정했습니다");
+
+        setTimeout(() => {
+          props.history.push("../../board/" + boardId + "/view/0");
+          window.scrollTo(0, 0);
+        }, 3000);
+      } else {
+        alert("게시글 수정에 실패했습니다.");
+      }
+    });
+  };
 
   const deletePost = () => {
     const variable = {
@@ -96,9 +148,25 @@ function PostPage(props) {
               border: "black solid 0.5px",
             }}
           >
-            {detailPost.postName}
+            {ismodify === false ? (
+              <p>{detailPost.postName}</p>
+            ) : (
+              <Input
+                onChange={onTitleChange}
+                value={postName}
+                placeholder={detailPost.postName}
+              />
+            )}
             <hr />
-            {detailPost.content}
+            {ismodify === false ? (
+              <p>{detailPost.content}</p>
+            ) : (
+              <TextArea
+                onChange={onDescriptionChange}
+                value={content}
+                placeholder={detailPost.content}
+              ></TextArea>
+            )}
           </div>
           <List.Item
             actions={[
@@ -111,6 +179,18 @@ function PostPage(props) {
               />,
             ]}
           ></List.Item>
+          {ismodify === false ? (
+            <button
+              style={{ width: "20%", height: "52px" }}
+              onClick={modifyPost}
+            >
+              게시글 수정하기
+            </button>
+          ) : (
+            <button style={{ width: "20%", height: "52px" }} onClick={savePost}>
+              저장하기
+            </button>
+          )}
           <button style={{ width: "20%", height: "52px" }} onClick={deletePost}>
             게시글 삭제하기
           </button>

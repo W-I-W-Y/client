@@ -46,10 +46,11 @@ function SingleComment(props) {
     //   userId={localStorage.getItem("userId")}
     //   commentId={props.comment._id}
     // />,
-    <CommentLikeDislikes
-      postId={props.postId}
-      commentId={props.commentList.id}
-    />,
+    // <CommentLikeDislikes
+    //   postId={props.postId}
+    //   commentList={props.commentList}
+    //   commentId={props.commentList.id}
+    // />,
     <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
       Reply to
     </span>,
