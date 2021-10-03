@@ -60,6 +60,7 @@ function RegisterPage(props) {
           dispatch(registerUser(dataToSubmit)).then((response) => {
             if (response.payload === "회원가입 완료") {
               props.history.push("/login");
+              window.scrollTo(0, 0);
             } else {
               alert(response.payload.err);
             }

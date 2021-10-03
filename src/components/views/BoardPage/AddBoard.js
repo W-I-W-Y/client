@@ -35,6 +35,7 @@ function AddBoard() {
         message.success("게시판을 성공적으로 생성했습니다");
         setTimeout(() => {
           history.push("/community");
+          window.scrollTo(0, 0);
         }, 2000);
       } else {
         alert("게시판 생성을 실패했습니다.");

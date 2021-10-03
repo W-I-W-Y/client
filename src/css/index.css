@@ -4273,6 +4273,7 @@ button:disabled,
   border: 0.2px solid rgb(167, 164, 164);
   border-top: none;
   margin-bottom: 30px;
+  width: 500px;
 }
 .board h3 {
   color: chocolate;

@@ -100,6 +100,7 @@ function CommunityUploadePage(props) {
 
         setTimeout(() => {
           props.history.push("../../board/" + boardId + "/view/0");
+          window.scrollTo(0, 0);
         }, 3000);
       } else {
         alert("파일 업로드에 실패했습니다.");

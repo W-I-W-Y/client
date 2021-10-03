@@ -214,6 +214,7 @@ function CommunityPage() {
   const history = useHistory();
   const detailPost = (id) => {
     history.push("../../../post/view/" + id);
+    window.scrollTo(0, 0);
   };
 
   const renderCards = community.map((community, index) => {
@@ -234,7 +235,15 @@ function CommunityPage() {
                 </a>
               ))}
             </div>
-            <ul className="actions" id="actions-more">
+            <ul
+              className="actions"
+              id="actions-more"
+              style={{
+                width: "500px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               <li>
                 <a
                   className="button"

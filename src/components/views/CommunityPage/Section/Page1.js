@@ -66,6 +66,7 @@ function Page1(props) {
   const history = useHistory();
   const detailPost = (id) => {
     history.push("../../../post/view/" + id);
+    window.scrollTo(0, 0);
   };
 
   return (

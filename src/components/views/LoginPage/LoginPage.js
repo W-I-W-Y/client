@@ -58,6 +58,7 @@ function LoginPage(props) {
                   localStorage.removeItem("rememberMe");
                 }
                 props.history.push("/community");
+                window.scrollTo(0, 0);
               } else {
                 setFormErrorMessage("Check out your Account or Password again");
               }

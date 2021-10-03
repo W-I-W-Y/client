@@ -62,6 +62,7 @@ function DeleteBoard() {
         message.success("게시판을 성공적으로 삭제했습니다");
         setTimeout(() => {
           history.push("/board/delete");
+          window.scrollTo(0, 0);
         }, 3000);
         window.location.reload();
       } else {

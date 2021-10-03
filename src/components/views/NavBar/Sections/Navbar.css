@@ -58,6 +58,13 @@
   background: #3e91f7;
 }
 
+.menuA:hover {
+  color: #f56a6a !important;
+  border-bottom-color: #f56a6a !important;
+  border-bottom: 5px solid #f56a6a !important;
+  z-index: 100;
+}
+
 .menu_drawer .ant-drawer-body {
   padding: 0 !important;
 }
