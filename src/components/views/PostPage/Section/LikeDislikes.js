@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Tooltip, Icon } from "antd";
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
+import { useHistory } from "react-router";
 
 function LikeDislikes(props) {
   const [good, setGood] = useState(0);
   const [dislikes, setDislikes] = useState(0);
 
-  const [likeAction, setLikeAction] = useState(null);
-  const [disLikeAction, setDisLikeAction] = useState(null);
+  const [likeAction, setLikeAction] = useState(false);
+  const [disLikeAction, setDisLikeAction] = useState(false);
 
   console.log(props.likes);
   console.log(props.hates);
@@ -50,43 +51,50 @@ function LikeDislikes(props) {
       // alert("dislike의 정보를 가져오지 못했습니다.");
     }
   };
-
+  const history = useHistory();
   const onLike = () => {
     const headers = {
       Authorization: `Bearer ` + localStorage.getItem("token"),
     };
-    check();
+    // check();
     //좋아요 버튼 클릭이 안되어있을때
     const variable = {
       likes: props.likes + 1,
       isLike: true,
     };
-    if (likeAction === null) {
+    const disvariable = {
+      likes: props.likes - 1,
+      isLike: false,
+    };
+
+    if (likeAction === false) {
       Axios.patch(`${USER_SERVER}/api/post/like/${props.postId}`, variable, {
         headers,
       }).then((response) => {
         console.log(response.data);
-        // if (response.data === "submitLike") {
-        //   setGood(props.likes);
-        //   console.log(good);
-        //   setLikeAction("liked");
+        if (response.data === "submitLike") {
+          setGood(props.likes);
+          console.log(good);
 
-        //   if (disLikeAction !== null) {
-        //     setDisLikeAction(null);
-        //     setDislikes(dislikes - 1);
-        //   }
-        // } else {
-        //   alert("Like를 올리지 못했습니다");
-        // }
+          window.location.reload();
+
+          setLikeAction(true);
+          //   if (disLikeAction !== null) {
+          //     setDisLikeAction(null);
+          //     setDislikes(dislikes - 1);
+          //   }
+        } else {
+          alert("Like를 올리지 못했습니다");
+        }
       });
     } else {
       //클릭이 되어있을 때
-      Axios.patch(`${USER_SERVER}/api/post/hate/${props.postId}`, {
+      Axios.patch(`${USER_SERVER}/api/post/like/${props.postId}`, {
         headers,
       }).then((response) => {
-        if (response.data === "cancelHate") {
+        if (response.data === "cancelLike") {
           setGood(good - 1);
-          setLikeAction(null);
+          setLikeAction(false);
         } else {
           alert("Like를 내리지 못했습니다");
         }
