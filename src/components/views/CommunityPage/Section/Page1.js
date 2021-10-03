@@ -32,12 +32,16 @@ function Page1(props) {
   };
 
   const [post, setPost] = useState([]);
+  const [Board, setBoard] = useState("");
+  const [BoardDescription, setBoardDescription] = useState("");
 
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/board/${boardId}/view/0`).then(
       (response, index) => {
         if (response.data !== null) {
           console.log(response.data);
+          setBoard(response.data[0].boardName);
+          setBoardDescription(response.data[0].boardDescription);
           response.data.forEach((lists) => {
             setPost((state) => [
               ...state,
@@ -86,8 +90,14 @@ function Page1(props) {
               <div className="inner">
                 <header id="header">
                   <a href="community.html" className="logo">
-                    <strong>{post.boardName}</strong>
-                    <p>{post.description}</p>
+                    <strong
+                      style={{ fontFamily: "Droid Sans", fontSize: "2rem" }}
+                    >
+                      {Board}
+                    </strong>
+                    <p style={{ fontFamily: "Droid Sans", marginTop: "20px" }}>
+                      {BoardDescription}
+                    </p>
                   </a>
                   <ul className="icons">
                     <li>
