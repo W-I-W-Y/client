@@ -15,6 +15,8 @@ function PostPage(props) {
   const [like, setLike] = useState(false);
   const [hate, setHate] = useState(false);
 
+  const [isAuthor, setIsAuthor] = useState(false);
+
   const [postName, setPostName] = useState("");
   const [content, setContent] = useState("");
 
@@ -37,11 +39,12 @@ function PostPage(props) {
       (response, index) => {
         if (response.data !== null) {
           console.log("data check");
-          console.log(response.data.commentOutputDTOS);
+          console.log(response.data);
 
           setLike(response.data.like);
           setHate(response.data.hate);
           setBoardId(response.data.boardId);
+          setIsAuthor(response.data.author);
 
           setDetailPost({
             id: response.data.postOutputDTO.id,
@@ -127,6 +130,7 @@ function PostPage(props) {
     });
   };
 
+  console.log(isAuthor);
   return (
     <Row gutter={[16, 16]}>
       <Col lg={18} xs={24}>
@@ -179,21 +183,40 @@ function PostPage(props) {
               />,
             ]}
           ></List.Item>
-          {ismodify === false ? (
-            <button
-              style={{ width: "20%", height: "52px" }}
-              onClick={modifyPost}
-            >
-              게시글 수정하기
-            </button>
-          ) : (
-            <button style={{ width: "20%", height: "52px" }} onClick={savePost}>
-              저장하기
-            </button>
-          )}
-          <button style={{ width: "20%", height: "52px" }} onClick={deletePost}>
-            게시글 삭제하기
-          </button>
+          <div style={{ display: "flex" }}>
+            {isAuthor === true ? (
+              <div style={{ width: "100%" }}>
+                {ismodify === false ? (
+                  <button
+                    style={{ width: "20%", height: "52px" }}
+                    onClick={modifyPost}
+                  >
+                    게시글 수정하기
+                  </button>
+                ) : (
+                  <button
+                    style={{ width: "20%", height: "52px" }}
+                    onClick={savePost}
+                  >
+                    저장하기
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div></div>
+            )}
+
+            {isAuthor ? (
+              <button
+                style={{ width: "20%", height: "52px" }}
+                onClick={deletePost}
+              >
+                게시글 삭제하기
+              </button>
+            ) : (
+              <div></div>
+            )}
+          </div>
 
           <Comment
             postId={postId}
