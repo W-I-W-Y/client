@@ -68,7 +68,7 @@ function SingleComment(props) {
     //   commentId={props.commentList.id}
     // />,
     <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
-      Reply to
+      답글달기
     </span>,
   ];
 

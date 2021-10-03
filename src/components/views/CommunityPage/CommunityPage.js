@@ -223,15 +223,36 @@ function CommunityPage() {
         <div className="posts">
           <article>
             <div className="board">
-              <h3>{community.boardName}</h3>
+              <h3
+                style={{
+                  fontFamily: "Droid Sans",
+                  fontSize: "1rem",
+                }}
+              >
+                {community.boardName}
+              </h3>
               {community.smallPostDTOS.map((communityPost, index) => (
                 <a
                   key={index}
                   className="list"
                   onClick={() => detailPost(communityPost.postId)}
                 >
-                  <time>{communityPost.calculateTime}</time>
-                  <p>{communityPost.postName}</p>
+                  <time
+                    style={{
+                      fontFamily: "Droid Sans",
+                      fontSize: "0.7rem",
+                    }}
+                  >
+                    {communityPost.calculateTime}
+                  </time>
+                  <p
+                    style={{
+                      fontFamily: "Droid Sans",
+                      fontSize: "0.8rem",
+                    }}
+                  >
+                    {communityPost.postName}
+                  </p>
                 </a>
               ))}
             </div>
@@ -250,6 +271,10 @@ function CommunityPage() {
                   href={
                     "/board/" + Number(community.boardId) + "/view/" + Number(0)
                   }
+                  style={{
+                    fontFamily: "Droid Sans",
+                    fontSize: "0.8rem",
+                  }}
                 >
                   more
                 </a>
@@ -285,16 +310,36 @@ function CommunityPage() {
               <div className="inner">
                 <ul className="actions" id="actions-more">
                   <li>
-                    <a className="button" href="/board/add">
+                    <a
+                      className="button"
+                      href="/board/add"
+                      style={{
+                        fontFamily: "Droid Sans",
+                        fontSize: "0.7rem",
+                        margin: "10px",
+                      }}
+                    >
                       게시판 만들기
                     </a>
-                    <a className="button" href="/board/delete">
+                    <a
+                      className="button"
+                      href="/board/delete"
+                      style={{
+                        fontFamily: "Droid Sans",
+                        fontSize: "0.7rem",
+                        margin: "10px",
+                      }}
+                    >
                       게시판 삭제하기
                     </a>
                   </li>
                 </ul>
                 <header id="header">
-                  <a href="community.html" className="logo">
+                  <a
+                    href="community.html"
+                    className="logo"
+                    style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}
+                  >
                     <strong>코로나 시대</strong> 살아남기
                   </a>
                   <ul className="icons">
@@ -329,23 +374,40 @@ function CommunityPage() {
                 <section id="banner">
                   <div className="content">
                     <header>
-                      <h1>
+                      <h1
+                        style={{ fontFamily: "Droid Sans", fontSize: "2rem" }}
+                      >
                         코로나 시대를 살아가는 여러분들을 위한
                         <br />
-                        <strong>코로나 정보 제공 서비스</strong>
+                        <strong>COVID-19 정보 제공 서비스</strong>
                       </h1>
-                      <p>확진자 정보부터 국내외 발생 현황, 백신 현황까지</p>
+                      <p
+                        style={{ fontFamily: "Droid Sans", fontSize: "1.3rem" }}
+                      >
+                        확진자 정보부터 국내외 발생 현황, 백신 접종 현황까지
+                      </p>
                     </header>
-                    <p>
-                      저희 서비스를 이용하시면 확진환자, 격리해제, 격리중,
-                      사망자의 현황을 파악할 수 있고, 시도별 확진자 수를 확인할
-                      수 있으며, 국내뿐만 아니라 국외 발생동향도 알 수 있습니다.
-                      더 나아가 코로나 백신 접종 현황까지 한 눈에 확인
-                      가능합니다.
+                    <p style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}>
+                      저희 서비스를 이용하시면{" "}
+                      <strong>확진환자, 격리해제, 격리중, 사망자의 현황</strong>
+                      을 파악할 수 있고, <strong>시도별 확진자 수</strong>를
+                      확인할 수 있으며,{" "}
+                      <strong>국내뿐만 아니라 국외 발생동향</strong>도 알 수
+                      있습니다. 더 나아가 코로나 백신 접종 현황까지 한 눈에 확인
+                      가능합니다. 또한 코로나시대를 살아가는 여러분들이{" "}
+                      <strong>충분히 정보를 공유</strong>할 수 있도록 게시판을
+                      제공합니다.
                     </p>
                     <ul className="actions">
                       <li>
-                        <a href="/" className="button big">
+                        <a
+                          href="/"
+                          className="button big"
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "0.8rem",
+                          }}
+                        >
                           정보 알아보기
                         </a>
                       </li>
@@ -358,7 +420,11 @@ function CommunityPage() {
 
                 <section>
                   <header className="major">
-                    <h2>게시판</h2>
+                    <h2
+                      style={{ fontFamily: "Droid Sans", fontSize: "1.8rem" }}
+                    >
+                      게시판
+                    </h2>
                   </header>
                   <Row gutter={16}>{renderCards}</Row>
                 </section>

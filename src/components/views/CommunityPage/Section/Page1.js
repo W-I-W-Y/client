@@ -130,9 +130,9 @@ function Page1(props) {
                 <table className="tabel-list">
                   <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
                     <tr className="row align-items-sm-center text-center text-dark">
-                      <Col span={12}>내용</Col>
-                      <Col span={6}>작성자</Col>
-                      <Col span={6}>작성일</Col>
+                      <Col span={16}>내용</Col>
+                      <Col span={4}>작성자</Col>
+                      <Col span={4}>작성일</Col>
                     </tr>
                   </thead>
 
@@ -144,12 +144,25 @@ function Page1(props) {
                       className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
                     >
                       <tr style={{ cursor: "pointer" }}>
-                        <Col span={12}>
-                          {post.postName}
-                          <p>{post.content}</p>
+                        <Col
+                          span={16}
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "1rem",
+                          }}
+                        >
+                          <strong>{post.postName}</strong>
+                          <p
+                            style={{
+                              fontFamily: "Droid Sans",
+                              fontSize: "0.9rem",
+                            }}
+                          >
+                            {post.content}
+                          </p>
                         </Col>
-                        <Col span={6}>{post.username}</Col>
-                        <Col span={6}>{post.calculateTime}</Col>
+                        <Col span={4}>{post.username}</Col>
+                        <Col span={4}>{post.calculateTime}</Col>
                       </tr>
                     </tbody>
                   ))}

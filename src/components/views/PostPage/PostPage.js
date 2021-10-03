@@ -4,6 +4,8 @@ import { USER_SERVER } from "../../Config";
 import { Row, Col, List, Avatar, message, Input, Text } from "antd";
 import LikeDislikes from "./Section/LikeDislikes";
 import Comment from "./Section/Comment";
+import profile from "../../../images/icon2.png";
+import SideBar from "../CommunityPage/Section/SideBar";
 
 const { TextArea } = Input;
 
@@ -133,12 +135,15 @@ function PostPage(props) {
   console.log(isAuthor);
   return (
     <Row gutter={[16, 16]}>
-      <Col lg={18} xs={24}>
+      <Col lg={4} xs={24}>
+        <SideBar />
+      </Col>
+      <Col lg={20} xs={24}>
         <div style={{ width: "100%", padding: "3rem 4rem" }}>
           <img src="" />
 
           <List.Item.Meta
-            avatar={<Avatar />}
+            avatar={<Avatar src={profile} />}
             title={detailPost.username}
             description={detailPost.createTime}
           />
@@ -172,17 +177,25 @@ function PostPage(props) {
               ></TextArea>
             )}
           </div>
-          <List.Item
-            actions={[
-              <LikeDislikes
-                postId={detailPost.id}
-                likes={detailPost.likes}
-                hates={detailPost.hates}
-                isLike={like}
-                isHate={hate}
-              />,
-            ]}
-          ></List.Item>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "end",
+            }}
+          >
+            <List.Item
+              actions={[
+                <LikeDislikes
+                  postId={detailPost.id}
+                  likes={detailPost.likes}
+                  hates={detailPost.hates}
+                  isLike={like}
+                  isHate={hate}
+                />,
+              ]}
+            ></List.Item>
+          </div>
           <div style={{ display: "flex" }}>
             {isAuthor === true ? (
               <div style={{ width: "100%" }}>
@@ -223,9 +236,6 @@ function PostPage(props) {
             // refreshFunction={refreshFunction}
           />
         </div>
-      </Col>
-      <Col lg={6} xs={24}>
-        {/* <SidePost /> */}
       </Col>
     </Row>
   );
