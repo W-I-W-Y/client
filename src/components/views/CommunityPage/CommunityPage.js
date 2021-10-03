@@ -9,6 +9,7 @@ import $ from "jquery";
 import { Helmet } from "react-helmet";
 import SideBar from "./Section/SideBar";
 import { Col, Row } from "antd";
+import { useHistory } from "react-router-dom";
 
 function CommunityPage() {
   useEffect(() => {
@@ -203,6 +204,7 @@ function CommunityPage() {
               {
                 postName: smallPostDTOS.postName,
                 calculateTime: smallPostDTOS.calculateTime,
+                postId: smallPostDTOS.postId,
               },
             ]);
           });
@@ -214,8 +216,12 @@ function CommunityPage() {
     });
   }, []);
 
+  const history = useHistory();
+  const detailPost = (id) => {
+    history.push("../../../post/view/" + id);
+  };
+
   const renderCards = community.map((community, index) => {
-    console.log(community.boardId);
     return (
       <Col key={index} lg={12} md={12} xs={24}>
         <div className="posts">
@@ -223,7 +229,12 @@ function CommunityPage() {
             <div className="board">
               <h3>{community.boardName}</h3>
               {community.smallPostDTOS.map((communityPost, index) => (
-                <a key={index} className="list" href="#">
+                <a
+                  key={index}
+                  className="list"
+                  href="#"
+                  onClick={() => detailPost(communityPost.postId)}
+                >
                   <time>{communityPost.calculateTime}</time>
                   <p>{communityPost.postName}</p>
                 </a>

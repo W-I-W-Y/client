@@ -10,7 +10,6 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import CommunityUploadePage from "./views/CommunityUploadePage/CommunityUploadePage";
-import FileDetailPage from "./views/FileDetailPage/FileDetailPage";
 import AddBoard from "./views/BoardPage/AddBoard.js";
 import DeleteBoard from "./views/BoardPage/DeleteBoard.js";
 import PostPage from "./views/PostPage/PostPage.js";
@@ -42,7 +41,6 @@ function App() {
             path="/post/add/:boardId"
             component={CommunityUploadePage}
           />
-          <Route exact path="/file/:fileId" component={FileDetailPage} />
         </Switch>
       </div>
       <Footer />

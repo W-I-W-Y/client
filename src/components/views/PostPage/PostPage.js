@@ -9,6 +9,8 @@ function PostPage(props) {
   const postId = props.match.params.postId;
 
   const [detailPost, setDetailPost] = useState([]);
+  const [like, setLike] = useState(false);
+  const [hate, setHate] = useState(false);
 
   useEffect(() => {
     const headers = {
@@ -19,7 +21,10 @@ function PostPage(props) {
       (response, index) => {
         if (response.data !== null) {
           console.log("data check");
-          console.log(response.data.postOutputDTO);
+          console.log(response.data);
+
+          setLike(response.data.like);
+          setHate(response.data.hate);
 
           setDetailPost({
             id: response.data.postOutputDTO.id,
@@ -41,6 +46,8 @@ function PostPage(props) {
     );
   }, []);
 
+  console.log(like);
+
   return (
     <Row gutter={[16, 16]}>
       <Col lg={18} xs={24}>
@@ -48,7 +55,7 @@ function PostPage(props) {
           <img src="" />
 
           <List.Item.Meta
-            avatar={<Avatar src />}
+            avatar={<Avatar />}
             title={detailPost.username}
             description={detailPost.createTime}
           />
@@ -66,7 +73,17 @@ function PostPage(props) {
             <hr />
             {detailPost.content}
           </div>
-          <List.Item actions={[<LikeDislikes />]}></List.Item>
+          <List.Item
+            actions={[
+              <LikeDislikes
+                postId={detailPost.id}
+                likes={detailPost.likes}
+                hates={detailPost.hates}
+                isLike={like}
+                isHate={hate}
+              />,
+            ]}
+          ></List.Item>
 
           <Comment
           // postId={detailPost.id}

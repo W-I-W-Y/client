@@ -59,9 +59,6 @@ function SideBar() {
                 ))}
               </ul>
             </li>
-            <li>
-              <a href="/">항목 추가하기</a>
-            </li>
           </ul>
         </nav>
 
