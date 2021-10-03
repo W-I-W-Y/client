@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { USER_SERVER } from "../../Config";
-import { Row, Col, List, Avatar } from "antd";
+import { Row, Col, List, Avatar, message } from "antd";
 import LikeDislikes from "./Section/LikeDislikes";
 import Comment from "./Section/Comment";
 
 function PostPage(props) {
   const postId = props.match.params.postId;
 
+  const [boardId, setBoardId] = useState();
   const [detailPost, setDetailPost] = useState([]);
   const [like, setLike] = useState(false);
   const [hate, setHate] = useState(false);
@@ -25,6 +26,7 @@ function PostPage(props) {
 
           setLike(response.data.like);
           setHate(response.data.hate);
+          setBoardId(response.data.boardId);
 
           setDetailPost({
             id: response.data.postOutputDTO.id,
@@ -47,6 +49,31 @@ function PostPage(props) {
   }, []);
 
   console.log(like);
+
+  const deletePost = () => {
+    const variable = {
+      postId: postId,
+    };
+
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+    Axios.post(`${USER_SERVER}/api/post/delete/${postId}`, variable, {
+      headers,
+    }).then((response) => {
+      console.log("포스트 확인");
+      console.log(response);
+      if (response.data === "deletePost") {
+        message.success("성공적으로 삭제했습니다");
+
+        setTimeout(() => {
+          props.history.push("../../board/" + boardId + "/view/0");
+        }, 3000);
+      } else {
+        alert("파일 삭제를 실패했습니다.");
+      }
+    });
+  };
 
   return (
     <Row gutter={[16, 16]}>
@@ -84,6 +111,9 @@ function PostPage(props) {
               />,
             ]}
           ></List.Item>
+          <button style={{ width: "20%", height: "52px" }} onClick={deletePost}>
+            게시글 삭제하기
+          </button>
 
           <Comment
           // postId={detailPost.id}
