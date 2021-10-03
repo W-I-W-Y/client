@@ -19,6 +19,22 @@ function SingleComment(props) {
     setCommentValue(e.currentTarget.value);
   };
 
+  const deleteComment = () => {
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+    Axios.delete(`${USER_SERVER}/api/comment/delete/${props.commentList.id}`, {
+      headers,
+    }).then((response) => {
+      if (response.data === "deleteComment") {
+        console.log(response.data);
+      } else {
+        alert("커멘트를 삭제하지 못했습니다");
+      }
+    });
+    window.location.reload();
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -58,12 +74,25 @@ function SingleComment(props) {
 
   return (
     <div>
-      <Comment
-        actions={actions}
-        author={props.commentList.username}
-        avatar={<Avatar src={profile} alt />}
-        content={<p>{props.commentList.content}</p>}
-      />
+      <div style={{ display: "flex" }}>
+        <Comment
+          actions={actions}
+          author={props.commentList.username}
+          avatar={<Avatar src={profile} alt />}
+          content={<p>{props.commentList.content}</p>}
+        />
+        {props.commentList.isAuthor ? (
+          <button
+            style={{ width: "80px", height: "20px", padding: "0px" }}
+            onClick={deleteComment}
+          >
+            댓글 삭제
+          </button>
+        ) : (
+          <div />
+        )}
+      </div>
+
       <hr />
 
       {openReply && (

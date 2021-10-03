@@ -31,6 +31,7 @@ function Comment(props) {
                 createTime: commentOutputDTOS.createTime,
                 username: commentOutputDTOS.username,
                 postName: commentOutputDTOS.postName,
+                isAuthor: commentOutputDTOS.author,
               },
             ]);
           });
