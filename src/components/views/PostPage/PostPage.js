@@ -22,7 +22,7 @@ function PostPage(props) {
       (response, index) => {
         if (response.data !== null) {
           console.log("data check");
-          console.log(response.data);
+          console.log(response.data.commentOutputDTOS);
 
           setLike(response.data.like);
           setHate(response.data.hate);
@@ -47,8 +47,6 @@ function PostPage(props) {
       }
     );
   }, []);
-
-  console.log(like);
 
   const deletePost = () => {
     const variable = {
@@ -117,9 +115,8 @@ function PostPage(props) {
           </button>
 
           <Comment
-          // postId={detailPost.id}
-          // commentLists={comments}
-          // refreshFunction={refreshFunction}
+            postId={postId}
+            // refreshFunction={refreshFunction}
           />
         </div>
       </Col>

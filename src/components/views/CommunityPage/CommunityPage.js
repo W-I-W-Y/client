@@ -184,11 +184,7 @@ function CommunityPage() {
 
     Axios.get(`${USER_SERVER}/api/community`).then((response, index) => {
       if (response.data !== null) {
-        console.log("data check");
-        // console.log(response.data[0].smallPostDTOS);
         response.data.forEach((lists) => {
-          console.log(lists.smallPostDTOS);
-          // console.log(lists.smallPostDTOS[0].postName);
           setCommunity((state) => [
             ...state,
             {
@@ -208,7 +204,6 @@ function CommunityPage() {
               },
             ]);
           });
-          console.log(communityPost);
         });
       } else {
         alert("게시판을 가져오는데 실패했습니다.");
@@ -232,7 +227,6 @@ function CommunityPage() {
                 <a
                   key={index}
                   className="list"
-                  href="#"
                   onClick={() => detailPost(communityPost.postId)}
                 >
                   <time>{communityPost.calculateTime}</time>

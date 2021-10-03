@@ -5,14 +5,6 @@ import { USER_SERVER } from "../../../Config";
 import { useHistory } from "react-router";
 
 function LikeDislikes(props) {
-  const [good, setGood] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-
-  console.log(props.likes);
-  console.log(props.hates);
-  console.log(props.isHate);
-  console.log(props.isLike);
-
   // let variable = {};
 
   // if (props.viedo) {
