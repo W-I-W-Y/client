@@ -65,6 +65,7 @@ function PostPage(props) {
       console.log(response);
       if (response.data === "deletePost") {
         message.success("성공적으로 삭제했습니다");
+        console.log(boardId);
 
         setTimeout(() => {
           props.history.push("../../board/" + boardId + "/view/0");
