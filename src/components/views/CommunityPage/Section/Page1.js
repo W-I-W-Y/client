@@ -130,6 +130,7 @@ function Page1(props) {
                           {Board.description}
                         </p>
                       </a>
+
                       <ul className="icons">
                         <li>
                           <a href="#" className="icon fa-twitter">
@@ -156,8 +157,24 @@ function Page1(props) {
                             <span className="label">Medium</span>
                           </a>
                         </li>
+                        <div
+                          style={{
+                            display: "flex",
+                            width: "100%",
+                            justifyContent: "end",
+                            marginTop: "20px",
+                          }}
+                        >
+                          <a
+                            className="button"
+                            href={"/post/add/" + Number(boardId)}
+                          >
+                            글쓰기
+                          </a>
+                        </div>
                       </ul>
                     </header>
+
                     <table className="tabel-list">
                       <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
                         <tr className="row align-items-sm-center text-center text-dark">
@@ -191,6 +208,41 @@ function Page1(props) {
                               >
                                 {post.content}
                               </p>
+                              <ul
+                                class="article-status"
+                                style={{ marginRight: "30px" }}
+                              >
+                                <li
+                                  title="공감"
+                                  class="vote"
+                                  style={{
+                                    fontFamily: "Droid Sans",
+                                    fontSize: "0.9rem",
+                                  }}
+                                >
+                                  👍🏻 {post.likes}
+                                </li>
+                                <li
+                                  title="공감"
+                                  class="vote"
+                                  style={{
+                                    fontFamily: "Droid Sans",
+                                    fontSize: "0.9rem",
+                                  }}
+                                >
+                                  👎🏻 {post.hates}
+                                </li>
+                                <li
+                                  title="댓글"
+                                  class="comment"
+                                  style={{
+                                    fontFamily: "Droid Sans",
+                                    fontSize: "0.9rem",
+                                  }}
+                                >
+                                  💬 {post.comCounts}
+                                </li>
+                              </ul>
                             </Col>
                             <Col span={4}>{post.username}</Col>
                             <Col span={4}>{post.calculateTime}</Col>
@@ -200,7 +252,14 @@ function Page1(props) {
                     </table>
 
                     <section>
-                      <div class="posts">
+                      <div
+                        class="posts"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          width: "100%",
+                        }}
+                      >
                         <article>
                           <div className="pagination">
                             {/* <ul>
@@ -259,9 +318,6 @@ function Page1(props) {
                         </article>
                       </div>
                     </section>
-                    <a className="button" href={"/post/add/" + Number(boardId)}>
-                      글쓰기
-                    </a>
                   </div>
                 </div>
               </div>
