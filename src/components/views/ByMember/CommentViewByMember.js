@@ -17,8 +17,6 @@ function CommentViewByMember() {
     Axios.get(`${USER_SERVER}/api/comment/viewByMember/0`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
-          console.log("확인ㅇ");
-          console.log(response.data);
           response.data.forEach((lists) => {
             setComment((state) => [
               ...state,

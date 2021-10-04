@@ -63,8 +63,7 @@ function Comment(props) {
     });
     window.location.reload();
   };
-  console.log("확인");
-  console.log(commentList);
+
   return (
     <div>
       <br />

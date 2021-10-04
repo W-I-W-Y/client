@@ -6,20 +6,40 @@ import mypageImg from "../../../../images/my.png";
 import infoImg1 from "../../../../images/picture1.png";
 import infoImg2 from "../../../../images/picture2.png";
 import infoImg3 from "../../../../images/picture3.png";
+import $ from "jquery";
 
 function SideBar() {
   const [board, setBoard] = useState([]);
   const [BoardName, setBoardName] = useState([]);
   useEffect(() => {
+    // Menu.
+    var $menu = $("#menu"),
+      $menu_openers = $menu.children("ul").find(".opener");
+
+    // Openers.
+    $menu_openers.each(function () {
+      var $this = $(this);
+
+      $this.on("click", function (event) {
+        // Prevent default.
+        event.preventDefault();
+
+        // Toggle.
+        $menu_openers.not($this).removeClass("active");
+        $this.toggleClass("active");
+
+        // // Trigger resize (sidebar lock).
+        // $window.triggerHandler("resize.sidebar-lock");
+      });
+    });
+
     Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
       if (response.data !== null) {
-        console.log(response.data);
-
-        setBoard(response.data);
         response.data.forEach((lists) => {
           setBoardName((state) => [
             ...state,
             {
+              id: lists.id,
               boardName: lists.boardName,
             },
           ]);
@@ -45,14 +65,14 @@ function SideBar() {
           </header>
           <ul>
             <li>
-              <a href="/">홈</a>
+              <a href="/community">홈</a>
             </li>
             <li>
               <span className="opener">게시판</span>
               <ul>
                 {BoardName.map((BoardName, index) => (
                   <li key={index}>
-                    <a href={"/community/" + Number(index + 1)}>
+                    <a href={"/board/" + BoardName.id + "/view/0"}>
                       {BoardName.boardName}
                     </a>
                   </li>
