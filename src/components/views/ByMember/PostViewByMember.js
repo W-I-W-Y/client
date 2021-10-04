@@ -47,6 +47,26 @@ function PostViewByMember() {
     window.scrollTo(0, 0);
   };
 
+  const deletePost = (postId) => {
+    const variable = {
+      postId: postId,
+    };
+
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+    Axios.post(`${USER_SERVER}/api/post/delete/${postId}`, variable, {
+      headers,
+    }).then((response) => {
+      if (response.data === "deletePost") {
+        console.log(response.data);
+      } else {
+        alert("파일 삭제를 실패했습니다.");
+      }
+      window.location.reload();
+    });
+  };
+
   return (
     <Row gutter={[16, 16]}>
       <Col lg={4} xs={24}>
@@ -98,20 +118,20 @@ function PostViewByMember() {
                 <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
                   <tr className="row align-items-sm-center text-center text-dark">
                     <Col span={16}>내용</Col>
-                    <Col span={4}>작성자</Col>
                     <Col span={4}>작성일</Col>
+                    <Col span={4}></Col>
                   </tr>
                 </thead>
 
                 {post.map((post, index) => (
                   <tbody
-                    onClick={() => detailPost(post.id)}
                     value={post.id}
                     key={index}
                     className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
                   >
                     <tr style={{ cursor: "pointer" }}>
                       <Col
+                        onClick={() => detailPost(post.id)}
                         span={16}
                         style={{
                           fontFamily: "Droid Sans",
@@ -163,8 +183,17 @@ function PostViewByMember() {
                           </li>
                         </ul>
                       </Col>
-                      <Col span={4}>{post.username}</Col>
                       <Col span={4}>{post.calculateTime}</Col>
+                      <Col span={4}>
+                        <button
+                          style={{ width: "95%", height: "52px" }}
+                          onClick={() => {
+                            deletePost(post.id);
+                          }}
+                        >
+                          게시글 삭제하기
+                        </button>
+                      </Col>
                     </tr>
                   </tbody>
                 ))}
