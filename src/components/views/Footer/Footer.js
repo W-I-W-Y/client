@@ -1,5 +1,5 @@
 import React from "react";
-import { Col } from "antd";
+import { Col, Row } from "antd";
 import logo from "../../../images/logo.jpg";
 import copylink from "../../../images/copylink.png";
 import kakao from "../../../images/kakaotalk.png";
@@ -47,7 +47,7 @@ function Footer() {
     //     padding-top: 0.3vw;
     //   }
     // }
-    <div style={{ minWidth: "1100px" }}>
+    <div style={{ minWidth: "1100px", width: "100%", display: "flex" }}>
       <Col
         lg={8}
         xs={8}

@@ -62,16 +62,27 @@ function SideBar() {
           </ul>
         </nav>
 
-        <section>
+        <nav id="menu">
           <header className="major">
             <h2>My page</h2>
           </header>
-          <div className="mini-posts">
+          <ul>
+            <li>
+              <a href={"/post/viewByMember/" + Number(0)}>내가 쓴 글</a>
+            </li>
+            <li>
+              <a href={"/comment/viewByMember/" + Number(0)}>내가 쓴 댓글</a>
+            </li>
+            <li>
+              <a href="/post/likehateByMember">좋아요 싫어요 목록</a>
+            </li>
+          </ul>
+          {/* <div className="mini-posts">
             <article id="mypage">
               <a href="#" className="image">
                 <img src={mypageImg} alt="" />
               </a>
-              {/* <p>회원명 : {file.writer.name}</p> */}
+              <p>회원명 : {file.writer.name}</p>
 
               <p align="center">
                 커뮤니티 이용을 위해 <br />
@@ -90,8 +101,8 @@ function SideBar() {
                 Sign Up
               </a>
             </li>
-          </ul>
-        </section>
+          </ul> */}
+        </nav>
 
         <section>
           <header className="major">
@@ -154,10 +165,10 @@ function SideBar() {
           </ul>
         </section>
 
-        <footer id="footer">
+        <div id="footer">
           homepage, made by <i className="fa fa-love"></i>
           <a href="https://naver.com">WIWY</a>
-          <div className="footer-row">
+          {/* <div className="footer-row">
             <ul className="icons">
               <li>
                 <a href="#" className="icon fa-twitter">
@@ -190,8 +201,8 @@ function SideBar() {
                 </a>
               </li>
             </ul>
-          </div>
-        </footer>
+          </div> */}
+        </div>
       </div>
     </div>
   );

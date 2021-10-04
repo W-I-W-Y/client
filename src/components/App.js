@@ -13,6 +13,9 @@ import CommunityUploadePage from "./views/CommunityUploadePage/CommunityUploadeP
 import AddBoard from "./views/BoardPage/AddBoard.js";
 import DeleteBoard from "./views/BoardPage/DeleteBoard.js";
 import PostPage from "./views/PostPage/PostPage.js";
+import PostViewByMember from "./views/ByMember/PostViewByMember";
+import CommentViewByMember from "./views/ByMember/CommentViewByMember";
+import LikeHateByMember from "./views/ByMember/LikeHateByMember";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -40,6 +43,21 @@ function App() {
             exact
             path="/post/add/:boardId"
             component={CommunityUploadePage}
+          />
+          <Route
+            exact
+            path="/post/viewByMember/:pageNum"
+            component={PostViewByMember}
+          />
+          <Route
+            exact
+            path="/comment/viewByMember/:pageNum"
+            component={CommentViewByMember}
+          />
+          <Route
+            exact
+            path="/post/likehateByMember"
+            component={LikeHateByMember}
           />
         </Switch>
       </div>

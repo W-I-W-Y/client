@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import Axios from "axios";
 import { useSelector } from "react-redux";
 import { USER_SERVER } from "../../Config";
+import SideBar from "../CommunityPage/Section/SideBar";
 
 const { Title } = Typography;
 const { TextArea } = Input;

@@ -18,30 +18,36 @@ import { useHistory } from "react-router-dom";
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function DeleteBoard() {
+function Board() {
   const history = useHistory();
   const [board, setBoard] = useState([]);
   const [boardOption, setBoardOption] = useState("자유게시판");
 
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/board/view`).then((response, index) => {
-      if (response.data !== null) {
-        console.log("data check");
-        console.log(response.data);
-        response.data.forEach((lists) => {
-          setBoard((state) => [
-            ...state,
-            {
-              id: lists.id,
-              boardName: lists.boardName,
-              description: lists.description,
-            },
-          ]);
-        });
-      } else {
-        alert("게시판을 가져오는데 실패했습니다.");
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.get(`${USER_SERVER}/api/board/view`, { headers }).then(
+      (response, index) => {
+        if (response.data !== null) {
+          console.log("data check");
+          console.log(response.data);
+          response.data.forEach((lists) => {
+            setBoard((state) => [
+              ...state,
+              {
+                id: lists.id,
+                boardName: lists.boardName,
+                description: lists.description,
+              },
+            ]);
+          });
+        } else {
+          alert("게시판을 가져오는데 실패했습니다.");
+        }
       }
-    });
+    );
   }, []);
 
   const onSubmit = (e) => {
@@ -49,26 +55,30 @@ function DeleteBoard() {
 
     const variable = {
       boardName: String(boardOption),
-      //   description: "Hi",
+      description: "Hi",
       // privacy: prvite,
       // filePath: filePath,
       // category: category,
     };
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
 
-    Axios.post(`${USER_SERVER}/api/board/delete`, variable).then((response) => {
-      console.log("======");
-      console.log(response.data);
-      if (response.data === "deleteBoard") {
-        message.success("게시판을 성공적으로 삭제했습니다");
-        setTimeout(() => {
-          history.push("/board/delete");
-          window.scrollTo(0, 0);
-        }, 3000);
-        window.location.reload();
-      } else {
-        alert("게시판 삭제를 실패했습니다.");
+    Axios.post(`${USER_SERVER}/api/board/delete`, variable, { headers }).then(
+      (response) => {
+        console.log(response.data);
+        if (response.data === "deleteBoard") {
+          message.success("게시판을 성공적으로 삭제했습니다");
+          setTimeout(() => {
+            history.push("/community");
+            // window.scrollTo(0, 0);
+          }, 3000);
+          // window.location.reload();
+        } else {
+          alert("게시판 삭제를 실패했습니다.");
+        }
       }
-    });
+    );
   };
 
   const onBoardChange = (e) => {
@@ -124,4 +134,4 @@ function DeleteBoard() {
   );
 }
 
-export default DeleteBoard;
+export default Board;

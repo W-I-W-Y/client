@@ -3038,6 +3038,7 @@ ul.pagination li > .page {
   min-width: 2em;
   padding: 0 0.5em;
   text-align: center;
+  color: #f56a6a;
 }
 
 ul.pagination li > .page.active {
@@ -3045,8 +3046,8 @@ ul.pagination li > .page.active {
   color: #ffffff !important;
 }
 
-ul.pagination li > .page.active:hover {
-  background-color: #f67878;
+ul.pagination li > .page:hover {
+  background-color: #fbb7b7;
 }
 
 ul.pagination li > .page.active:active {

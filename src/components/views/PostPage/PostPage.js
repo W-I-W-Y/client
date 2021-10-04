@@ -139,7 +139,7 @@ function PostPage(props) {
         <SideBar />
       </Col>
       <Col lg={20} xs={24}>
-        <div style={{ width: "100%", padding: "3rem 4rem" }}>
+        <div style={{ width: "90%", padding: "3rem 4rem" }}>
           <img src="" />
 
           <List.Item.Meta

@@ -36,6 +36,7 @@ function AddBoard() {
         setTimeout(() => {
           history.push("/community");
           window.scrollTo(0, 0);
+          window.location.reload();
         }, 2000);
       } else {
         alert("게시판 생성을 실패했습니다.");
