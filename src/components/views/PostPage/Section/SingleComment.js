@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { USER_SERVER } from "../../../Config";
 
 import Axios from "axios";
-import CommentLikeDislikes from "../Section/CommentLikeDislike";
+import CommentLikeDislikes from "../Section/CommentLikeDislikes";
 import profile from "../../../../images/icon1.png";
 
 function SingleComment(props) {
@@ -23,9 +23,16 @@ function SingleComment(props) {
     const headers = {
       Authorization: `Bearer ` + localStorage.getItem("token"),
     };
-    Axios.delete(`${USER_SERVER}/api/comment/delete/${props.commentList.id}`, {
-      headers,
-    }).then((response) => {
+    const variable = {
+      commentId: props.commentList.id,
+    };
+    Axios.post(
+      `${USER_SERVER}/api/comment/delete/${props.commentList.id}`,
+      variable,
+      {
+        headers,
+      }
+    ).then((response) => {
       if (response.data === "deleteComment") {
         console.log(response.data);
       } else {

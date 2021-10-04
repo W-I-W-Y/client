@@ -14,6 +14,7 @@ import {
 } from "antd";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router-dom";
+import SideBar from "../CommunityPage/Section/SideBar";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -86,51 +87,58 @@ function Board() {
   };
 
   return (
-    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={2}>게시판 삭제하기</Title>
-      </div>
+    <Row gutter={[16, 16]}>
+      <Col lg={4} xs={24}>
+        <SideBar />
+      </Col>
+      <Col lg={20} xs={24}>
+        <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+            <Title level={2}>게시판 삭제하기</Title>
+          </div>
 
-      <table className="tabel-list">
-        <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
-          <tr className="row align-items-sm-center text-center text-dark">
-            <th className="col-sm-10">게시판 제목</th>
-            <th className="col-sm-14">게시판 설명</th>
-          </tr>
-        </thead>
-
-        {board.map((board, index) => (
-          <>
-            <tbody
-              key={index}
-              className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
-              style={{ cursor: "pointer" }}
-            >
-              <tr>
-                {/* <Checkbox key={index} name="board" /> */}
-                <td></td>
-                <td id={index} className="col-sm-10 thtitle">
-                  {board.boardName}
-                </td>
-                <td id={index} className="col-sm-14">
-                  {board.description}
-                </td>
+          <table className="tabel-list">
+            <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
+              <tr className="row align-items-sm-center text-center text-dark">
+                <th className="col-sm-10">게시판 제목</th>
+                <th className="col-sm-14">게시판 설명</th>
               </tr>
-            </tbody>
-          </>
-        ))}
-      </table>
-      <select onChange={onBoardChange}>
-        {board.map((board, index) => (
-          <option key={index} value={board.boardName}>
-            {board.boardName}
-          </option>
-        ))}
-      </select>
-      <Button type="primary" size="large" onClick={onSubmit}>
-        삭제하기
-      </Button>
-    </div>
+            </thead>
+
+            {board.map((board, index) => (
+              <>
+                <tbody
+                  key={index}
+                  className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
+                  style={{ cursor: "pointer" }}
+                >
+                  <tr>
+                    {/* <Checkbox key={index} name="board" /> */}
+                    <td></td>
+                    <td id={index} className="col-sm-10 thtitle">
+                      {board.boardName}
+                    </td>
+                    <td id={index} className="col-sm-14">
+                      {board.description}
+                    </td>
+                  </tr>
+                </tbody>
+              </>
+            ))}
+          </table>
+          <select onChange={onBoardChange}>
+            {board.map((board, index) => (
+              <option key={index} value={board.boardName}>
+                {board.boardName}
+              </option>
+            ))}
+          </select>
+          <Button type="primary" size="large" onClick={onSubmit}>
+            삭제하기
+          </Button>
+        </div>
+      </Col>
+    </Row>
   );
 }
 

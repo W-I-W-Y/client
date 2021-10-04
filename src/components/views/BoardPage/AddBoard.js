@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { Typography, Button, Form, message, Input, Icon } from "antd";
+import { Typography, Button, Form, message, Input, Icon, Row, Col } from "antd";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router-dom";
+import SideBar from "../CommunityPage/Section/SideBar";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -45,32 +46,39 @@ function AddBoard() {
   };
 
   return (
-    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={2}>게시판 생성하기</Title>
-      </div>
+    <Row gutter={[16, 16]}>
+      <Col lg={4} xs={24}>
+        <SideBar />
+      </Col>
+      <Col lg={20} xs={24}>
+        <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+            <Title level={2}>게시판 생성하기</Title>
+          </div>
 
-      <Form onSubmit={onSubmit}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <br />
-          <br />
-          <label>Title</label>
-          <Input onChange={onTitleChange} value={boardTitle} />
-          <br />
-          <br />
-          <label>Description</label>
-          <TextArea
-            onChange={onDescriptionChange}
-            value={description}
-          ></TextArea>
-          <br />
-          <br />
-          <Button type="primary" size="large" onClick={onSubmit}>
-            Submit
-          </Button>
+          <Form onSubmit={onSubmit}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <br />
+              <br />
+              <label>Title</label>
+              <Input onChange={onTitleChange} value={boardTitle} />
+              <br />
+              <br />
+              <label>Description</label>
+              <TextArea
+                onChange={onDescriptionChange}
+                value={description}
+              ></TextArea>
+              <br />
+              <br />
+              <Button type="primary" size="large" onClick={onSubmit}>
+                Submit
+              </Button>
+            </div>
+          </Form>
         </div>
-      </Form>
-    </div>
+      </Col>
+    </Row>
   );
 }
 

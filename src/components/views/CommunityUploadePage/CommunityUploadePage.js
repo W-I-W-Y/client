@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Button, Form, message, Input, Icon } from "antd";
+import { Typography, Button, Form, message, Input, Icon, Row, Col } from "antd";
 import Dropzone from "react-dropzone";
 import Axios from "axios";
 import { useSelector } from "react-redux";
@@ -110,13 +110,18 @@ function CommunityUploadePage(props) {
   };
 
   return (
-    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={2}>게시글 작성하기</Title>
-      </div>
+    <Row gutter={[16, 16]}>
+      <Col lg={4} xs={24}>
+        <SideBar />
+      </Col>
+      <Col lg={20} xs={24}>
+        <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+            <Title level={2}>게시글 작성하기</Title>
+          </div>
 
-      <Form onSubmit={onSubmit}>
-        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Form onSubmit={onSubmit}>
+            {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
        
           <Dropzone onDrop={onDrop} multiple={false} maxSize={1000000000}>
             {({ getRootProps, getInputProps }) => (
@@ -144,18 +149,18 @@ function CommunityUploadePage(props) {
           )}
         </div> */}
 
-        <br />
-        <br />
-        <label>Title</label>
-        <Input onChange={onTitleChange} value={postName} />
-        <br />
-        <br />
-        <label>Description</label>
-        <TextArea onChange={onDescriptionChange} value={content}></TextArea>
-        <br />
-        <br />
+            <br />
+            <br />
+            <label>Title</label>
+            <Input onChange={onTitleChange} value={postName} />
+            <br />
+            <br />
+            <label>Description</label>
+            <TextArea onChange={onDescriptionChange} value={content}></TextArea>
+            <br />
+            <br />
 
-        {/* <select onChange={onPrivateChange}>
+            {/* <select onChange={onPrivateChange}>
           {PrivateOptions.map((item, index) => (
             <option key={index} value={item.value}>
               {item.label}
@@ -171,13 +176,15 @@ function CommunityUploadePage(props) {
             </option>
           ))}
         </select> */}
-        <br />
-        <br />
-        <Button type="primary" size="large" onClick={onSubmit}>
-          Submit
-        </Button>
-      </Form>
-    </div>
+            <br />
+            <br />
+            <Button type="primary" size="large" onClick={onSubmit}>
+              Submit
+            </Button>
+          </Form>
+        </div>
+      </Col>
+    </Row>
   );
 }
 
