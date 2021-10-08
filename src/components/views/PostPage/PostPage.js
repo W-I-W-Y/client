@@ -168,7 +168,11 @@ function PostPage(props) {
             )}
             <hr />
             {ismodify === false ? (
-              <p>{detailPost.content}</p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: detailPost.content,
+                }}
+              ></p>
             ) : (
               <TextArea
                 onChange={onDescriptionChange}

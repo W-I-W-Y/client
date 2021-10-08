@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { USER_SERVER } from "../../Config";
 import SideBar from "../CommunityPage/Section/SideBar";
 
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 const { Title } = Typography;
 const { TextArea } = Input;
 
@@ -36,17 +39,17 @@ function CommunityUploadePage(props) {
     setPostName(e.currentTarget.value);
   };
 
-  const onDescriptionChange = (e) => {
-    setContent(e.currentTarget.value);
-  };
+  // const onDescriptionChange = (e) => {
+  //   setContent(e.currentTarget.value);
+  // };
 
-  const onPrivateChange = (e) => {
-    setPrvite(e.currentTarget.value);
-  };
+  // const onPrivateChange = (e) => {
+  //   setPrvite(e.currentTarget.value);
+  // };
 
-  const onCategoryChange = (e) => {
-    setCategory(e.currentTarget.value);
-  };
+  // const onCategoryChange = (e) => {
+  //   setCategory(e.currentTarget.value);
+  // };
 
   const onDrop = (files) => {
     let formData = new FormData();
@@ -79,7 +82,7 @@ function CommunityUploadePage(props) {
 
     const variable = {
       postName: postName,
-      content: content,
+      content: content.newContent,
       boardId: boardId,
 
       // privacy: prvite,
@@ -91,9 +94,12 @@ function CommunityUploadePage(props) {
       Authorization: `Bearer ` + localStorage.getItem("token"),
     };
 
+    console.log(typeof variable.content);
+
     Axios.post(`${USER_SERVER}/api/post/add/${boardId}`, variable, {
       headers,
     }).then((response) => {
+      console.log(variable.content);
       console.log("포스트 확인");
       console.log(response);
       if (response.data === "addPost") {
@@ -121,6 +127,37 @@ function CommunityUploadePage(props) {
           </div>
 
           <Form onSubmit={onSubmit}>
+            <input
+              className="title-input"
+              type="text"
+              placeholder="제목"
+              onChange={onTitleChange}
+              value={postName}
+            />
+            <CKEditor
+              editor={ClassicEditor}
+              placeholder="제목"
+              value={content}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                console.log({ event, editor, data });
+
+                const newContent = data
+                  .replace("&lt;", "<")
+                  .replace("&gt;", ">")
+                  .replace("&amp;lt;", "<")
+                  .replace("&amp;gt;", ">")
+                  .replace("&amp;nbsp;", " ")
+                  .replace("&amp;amp;", "&");
+                setContent({
+                  ...content,
+                  newContent,
+                });
+
+                console.log(content);
+              }}
+            />
+
             {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
        
           <Dropzone onDrop={onDrop} multiple={false} maxSize={1000000000}>
@@ -148,17 +185,6 @@ function CommunityUploadePage(props) {
             </div>
           )}
         </div> */}
-
-            <br />
-            <br />
-            <label>Title</label>
-            <Input onChange={onTitleChange} value={postName} />
-            <br />
-            <br />
-            <label>Description</label>
-            <TextArea onChange={onDescriptionChange} value={content}></TextArea>
-            <br />
-            <br />
 
             {/* <select onChange={onPrivateChange}>
           {PrivateOptions.map((item, index) => (
