@@ -57,7 +57,7 @@ function CommunityPage() {
 
   const renderCards = community.map((community, index) => {
     return (
-      <Col key={index} lg={12} md={12} xs={24}>
+      <Col key={index} lg={12} md={12} sm={24} xs={24}>
         <div className="posts">
           <article>
             <div className="board">

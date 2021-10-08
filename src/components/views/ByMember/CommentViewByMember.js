@@ -71,7 +71,7 @@ function CommentViewByMember() {
 
   return (
     <Row gutter={[16, 16]}>
-      <Col lg={4} xs={24}>
+      <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
         <SideBar />
       </Col>
       <Col lg={20} xs={24}>

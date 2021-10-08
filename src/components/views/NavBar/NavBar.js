@@ -30,7 +30,7 @@ function NavBar() {
         <div className="menu_rigth">
           <RightMenu mode="horizontal" />
         </div>
-        <Button
+        {/* <Button
           className="menu__mobile-button"
           type="primary"
           onClick={showDrawer}
@@ -47,7 +47,7 @@ function NavBar() {
         >
           <LeftMenu mode="inline" />
           <RightMenu mode="inline" />
-        </Drawer>
+        </Drawer> */}
       </div>
     </nav>
   );
