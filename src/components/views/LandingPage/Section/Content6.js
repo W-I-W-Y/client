@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import { USER_SERVER } from "../../../Config";
 
 function Content3() {
+  const [coronaToday, setCoronaToday] = useState([]);
+
+  useEffect(() => {
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
+      (response, index) => {
+        const d = new Date();
+        if (response.data !== null) {
+          setCoronaToday({
+            defCnt: response.data.coronaTodayDTO.defCnt,
+            isolClearCnt: response.data.coronaTodayDTO.isolClearCnt,
+            isolIngCnt: response.data.coronaTodayDTO.isolIngCnt,
+            deathCnt: response.data.coronaTodayDTO.deathCnt,
+            incDec: response.data.coronaTodayDTO.incDec,
+          });
+        } else {
+          alert("코로나정보를 가져오는데 실패했습니다.");
+        }
+      }
+    );
+  }, []);
+
   return (
     <section className="content-section" id="content-section-3">
       <h1>당일 집계 현황</h1>
@@ -15,7 +42,7 @@ function Content3() {
         <tbody>
           <tr>
             <td style={{ fontSize: "3rem" }}>
-              <strong>123</strong> 명
+              <strong>{coronaToday.incDec}</strong> 명
             </td>
             <td style={{ fontSize: "3rem" }}>
               <strong>1232</strong> 명

@@ -70,6 +70,7 @@ function Content1() {
 
     Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
       (response, index) => {
+        const d = new Date();
         if (response.data !== null) {
           console.log("data check");
           console.log(response.data);
@@ -78,8 +79,8 @@ function Content1() {
             setCoronaWeek((state) => [
               ...state,
               {
-                defCnt: lists.defCnt,
-                stdDay: lists.stdDay,
+                incDec: lists.incDec,
+                stdDay: d + index - 7,
               },
             ]);
           });
@@ -97,7 +98,7 @@ function Content1() {
       }
     );
   }, []);
-  console.log(coronaWeek);
+
   return (
     <section
       className="content-section"
@@ -108,9 +109,9 @@ function Content1() {
         <div className="coronaboard">
           <Row style={{ display: "flex" }}>
             <Col span={6} style={{ display: "flex", justifyContent: "center" }}>
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 확진환자
-                <p style={{ color: "blue", textAlign: "center" }}>
+                <p style={{ color: "blue", textAlign: "center", margin: "0" }}>
                   {coronaToday.defCnt}
                 </p>
               </div>
@@ -122,9 +123,9 @@ function Content1() {
                 justifyContent: "center",
               }}
             >
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 격리해제
-                <p style={{ color: "red", textAlign: "center" }}>
+                <p style={{ color: "red", textAlign: "center", margin: "0" }}>
                   {coronaToday.isolClearCnt}
                 </p>
               </div>
@@ -136,9 +137,9 @@ function Content1() {
                 justifyContent: "center",
               }}
             >
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 격리중
-                <p style={{ color: "green", textAlign: "center" }}>
+                <p style={{ color: "green", textAlign: "center", margin: "0" }}>
                   {coronaToday.isolIngCnt}
                 </p>
               </div>
@@ -150,9 +151,9 @@ function Content1() {
                 justifyContent: "center",
               }}
             >
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 사망
-                <p style={{ color: "black", textAlign: "center" }}>
+                <p style={{ color: "black", textAlign: "center", margin: "0" }}>
                   {coronaToday.deathCnt}
                 </p>
               </div>
@@ -165,7 +166,7 @@ function Content1() {
             <LineChart
               width={500}
               height={300}
-              data={data}
+              data={coronaWeek}
               margin={{
                 top: 10,
                 right: 0,
@@ -176,22 +177,22 @@ function Content1() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="stdDay" />
               <YAxis yAxisId="left" />
-              <YAxis yAxisId="right" orientation="right" />
+              {/* <YAxis yAxisId="right" orientation="right" /> */}
               <Tooltip />
               <Legend />
               <Line
                 yAxisId="left"
                 type="monotone"
-                dataKey="pv"
+                dataKey="incDec"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />
-              <Line
+              {/* <Line
                 yAxisId="right"
                 type="monotone"
                 dataKey="uv"
                 stroke="#82ca9d"
-              />
+              /> */}
             </LineChart>
           </ResponsiveContainer>
         </div>

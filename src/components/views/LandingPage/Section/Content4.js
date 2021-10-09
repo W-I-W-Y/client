@@ -107,9 +107,9 @@ function Content4() {
               span={12}
               style={{ display: "flex", justifyContent: "center" }}
             >
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 1차 접종
-                <p style={{ color: "blue", textAlign: "center" }}>
+                <p style={{ color: "blue", textAlign: "center", margin: "0" }}>
                   {vaccine.firstCnt}
                 </p>
               </div>
@@ -121,9 +121,9 @@ function Content4() {
                 justifyContent: "center",
               }}
             >
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", paddingTop: "10px" }}>
                 2차 접종
-                <p style={{ color: "red", textAlign: "center" }}>
+                <p style={{ color: "red", textAlign: "center", margin: "0" }}>
                   {vaccine.secondCnt}
                 </p>
               </div>
