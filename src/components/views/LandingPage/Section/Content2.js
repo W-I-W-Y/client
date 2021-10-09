@@ -2,8 +2,21 @@ import React from "react";
 
 function Content2() {
   return (
-    <section className="content-section" id="content-section-2">
-      <h1>시도별 확진자 현황</h1>
+    <section
+      className="content-section"
+      id="content-section-2"
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <p
+        style={{
+          fontFamily: "Droid Sans",
+          fontSize: "2rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <stiong>시도별 확진자 현황</stiong>
+      </p>
       <div className="two-content">
         <div className="map">
           <img src="../../../images/map.png" width="100%" alt="" />

@@ -15,32 +15,31 @@ import Content5 from "./Section/Content5";
 
 function LandingPage() {
   return (
-    <div>
-      {/* <div className="navbar-links">
-        <a href="#content-section-1" className="navbar-item">
-          COVID-19 현황
-        </a>
-        <a href="#content-section-2" className="navbar-item">
-          시도별 발생동향
-        </a>
-        <a href="#content-section-3" className="navbar-item">
-          국외 발생동향
-        </a>
-        <a href="#content-section-4" className="navbar-item">
-          백신 접종 현황
-        </a>
-      </div> */}
+    // {/* <div className="navbar-links">
+    //   <a href="#content-section-1" className="navbar-item">
+    //     COVID-19 현황
+    //   </a>
+    //   <a href="#content-section-2" className="navbar-item">
+    //     시도별 발생동향
+    //   </a>
+    //   <a href="#content-section-3" className="navbar-item">
+    //     국외 발생동향
+    //   </a>
+    //   <a href="#content-section-4" className="navbar-item">
+    //     백신 접종 현황
+    //   </a>
+    // </div> */}
 
-      {/* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> */}
+    // {/* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> */}
 
-      {/* <div className="before-load"> */}
-      {/* <div className="loading">
-        <svg className="loading-circle">
-          <circle cx="50%" cy="50%" r="25"></circle>
-        </svg>
-      </div> */}
-      <div className="container">
-        {/* 코로나 시대 살아남기 COVID-19 현황    시도별 발생동향  국외 발생동향     백신 접종 현황 */}
+    // {/* <div className="before-load"> */}
+    // {/* <div className="loading">
+    //   <svg className="loading-circle">
+    //     <circle cx="50%" cy="50%" r="25"></circle>
+    //   </svg>
+    // </div> */}
+    <>
+      <Row className="antdrow" style={{ padding: "10vw" }}>
         {/* <section className="scroll-section" id="scroll-section-0">
               <h1>WIWY</h1>
               <object
@@ -67,19 +66,32 @@ function LandingPage() {
                 <p>모든 것</p>
               </div>
             </section> */}
-        <div className="normal-content">
+        <Col
+          className="leftarea"
+          xl={11}
+          lg={24}
+          sm={24}
+          xs={24}
+          style={{ paddingLeft: "30px", paddingRight: "30px", margin: "30px" }}
+        >
           <Content1 />
+        </Col>
 
-          <Content2 />
-
-          <Content3 />
-
+        <Col
+          className="rightarea"
+          xl={11}
+          lg={24}
+          sm={24}
+          xs={24}
+          style={{ paddingLeft: "30px", paddingRight: "30px", margin: "30px" }}
+        >
           <Content4 />
-
-          <Content5 />
-        </div>
-      </div>
-    </div>
+          {/* <Content3 />
+          <Content4 />
+          <Content5 /> */}
+        </Col>
+      </Row>
+    </>
   );
 }
 
