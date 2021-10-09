@@ -70,17 +70,25 @@ function Content1() {
 
     Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
       (response, index) => {
-        const d = new Date();
+        const day = new Date();
+        const sunday = day.getTime() - 86400000 * 6;
+        console.log(sunday);
+        day.setTime(sunday);
+        const result = [day.toISOString().slice(5, 10)];
+
+        console.log(result);
         if (response.data !== null) {
           console.log("data check");
           console.log(response.data);
 
           response.data.coronaWeekDTOS.forEach((lists) => {
+            day.setTime(day.getTime() + 86400000);
+
             setCoronaWeek((state) => [
               ...state,
               {
                 incDec: lists.incDec,
-                stdDay: d + index - 7,
+                stdDay: day.toISOString().slice(5, 10),
               },
             ]);
           });

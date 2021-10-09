@@ -31,7 +31,6 @@ function Content3() {
     );
   }, []);
 
-  console.log(coronaAbr);
   return (
     <section className="content-section" id="content-section-3">
       <h1>국외 발생동향</h1>
