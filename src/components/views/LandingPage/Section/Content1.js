@@ -104,21 +104,11 @@ function Content1() {
       id="content-section-1"
       style={{ display: "block", justifyContent: "center" }}
     >
-      <p
-        style={{
-          fontFamily: "Droid Sans",
-          fontSize: "2rem",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <stiong>코로나 확진자 현황</stiong>
-      </p>
       <div className="two-content" style={{ padding: "10px" }}>
         <div className="coronaboard">
           <Row style={{ display: "flex" }}>
             <Col span={6} style={{ display: "flex", justifyContent: "center" }}>
-              <div>
+              <div style={{ textAlign: "center" }}>
                 확진환자
                 <p style={{ color: "blue", textAlign: "center" }}>
                   {coronaToday.defCnt}
@@ -132,7 +122,7 @@ function Content1() {
                 justifyContent: "center",
               }}
             >
-              <div>
+              <div style={{ textAlign: "center" }}>
                 격리해제
                 <p style={{ color: "red", textAlign: "center" }}>
                   {coronaToday.isolClearCnt}
@@ -146,7 +136,7 @@ function Content1() {
                 justifyContent: "center",
               }}
             >
-              <div>
+              <div style={{ textAlign: "center" }}>
                 격리중
                 <p style={{ color: "green", textAlign: "center" }}>
                   {coronaToday.isolIngCnt}
@@ -160,7 +150,7 @@ function Content1() {
                 justifyContent: "center",
               }}
             >
-              <div>
+              <div style={{ textAlign: "center" }}>
                 사망
                 <p style={{ color: "black", textAlign: "center" }}>
                   {coronaToday.deathCnt}
@@ -177,10 +167,10 @@ function Content1() {
               height={300}
               data={data}
               margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
+                top: 10,
+                right: 0,
+                left: 0,
+                bottom: 10,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />

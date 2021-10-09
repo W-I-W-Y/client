@@ -12,6 +12,7 @@ import Content2 from "./Section/Content2";
 import Content3 from "./Section/Content3";
 import Content4 from "./Section/Content4";
 import Content5 from "./Section/Content5";
+import Content6 from "./Section/Content6";
 
 function LandingPage() {
   return (
@@ -39,7 +40,11 @@ function LandingPage() {
     //   </svg>
     // </div> */}
     <>
-      <Row className="antdrow" style={{ padding: "10vw" }}>
+      <Content6 />
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
         {/* <section className="scroll-section" id="scroll-section-0">
               <h1>WIWY</h1>
               <object
@@ -86,11 +91,11 @@ function LandingPage() {
           style={{ paddingLeft: "30px", paddingRight: "30px", margin: "30px" }}
         >
           <Content4 />
-          {/* <Content3 />
-          <Content4 />
-          <Content5 /> */}
         </Col>
       </Row>
+      <Content3 />
+      {/* <Content2 /> */}
+      <Content5 />
     </>
   );
 }

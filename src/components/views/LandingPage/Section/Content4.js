@@ -90,7 +90,7 @@ function Content4() {
       id="content-section-4"
       style={{ display: "block", justifyContent: "center" }}
     >
-      <p
+      {/* <p
         style={{
           fontFamily: "Droid Sans",
           fontSize: "2rem",
@@ -99,7 +99,7 @@ function Content4() {
         }}
       >
         <stiong>백신 접종 현황</stiong>
-      </p>
+      </p> */}
       <div className="two-content" style={{ padding: "10px" }}>
         <div className="coronaboard">
           <Row style={{ display: "flex" }}>
@@ -107,7 +107,7 @@ function Content4() {
               span={12}
               style={{ display: "flex", justifyContent: "center" }}
             >
-              <div>
+              <div style={{ textAlign: "center" }}>
                 1차 접종
                 <p style={{ color: "blue", textAlign: "center" }}>
                   {vaccine.firstCnt}
@@ -121,7 +121,7 @@ function Content4() {
                 justifyContent: "center",
               }}
             >
-              <div>
+              <div style={{ textAlign: "center" }}>
                 2차 접종
                 <p style={{ color: "red", textAlign: "center" }}>
                   {vaccine.secondCnt}
@@ -139,9 +139,9 @@ function Content4() {
               data={data}
               margin={{
                 top: 10,
-                right: 30,
+                right: 0,
                 left: 0,
-                bottom: 0,
+                bottom: 10,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />

@@ -30,14 +30,15 @@ a {
 }
 .leftarea {
   grid-area: leftarea;
-  background-color: rgb(226, 211, 255);
+  background-color: rgb(255, 255, 255);
   width: 50%;
+
   border-radius: 50px;
   border: solid 1px rgb(147, 147, 147);
 }
 .rightarea {
   grid-area: rightarea;
-  background-color: rgb(226, 211, 255);
+  background-color: rgb(255, 255, 255);
   width: 50%;
   border-radius: 50px;
   border: solid 1px rgb(147, 147, 147);
@@ -53,7 +54,7 @@ a {
   width: 100%;
   height: 100%;
 
-  margin-top: 100px;
+  margin-top: 10px;
   /* margin-bottom: 200px; */
   background-color: none;
 }
@@ -382,6 +383,16 @@ footer {
 }
 
 @media (min-width: 1024px) {
+  .leftarea {
+    grid-area: leftarea;
+    width: 50%;
+    margin: 20px !important;
+  }
+  .rightarea {
+    grid-area: rightarea;
+    width: 50%;
+    margin: 20px !important;
+  }
   .navbar-links a {
     margin-left: 2em;
     text-decoration-line: none;
