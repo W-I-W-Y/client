@@ -38,7 +38,6 @@ function Content3() {
 
   return (
     <section className="content-section" id="content-section-3">
-      <h1>당일 집계 현황</h1>
       <table className="tabel">
         <thead>
           <tr>

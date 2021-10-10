@@ -43,11 +43,34 @@ function LandingPage() {
     //   </svg>
     // </div> */}
     <>
-      <Content6 />
       <Row
         className="antdrow"
         style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
       >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            당일 집계 현황
+          </h2>
+        </header>
+        <Content6 />
+      </Row>
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            확진자 현황, 백신 접종 현황
+          </h2>
+        </header>
         {/* <section className="scroll-section" id="scroll-section-0">
               <h1>WIWY</h1>
               <object
@@ -100,6 +123,15 @@ function LandingPage() {
         className="antdrow"
         style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
       >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            거리두기 안내, 백신 종류
+          </h2>
+        </header>
         <Col
           className="leftarea"
           xl={11}
@@ -122,7 +154,23 @@ function LandingPage() {
           <Text2 />
         </Col>
       </Row>
-      <Content3 />
+
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            국외 발생동향
+          </h2>
+        </header>
+        <Content3 />
+      </Row>
+
       {/* <Content2 /> */}
       <Content5 />
     </>
