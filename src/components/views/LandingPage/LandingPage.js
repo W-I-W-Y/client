@@ -14,6 +14,9 @@ import Content4 from "./Section/Content4";
 import Content5 from "./Section/Content5";
 import Content6 from "./Section/Content6";
 
+import Text1 from "./Section/Text1";
+import Text2 from "./Section/Text2";
+
 function LandingPage() {
   return (
     // {/* <div className="navbar-links">
@@ -91,6 +94,32 @@ function LandingPage() {
           style={{ paddingLeft: "30px", paddingRight: "30px", margin: "30px" }}
         >
           <Content4 />
+        </Col>
+      </Row>
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <Col
+          className="leftarea"
+          xl={11}
+          lg={24}
+          sm={24}
+          xs={24}
+          style={{ paddingLeft: "30px", paddingRight: "30px", margin: "30px" }}
+        >
+          <Text1 />
+        </Col>
+
+        <Col
+          className="rightarea"
+          xl={11}
+          lg={24}
+          sm={24}
+          xs={24}
+          style={{ paddingLeft: "30px", paddingRight: "30px", margin: "30px" }}
+        >
+          <Text2 />
         </Col>
       </Row>
       <Content3 />

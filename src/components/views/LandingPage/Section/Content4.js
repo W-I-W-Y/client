@@ -11,52 +11,45 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
 function Content4() {
-  const demoUrl = "https://codesandbox.io/s/stacked-area-chart-ix341";
+  const demoUrl = "https://codesandbox.io/s/stacked-bar-chart-s47i2";
   const [vaccine, setVaccine] = useState([]);
+  const [vaccineChart, setVaccineChart] = useState([]);
   const data = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: "10-04",
+      incFirstCnt: 4000,
+      incSecondCnt: 546733,
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: "10-05",
+      incFirstCnt: 3000,
+      incSecondCnt: 46342,
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: "10-06",
+      incFirstCnt: 2000,
+      incSecondCnt: 234353,
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: "10-07",
+      incFirstCnt: 2780,
+      incSecondCnt: 810334,
     },
     {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: "10-08",
+      incFirstCnt: 1890,
+      incSecondCnt: 564364,
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      name: "10-09",
+      incFirstCnt: 2390,
+      incSecondCnt: 746353,
     },
     {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: "10-10",
+      incFirstCnt: 43782,
+      incSecondCnt: 1098170,
     },
   ];
 
@@ -67,9 +60,25 @@ function Content4() {
 
     Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
       (response, index) => {
+        const day = new Date();
+        const sunday = day.getTime() - 86400000 * 6;
+        console.log(sunday);
+        day.setTime(sunday);
+        const result = [day.toISOString().slice(5, 10)];
+
         if (response.data !== null) {
-          console.log("data check");
-          console.log(response.data.vaccineDTO);
+          response.data.vaccineChartDTOS.forEach((lists) => {
+            day.setTime(day.getTime() + 86400000);
+
+            setVaccineChart((state) => [
+              ...state,
+              {
+                incFirstCnt: lists.incFirstCnt,
+                incSecondCnt: lists.incSecondCnt,
+                stdDay: day.toISOString().slice(5, 10),
+              },
+            ]);
+          });
 
           setVaccine({
             firstCnt: response.data.vaccineDTO.firstCnt,
@@ -83,6 +92,8 @@ function Content4() {
       }
     );
   }, []);
+
+  console.log(vaccineChart);
 
   return (
     <section
@@ -132,42 +143,52 @@ function Content4() {
         </div>
 
         <div className="vaccineCovidStatus" style={{ width: "100%" }}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={200}>
             <AreaChart
               width={500}
-              height={400}
+              height={200}
               data={data}
               margin={{
                 top: 10,
-                right: 0,
+                right: 30,
                 left: 0,
-                bottom: 10,
+                bottom: 0,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="stdDay" />
               <YAxis />
               <Tooltip />
               <Area
                 type="monotone"
-                dataKey="uv"
-                stackId="1"
-                stroke="#8884d8"
-                fill="#8884d8"
-              />
-              <Area
-                type="monotone"
-                dataKey="pv"
-                stackId="1"
-                stroke="#82ca9d"
-                fill="#82ca9d"
-              />
-              <Area
-                type="monotone"
-                dataKey="amt"
-                stackId="1"
+                dataKey="incFirstCnt"
                 stroke="#ffc658"
                 fill="#ffc658"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={200}>
+            <AreaChart
+              width={500}
+              height={200}
+              data={data}
+              margin={{
+                top: 10,
+                right: 30,
+                left: 0,
+                bottom: 0,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="stdDay" />
+              <YAxis />
+              <Tooltip />
+              <Area
+                connectNulls
+                type="monotone"
+                dataKey="incSecondCnt"
+                stroke="#82ca9d"
+                fill="#82ca9d"
               />
             </AreaChart>
           </ResponsiveContainer>

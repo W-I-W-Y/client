@@ -1030,3 +1030,11 @@ header.major > :last-child {
   margin-top: 10px;
   display: block;
 }
+
+.pointerClick:hover {
+  background-color: rgb(190, 232, 255);
+  opacity: 0.7;
+}
+.pointerClick:hover p {
+  color: #0030f2 !important;
+}

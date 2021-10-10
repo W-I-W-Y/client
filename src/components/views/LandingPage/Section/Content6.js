@@ -4,6 +4,7 @@ import { USER_SERVER } from "../../../Config";
 
 function Content3() {
   const [coronaToday, setCoronaToday] = useState([]);
+  const [vaccine, setVaccine] = useState([]);
 
   useEffect(() => {
     const headers = {
@@ -21,6 +22,13 @@ function Content3() {
             deathCnt: response.data.coronaTodayDTO.deathCnt,
             incDec: response.data.coronaTodayDTO.incDec,
           });
+
+          setVaccine({
+            firstCnt: response.data.vaccineDTO.firstCnt,
+            secondCnt: response.data.vaccineDTO.secondCnt,
+            incFirstCnt: response.data.vaccineDTO.incFirstCnt,
+            incSecondCnt: response.data.vaccineDTO.incSecondCnt,
+          });
         } else {
           alert("코로나정보를 가져오는데 실패했습니다.");
         }
@@ -35,8 +43,8 @@ function Content3() {
         <thead>
           <tr>
             <th style={{ textAlign: "center" }}>확진자</th>
-            <th style={{ textAlign: "center" }}>백신 접종</th>
-            <th style={{ textAlign: "center" }}> 거리두기 단계</th>
+            <th style={{ textAlign: "center" }}>백신 접종(2차 완료)</th>
+            <th style={{ textAlign: "center" }}>거리두기 단계</th>
           </tr>
         </thead>
         <tbody>
@@ -45,7 +53,7 @@ function Content3() {
               <strong>{coronaToday.incDec}</strong> 명
             </td>
             <td style={{ fontSize: "3rem" }}>
-              <strong>1232</strong> 명
+              <strong>{vaccine.incSecondCnt}</strong> 명
             </td>
             <td style={{ fontSize: "3rem" }}>
               <strong>3</strong>단계
