@@ -7,20 +7,7 @@ import icon4 from "../../../../images/icon4.png";
 
 function Content5() {
   return (
-    <section
-      className="content-section"
-      id="content-section-5"
-      style={{ padding: "200px", margin: "0px" }}
-    >
-      <header className="major">
-        <h2
-          style={{
-            fontFamily: "Droid Sans",
-          }}
-        >
-          제공 서비스
-        </h2>
-      </header>
+    <section className="content-section" id="content-section-5">
       <div className="features">
         <article>
           <span

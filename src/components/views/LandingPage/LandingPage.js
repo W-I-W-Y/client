@@ -14,6 +14,9 @@ import Content4 from "./Section/Content4";
 import Content5 from "./Section/Content5";
 import Content6 from "./Section/Content6";
 
+import CoronaNews from "./Section/CoronaNews";
+import CoronaVideo from "./Section/CoronaVideo";
+
 import Text1 from "./Section/Text1";
 import Text2 from "./Section/Text2";
 
@@ -154,7 +157,21 @@ function LandingPage() {
           <Text2 />
         </Col>
       </Row>
-
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            시도별 확진현황
+          </h2>
+        </header>
+        {/* <Content2 /> */}
+      </Row>
       <Row
         className="antdrow"
         style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
@@ -171,8 +188,51 @@ function LandingPage() {
         <Content3 />
       </Row>
 
-      {/* <Content2 /> */}
-      <Content5 />
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            코로나 관련 뉴스
+          </h2>
+        </header>
+        <CoronaNews />
+      </Row>
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            코로나 관련 동영상
+          </h2>
+        </header>
+        <CoronaVideo />
+      </Row>
+      <Row
+        className="antdrow"
+        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+      >
+        <header className="major">
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+            }}
+          >
+            제공 서비스
+          </h2>
+        </header>
+        <Content5 />
+      </Row>
     </>
   );
 }
