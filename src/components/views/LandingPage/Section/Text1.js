@@ -4,8 +4,6 @@ import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
 
 function Text1() {
-  const [coronaToday, setCoronaToday] = useState([]);
-  const [coronaWeek, setCoronaWeek] = useState([]);
   const [one, setOne] = useState(true);
   const [two, setTwo] = useState(false);
   const [three, setThree] = useState(false);
@@ -34,50 +32,6 @@ function Text1() {
       setFour(true);
     }
   };
-
-  useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
-
-    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
-      (response, index) => {
-        const day = new Date();
-        const sunday = day.getTime() - 86400000 * 6;
-        console.log(sunday);
-        day.setTime(sunday);
-        const result = [day.toISOString().slice(5, 10)];
-
-        console.log(result);
-        if (response.data !== null) {
-          console.log("data check");
-          console.log(response.data);
-
-          response.data.coronaWeekDTOS.forEach((lists) => {
-            day.setTime(day.getTime() + 86400000);
-
-            setCoronaWeek((state) => [
-              ...state,
-              {
-                incDec: lists.incDec,
-                stdDay: day.toISOString().slice(5, 10),
-              },
-            ]);
-          });
-
-          setCoronaToday({
-            defCnt: response.data.coronaTodayDTO.defCnt,
-            isolClearCnt: response.data.coronaTodayDTO.isolClearCnt,
-            isolIngCnt: response.data.coronaTodayDTO.isolIngCnt,
-            deathCnt: response.data.coronaTodayDTO.deathCnt,
-            incDec: response.data.coronaTodayDTO.incDec,
-          });
-        } else {
-          alert("코로나정보를 가져오는데 실패했습니다.");
-        }
-      }
-    );
-  }, []);
 
   return (
     <section
