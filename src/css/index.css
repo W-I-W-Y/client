@@ -3512,7 +3512,7 @@ button:disabled,
   -webkit-flex-shrink: 1;
   -ms-flex-shrink: 1;
   flex-shrink: 1;
-  margin: 0 0 6em 6em;
+  margin: 0 0 0 0;
   position: relative;
   width: calc(33.33333% - 6em);
   margin-bottom: 40px !important;
@@ -4501,6 +4501,15 @@ button:disabled,
     background-color: rgba(255, 215, 248, 0.693);
     border-left: 0;
     box-shadow: none !important;
+  }
+  .board {
+    border: 0.2px solid rgb(167, 164, 164);
+    border-top: none;
+    margin-bottom: 30px;
+    width: 318px;
+  }
+  #actions-more {
+    width: 300px !important;
   }
 }
 .side-bar {
