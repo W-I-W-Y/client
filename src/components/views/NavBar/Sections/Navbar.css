@@ -79,10 +79,10 @@
     display: inline-block !important;
   }
 
-  .menu_left,
+  /* .menu_left,
   .menu_rigth {
     display: none;
-  }
+  } */
 
   .menu__logo a {
     margin-left: -20px;

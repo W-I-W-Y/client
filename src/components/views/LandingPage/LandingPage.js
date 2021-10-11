@@ -170,7 +170,7 @@ function LandingPage() {
             시도별 확진현황
           </h2>
         </header>
-        {/* <Content2 /> */}
+        <Content2 />
       </Row>
       <Row
         className="antdrow"

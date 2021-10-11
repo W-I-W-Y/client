@@ -26,6 +26,7 @@ function App() {
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
       <div
+        className="classbody"
         style={{
           paddingTop: "69px",
           minHeight: "calc(100vh - 80px)",
