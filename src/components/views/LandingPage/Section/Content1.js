@@ -26,7 +26,7 @@ function Content1() {
     Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
       (response, index) => {
         const day = new Date();
-        const sunday = day.getTime() - 86400000 * 7;
+        const sunday = day.getTime() - 86400000 * 8;
         console.log(sunday);
         day.setTime(sunday);
         const result = [day.toISOString().slice(5, 10)];
