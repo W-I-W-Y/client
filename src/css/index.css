@@ -1319,6 +1319,11 @@ body {
 }
 
 @media screen and (max-width: 480px) {
+  .youtube {
+    height: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
   .row > * {
     padding: 0 0 0 1.5em;
   }

@@ -9,6 +9,7 @@ function Content3() {
       <Row gutter={16}>
         <Col lg={8} md={12} xs={24} sm={24}>
           <iframe
+            className="youtube"
             width="100%"
             height="250"
             src="https://www.youtube.com/embed/IFIMlZPa62Q"
@@ -20,6 +21,7 @@ function Content3() {
         </Col>
         <Col lg={8} md={12} xs={24} sm={24}>
           <iframe
+            className="youtube"
             width="100%"
             height="250"
             src="https://www.youtube.com/embed/ZFUnG41xJOY"
@@ -31,6 +33,7 @@ function Content3() {
         </Col>
         <Col lg={8} md={12} xs={24} sm={24}>
           <iframe
+            className="youtube"
             width="100%"
             height="250"
             src="https://www.youtube.com/embed/PQOS0CBbM80"

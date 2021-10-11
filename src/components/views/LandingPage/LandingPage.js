@@ -198,7 +198,7 @@ function LandingPage() {
               fontFamily: "Droid Sans",
             }}
           >
-            코로나 관련 뉴스
+            코로나 카드 뉴스
           </h2>
         </header>
         <CoronaNews />
