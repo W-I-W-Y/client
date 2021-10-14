@@ -44,7 +44,13 @@ function Content3() {
         <tbody className="tbody">
           {coronaAbr.map((coronaAbr, index) => (
             <tr className="tabel-tr" key={index}>
-              <td className="th-1">{coronaAbr.nationNm}</td>
+              <td className="th-1">
+                <img
+                  src={require(`../../../../images/country/${coronaAbr.nationNm}.png`)}
+                  style={{ width: "30px", height: "20px", marginRight: "20px" }}
+                ></img>
+                {coronaAbr.nationNm}
+              </td>
               <td className="th-2">{coronaAbr.natDefCnt}</td>
               <td className="th-3">{coronaAbr.natDeathCnt}</td>
             </tr>
