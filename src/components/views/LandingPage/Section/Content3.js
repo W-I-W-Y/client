@@ -4,6 +4,7 @@ import { USER_SERVER } from "../../../Config";
 
 function Content3() {
   const [coronaAbr, setCoronaAbr] = useState([]);
+  const [numberOfItem, setNumberOfItem] = useState(10);
 
   useEffect(() => {
     const headers = {
@@ -31,6 +32,10 @@ function Content3() {
     );
   }, []);
 
+  const handleNumber = () => {
+    setNumberOfItem(numberOfItem + 10);
+  };
+
   return (
     <section className="content-section" id="content-section-3">
       <table className="tabel">
@@ -42,7 +47,7 @@ function Content3() {
           </tr>
         </thead>
         <tbody className="tbody">
-          {coronaAbr.map((coronaAbr, index) => (
+          {coronaAbr.slice(0, numberOfItem).map((coronaAbr, index) => (
             <tr className="tabel-tr" key={index}>
               <td className="th-1">
                 <img
@@ -56,6 +61,19 @@ function Content3() {
             </tr>
           ))}
         </tbody>
+        <div style={{ width: "298%", padding: "0" }}>
+          {numberOfItem > coronaAbr.length ? (
+            <p></p>
+          ) : (
+            <button
+              onClick={handleNumber}
+              style={{ width: "100%", boxShadow: "none" }}
+            >
+              {" "}
+              +10 MORE
+            </button>
+          )}
+        </div>
       </table>
     </section>
   );
