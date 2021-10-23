@@ -11,6 +11,9 @@ import SideBar from "./Section/SideBar";
 import { Col, Row } from "antd";
 import { useHistory } from "react-router-dom";
 
+import trueimg from "../../../images/true.png";
+import falseimg from "../../../images/false.png";
+
 function CommunityPage() {
   const [community, setCommunity] = useState([]);
   const [communityPost, setCommunityPost] = useState([]);
@@ -257,6 +260,47 @@ function CommunityPage() {
                 </section>
 
                 <section>
+                  <br />
+                  <Row gutter={16} style={{ display: "flex" }}>
+                    <div className="true" style={{ width: "40%" }}>
+                      찬성
+                      <div
+                        style={{
+                          backgroundColor: "#FA6A90",
+                          height: "30px",
+                          position: "relative",
+                        }}
+                      ></div>
+                      <img
+                        src={trueimg}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          position: "relative",
+                          top: "-74px",
+                          float: "right",
+                        }}
+                      />
+                    </div>
+                    <div className="false" style={{ width: "60%" }}>
+                      반대
+                      <div
+                        style={{ backgroundColor: "#6AA8FA", height: "30px" }}
+                      ></div>
+                      <img
+                        src={falseimg}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          position: "relative",
+                          top: "-74px",
+                          float: "left",
+                        }}
+                      />
+                    </div>
+                  </Row>
+                </section>
+                <section>
                   <header className="major">
                     <h2
                       style={{ fontFamily: "Droid Sans", fontSize: "1.8rem" }}
@@ -264,6 +308,7 @@ function CommunityPage() {
                       게시판
                     </h2>
                   </header>
+
                   <Row gutter={16}>{renderCards}</Row>
                 </section>
               </div>
