@@ -276,6 +276,16 @@ function CommunityPage() {
                         height: "130px",
                       }}
                     ></img>
+                    <h1
+                      style={{
+                        fontFamily: "Droid Sans",
+                        fontSize: "2rem",
+                        textAlign: "center",
+                        marginBottom: "30px",
+                      }}
+                    >
+                      "백신 접종은 필수로 맞아야한다"
+                    </h1>
                   </div>
                   <br />
                   <Row
@@ -295,6 +305,7 @@ function CommunityPage() {
                           marginBottom: "30px",
                         }}
                       >
+                        <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
                         40%(80명)
                       </h1>
                       <div
@@ -324,7 +335,8 @@ function CommunityPage() {
                           marginBottom: "30px",
                         }}
                       >
-                        60%(120명)
+                        60%(120명){" "}
+                        <strong style={{ color: "#6AA8FA" }}>반대</strong>
                       </h1>
                       <div
                         style={{ backgroundColor: "#6AA8FA", height: "30px" }}
