@@ -14,6 +14,8 @@ import { useHistory } from "react-router-dom";
 import trueimg from "../../../images/true.png";
 import falseimg from "../../../images/false.png";
 
+import votetitle from "../../../images/votetitle.png";
+
 function CommunityPage() {
   const [community, setCommunity] = useState([]);
   const [communityPost, setCommunityPost] = useState([]);
@@ -216,28 +218,33 @@ function CommunityPage() {
                   <div className="content">
                     <header>
                       <h1
-                        style={{ fontFamily: "Droid Sans", fontSize: "2rem" }}
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          marginBottom: "20px",
+                        }}
                       >
                         코로나 시대를 살아가는 여러분들을 위한
-                        <br />
-                        <strong>COVID-19 정보 제공 서비스</strong>
+                        <strong style={{ color: "#f56a6a" }}>
+                          {" "}
+                          COVID-19 정보 제공 서비스
+                        </strong>
                       </h1>
                       <p
                         style={{ fontFamily: "Droid Sans", fontSize: "1.3rem" }}
                       >
-                        확진자 정보부터 국내외 발생 현황, 백신 접종 현황까지
+                        확진자 정보, 백신접종 정보, 국내외 발생 현황, 전세계
+                        확진 현황
                       </p>
                     </header>
                     <p style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}>
                       저희 서비스를 이용하시면{" "}
                       <strong>확진환자, 격리해제, 격리중, 사망자의 현황</strong>
-                      을 파악할 수 있고, <strong>시도별 확진자 수</strong>를
-                      확인할 수 있으며,{" "}
-                      <strong>국내뿐만 아니라 국외 발생동향</strong>도 알 수
-                      있습니다. 더 나아가 코로나 백신 접종 현황까지 한 눈에 확인
-                      가능합니다. 또한 코로나시대를 살아가는 여러분들이{" "}
-                      <strong>충분히 정보를 공유</strong>할 수 있도록 게시판을
-                      제공합니다.
+                      을 알 수 있고, <strong>백신접종 현황</strong>을 알 수
+                      있습니다. 또한 <strong>시도별 확진자 수</strong>를 확인할
+                      수 있으며, <strong>국내뿐만 아니라 국외 발생동향</strong>
+                      도 알 수 있습니다. 더 나아가 코로나 백신 접종 현황까지 한
+                      눈에 확인 가능합니다.
                     </p>
                     <ul className="actions">
                       <li>
@@ -260,10 +267,36 @@ function CommunityPage() {
                 </section>
 
                 <section>
+                  <div style={{ textAlign: "center" }}>
+                    <img
+                      src={votetitle}
+                      style={{
+                        marginBottom: "50px",
+                        width: "500px",
+                        height: "130px",
+                      }}
+                    ></img>
+                  </div>
                   <br />
-                  <Row gutter={16} style={{ display: "flex" }}>
+                  <Row
+                    gutter={16}
+                    style={{
+                      display: "flex",
+                      marginRight: "0px",
+                      marginLeft: "0px",
+                    }}
+                  >
                     <div className="true" style={{ width: "40%" }}>
-                      찬성
+                      <h1
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          textAlign: "left",
+                          marginBottom: "30px",
+                        }}
+                      >
+                        40%(80명)
+                      </h1>
                       <div
                         style={{
                           backgroundColor: "#FA6A90",
@@ -283,7 +316,16 @@ function CommunityPage() {
                       />
                     </div>
                     <div className="false" style={{ width: "60%" }}>
-                      반대
+                      <h1
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          textAlign: "right",
+                          marginBottom: "30px",
+                        }}
+                      >
+                        60%(120명)
+                      </h1>
                       <div
                         style={{ backgroundColor: "#6AA8FA", height: "30px" }}
                       ></div>
