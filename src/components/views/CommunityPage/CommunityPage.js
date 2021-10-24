@@ -297,60 +297,64 @@ function CommunityPage() {
                     }}
                   >
                     <div className="true" style={{ width: "40%" }}>
-                      <h1
-                        style={{
-                          fontFamily: "Droid Sans",
-                          fontSize: "2rem",
-                          textAlign: "left",
-                          marginBottom: "30px",
-                        }}
-                      >
-                        <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
-                        40%(80명)
-                      </h1>
-                      <div
-                        style={{
-                          backgroundColor: "#FA6A90",
-                          height: "30px",
-                          position: "relative",
-                        }}
-                      ></div>
-                      <img
-                        src={trueimg}
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          position: "relative",
-                          top: "-74px",
-                          float: "right",
-                        }}
-                      />
+                      <a>
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            textAlign: "left",
+                            marginBottom: "30px",
+                          }}
+                        >
+                          <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
+                          40%(80명)
+                        </h1>
+                        <div
+                          style={{
+                            backgroundColor: "#FA6A90",
+                            height: "30px",
+                            position: "relative",
+                          }}
+                        ></div>
+                        <img
+                          src={trueimg}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            position: "relative",
+                            top: "-74px",
+                            float: "right",
+                          }}
+                        />
+                      </a>
                     </div>
                     <div className="false" style={{ width: "60%" }}>
-                      <h1
-                        style={{
-                          fontFamily: "Droid Sans",
-                          fontSize: "2rem",
-                          textAlign: "right",
-                          marginBottom: "30px",
-                        }}
-                      >
-                        60%(120명){" "}
-                        <strong style={{ color: "#6AA8FA" }}>반대</strong>
-                      </h1>
-                      <div
-                        style={{ backgroundColor: "#6AA8FA", height: "30px" }}
-                      ></div>
-                      <img
-                        src={falseimg}
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          position: "relative",
-                          top: "-74px",
-                          float: "left",
-                        }}
-                      />
+                      <a>
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            textAlign: "right",
+                            marginBottom: "30px",
+                          }}
+                        >
+                          60%(120명){" "}
+                          <strong style={{ color: "#6AA8FA" }}>반대</strong>
+                        </h1>
+                        <div
+                          style={{ backgroundColor: "#6AA8FA", height: "30px" }}
+                        ></div>
+                        <img
+                          src={falseimg}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            position: "relative",
+                            top: "-74px",
+                            float: "left",
+                          }}
+                        />
+                      </a>
                     </div>
                   </Row>
                 </section>

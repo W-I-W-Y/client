@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { USER_SERVER } from "../../../Config";
 import { Button, message, Drawer, Icon } from "antd";
-import { FormOutlined } from "@ant-design/icons";
+// import { FormOutlined } from "@ant-design/icons";
 import Axios from "axios";
 import mypageImg from "../../../../images/my.png";
 import infoImg1 from "../../../../images/picture1.png";
@@ -93,7 +93,7 @@ function SideBar() {
             paddingLeft: "10px",
           }}
         >
-          <FormOutlined />
+          {/* <FormOutlined /> */}
         </button>
         <div id="sidebar">
           {visibleSidebar && (
