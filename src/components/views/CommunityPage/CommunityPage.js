@@ -151,32 +151,6 @@ function CommunityPage() {
           <div id="wrapper">
             <div id="main">
               <div className="inner">
-                <ul className="actions" id="actions-more">
-                  <li>
-                    <a
-                      className="button"
-                      href="/board/add"
-                      style={{
-                        fontFamily: "Droid Sans",
-                        fontSize: "0.7rem",
-                        margin: "10px",
-                      }}
-                    >
-                      게시판 만들기
-                    </a>
-                    <a
-                      className="button"
-                      href="/board/delete"
-                      style={{
-                        fontFamily: "Droid Sans",
-                        fontSize: "0.7rem",
-                        margin: "10px",
-                      }}
-                    >
-                      게시판 삭제하기
-                    </a>
-                  </li>
-                </ul>
                 <header id="header">
                   <a
                     href="community.html"

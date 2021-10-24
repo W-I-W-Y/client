@@ -7,29 +7,23 @@ function Content3() {
   const [numberOfItem, setNumberOfItem] = useState(10);
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
-
-    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
-      (response, index) => {
-        console.log(response.data.abrCoronaDtos);
-        if (response.data !== null) {
-          response.data.abrCoronaDtos.forEach((lists) => {
-            setCoronaAbr((state) => [
-              ...state,
-              {
-                natDeathCnt: lists.natDeathCnt,
-                natDefCnt: lists.natDefCnt,
-                nationNm: lists.nationNm,
-              },
-            ]);
-          });
-        } else {
-          alert("국외 코로나정보를 가져오는데 실패했습니다.");
-        }
+    Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
+      console.log(response.data.abrCoronaDtos);
+      if (response.data !== null) {
+        response.data.abrCoronaDtos.forEach((lists) => {
+          setCoronaAbr((state) => [
+            ...state,
+            {
+              natDeathCnt: lists.natDeathCnt,
+              natDefCnt: lists.natDefCnt,
+              nationNm: lists.nationNm,
+            },
+          ]);
+        });
+      } else {
+        alert("국외 코로나정보를 가져오는데 실패했습니다.");
       }
-    );
+    });
   }, []);
 
   const handleNumber = () => {

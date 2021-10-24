@@ -9,31 +9,25 @@ function Content2() {
   const [coronaGubun, setCoronaGubun] = useState([]);
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
+    Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
+      if (response.data !== null) {
+        console.log("data check");
+        console.log(response.data);
 
-    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
-      (response, index) => {
-        if (response.data !== null) {
-          console.log("data check");
-          console.log(response.data);
-
-          response.data.coronaGubunDTOS.forEach((lists) => {
-            setCoronaGubun((state) => [
-              ...state,
-              {
-                gubun: lists.gubun,
-                defCnt: lists.defCnt,
-                incDec: lists.incDec,
-              },
-            ]);
-          });
-        } else {
-          alert("코로나정보를 가져오는데 실패했습니다.");
-        }
+        response.data.coronaGubunDTOS.forEach((lists) => {
+          setCoronaGubun((state) => [
+            ...state,
+            {
+              gubun: lists.gubun,
+              defCnt: lists.defCnt,
+              incDec: lists.incDec,
+            },
+          ]);
+        });
+      } else {
+        alert("코로나정보를 가져오는데 실패했습니다.");
       }
-    );
+    });
   }, []);
 
   const renderActiveShape = (props) => {

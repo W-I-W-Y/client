@@ -19,47 +19,41 @@ function Content1() {
   const [coronaWeek, setCoronaWeek] = useState([]);
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
+    Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
+      const day = new Date();
+      const sunday = day.getTime() - 86400000 * 8;
+      console.log(sunday);
+      day.setTime(sunday);
+      const result = [day.toISOString().slice(5, 10)];
 
-    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
-      (response, index) => {
-        const day = new Date();
-        const sunday = day.getTime() - 86400000 * 8;
-        console.log(sunday);
-        day.setTime(sunday);
-        const result = [day.toISOString().slice(5, 10)];
+      console.log(result);
+      if (response.data !== null) {
+        console.log("data check");
+        console.log(response.data);
 
-        console.log(result);
-        if (response.data !== null) {
-          console.log("data check");
-          console.log(response.data);
+        response.data.coronaWeekDTOS.forEach((lists) => {
+          day.setTime(day.getTime() + 86400000);
 
-          response.data.coronaWeekDTOS.forEach((lists) => {
-            day.setTime(day.getTime() + 86400000);
+          setCoronaWeek((state) => [
+            ...state,
+            {
+              incDec: lists.incDec,
+              stdDay: day.toISOString().slice(5, 10),
+            },
+          ]);
+        });
 
-            setCoronaWeek((state) => [
-              ...state,
-              {
-                incDec: lists.incDec,
-                stdDay: day.toISOString().slice(5, 10),
-              },
-            ]);
-          });
-
-          setCoronaToday({
-            defCnt: response.data.coronaTodayDTO.defCnt,
-            isolClearCnt: response.data.coronaTodayDTO.isolClearCnt,
-            isolIngCnt: response.data.coronaTodayDTO.isolIngCnt,
-            deathCnt: response.data.coronaTodayDTO.deathCnt,
-            incDec: response.data.coronaTodayDTO.incDec,
-          });
-        } else {
-          alert("코로나정보를 가져오는데 실패했습니다.");
-        }
+        setCoronaToday({
+          defCnt: response.data.coronaTodayDTO.defCnt,
+          isolClearCnt: response.data.coronaTodayDTO.isolClearCnt,
+          isolIngCnt: response.data.coronaTodayDTO.isolIngCnt,
+          deathCnt: response.data.coronaTodayDTO.deathCnt,
+          incDec: response.data.coronaTodayDTO.incDec,
+        });
+      } else {
+        alert("코로나정보를 가져오는데 실패했습니다.");
       }
-    );
+    });
   }, []);
 
   return (

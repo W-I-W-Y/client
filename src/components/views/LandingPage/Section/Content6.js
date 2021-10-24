@@ -7,33 +7,27 @@ function Content3() {
   const [vaccine, setVaccine] = useState([]);
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
+    Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
+      const d = new Date();
+      if (response.data !== null) {
+        setCoronaToday({
+          defCnt: response.data.coronaTodayDTO.defCnt,
+          isolClearCnt: response.data.coronaTodayDTO.isolClearCnt,
+          isolIngCnt: response.data.coronaTodayDTO.isolIngCnt,
+          deathCnt: response.data.coronaTodayDTO.deathCnt,
+          incDec: response.data.coronaTodayDTO.incDec,
+        });
 
-    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
-      (response, index) => {
-        const d = new Date();
-        if (response.data !== null) {
-          setCoronaToday({
-            defCnt: response.data.coronaTodayDTO.defCnt,
-            isolClearCnt: response.data.coronaTodayDTO.isolClearCnt,
-            isolIngCnt: response.data.coronaTodayDTO.isolIngCnt,
-            deathCnt: response.data.coronaTodayDTO.deathCnt,
-            incDec: response.data.coronaTodayDTO.incDec,
-          });
-
-          setVaccine({
-            firstCnt: response.data.vaccineDTO.firstCnt,
-            secondCnt: response.data.vaccineDTO.secondCnt,
-            incFirstCnt: response.data.vaccineDTO.incFirstCnt,
-            incSecondCnt: response.data.vaccineDTO.incSecondCnt,
-          });
-        } else {
-          alert("코로나정보를 가져오는데 실패했습니다.");
-        }
+        setVaccine({
+          firstCnt: response.data.vaccineDTO.firstCnt,
+          secondCnt: response.data.vaccineDTO.secondCnt,
+          incFirstCnt: response.data.vaccineDTO.incFirstCnt,
+          incSecondCnt: response.data.vaccineDTO.incSecondCnt,
+        });
+      } else {
+        alert("코로나정보를 가져오는데 실패했습니다.");
       }
-    );
+    });
   }, []);
 
   return (
