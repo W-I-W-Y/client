@@ -129,6 +129,9 @@ function SideBar() {
                       ))}
                     </ul>
                   </li>
+                  <li>
+                    <a href={"/board/region/view/0"}>지역게시판</a>
+                  </li>
                 </ul>
               </nav>
 

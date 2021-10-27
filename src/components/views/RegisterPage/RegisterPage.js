@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { registerUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Select } from "antd";
+// const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -37,6 +38,7 @@ function RegisterPage(props) {
       initialValues={{
         email: "",
         username: "",
+        region: "",
         password: "",
       }}
       validationSchema={Yup.object().shape({
@@ -44,6 +46,7 @@ function RegisterPage(props) {
         email: Yup.string()
           .email("Email is invalid")
           .required("Email is required"),
+        region: Yup.string().required("Region is required"),
         password: Yup.string()
           .min(6, "Password must be at least 6 characters")
           .required("Password is required"),
@@ -54,6 +57,7 @@ function RegisterPage(props) {
             email: values.email,
             password: values.password,
             username: values.username,
+            region: values.region,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
           };
 
@@ -82,6 +86,7 @@ function RegisterPage(props) {
           handleSubmit,
           handleReset,
         } = props;
+
         return (
           <div className="app">
             <h2>Sign up</h2>
@@ -132,6 +137,84 @@ function RegisterPage(props) {
                 />
                 {errors.email && touched.email && (
                   <div className="input-feedback">{errors.email}</div>
+                )}
+              </Form.Item>
+
+              <Form.Item
+                required
+                label="Region"
+                hasFeedback
+                // validateStatus={
+                //   errors.region && touched.region ? "error" : "success"
+                // }
+                // rules={[
+                //   {
+                //     required: true,
+                //   },
+                // ]}
+              >
+                <select
+                  id="region"
+                  name="region"
+                  placeholder="Select your region"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.region}
+                >
+                  <option name="region" value="서울">
+                    서울
+                  </option>
+                  <option name="region" value="부산">
+                    부산
+                  </option>
+                  <option name="region" value="대구">
+                    대구
+                  </option>
+                  <option name="region" value="인천">
+                    인천
+                  </option>
+                  <option name="region" value="광주">
+                    광주
+                  </option>
+                  <option name="region" value="대전">
+                    대전
+                  </option>
+                  <option name="region" value="울산">
+                    울산
+                  </option>
+                  <option name="region" value="세종">
+                    세종
+                  </option>
+                  <option name="region" value="경기">
+                    경기
+                  </option>
+                  <option name="region" value="강원">
+                    강원
+                  </option>
+                  <option name="region" value="충북">
+                    충북
+                  </option>
+                  <option name="region" value="충남">
+                    충남
+                  </option>
+                  <option name="region" value="전북">
+                    전북
+                  </option>
+                  <option name="region" value="전남">
+                    전남
+                  </option>
+                  <option name="region" value="경북">
+                    경북
+                  </option>
+                  <option name="region" value="경남">
+                    경남
+                  </option>
+                  <option name="region" value="제주">
+                    제주
+                  </option>
+                </select>
+                {errors.region && touched.region && (
+                  <div className="input-feedback">{errors.region}</div>
                 )}
               </Form.Item>
 
