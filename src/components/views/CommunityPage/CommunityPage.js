@@ -19,11 +19,26 @@ import votetitle from "../../../images/votetitle.png";
 function CommunityPage() {
   const [community, setCommunity] = useState([]);
   const [communityPost, setCommunityPost] = useState([]);
+  const [vote, setVote] = useState([]);
 
   useEffect(() => {
     // const headers = {
     //   Authorization: `Bearer ` + localStorage.getItem("token"),
     // };
+    Axios.get(`${USER_SERVER}/api/vote/view`).then((response, index) => {
+      console.log("투표확인");
+      console.log(response.data);
+      if (response.data !== null) {
+        setVote({
+          agree: response.data.agree,
+          disagree: response.data.disagree,
+          content: response.data.content,
+          createDate: response.data.createDate,
+        });
+      } else {
+        alert("투표 정보를 가져오는데 실패했습니다.");
+      }
+    });
 
     Axios.get(`${USER_SERVER}/api/community`).then((response, index) => {
       if (response.data !== null) {
@@ -258,7 +273,7 @@ function CommunityPage() {
                         marginBottom: "30px",
                       }}
                     >
-                      "백신 접종은 필수로 맞아야한다"
+                      "{vote.content}"
                     </h1>
                   </div>
                   <br />

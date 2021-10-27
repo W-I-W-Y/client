@@ -16,6 +16,8 @@ function ManagerPage() {
 
   const [add, setAdd] = useState(true);
 
+  const [voteContent, setVoteContent] = useState("");
+
   useEffect(() => {
     const headers = {
       Authorization: `Bearer ` + localStorage.getItem("token"),
@@ -118,6 +120,37 @@ function ManagerPage() {
 
   const handleDelete = () => {
     setAdd(false);
+  };
+
+  const onVoteSubmit = (e) => {
+    e.preventDefault();
+
+    const variable = {
+      content: voteContent,
+    };
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.post(`${USER_SERVER}/api/vote/add`, variable, { headers }).then(
+      (response) => {
+        console.log(response.data);
+        if (response.data === "addVote") {
+          message.success("투표를 성공적으로 생성했습니다.");
+          setTimeout(() => {
+            history.push("/community");
+            // window.scrollTo(0, 0);
+          }, 3000);
+          // window.location.reload();
+        } else {
+          alert("투표 생성을 실패했습니다.");
+        }
+      }
+    );
+  };
+
+  const onVoteChange = (e) => {
+    setVoteContent(e.currentTarget.value);
   };
 
   return (
@@ -234,6 +267,32 @@ function ManagerPage() {
             </Col>
           </Row>
         )}
+      </div>
+      <div>
+        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <Title level={2}>투표 생성하기</Title>
+        </div>
+        <Form onSubmit={onVoteSubmit}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "60%",
+              alignItems: "center",
+            }}
+          >
+            <br />
+            <br />
+            <label>투표 제목</label>
+            <Input onChange={onVoteChange} value={voteContent} />
+            <br />
+            <br />
+
+            <Button type="primary" size="large" onClick={onVoteSubmit}>
+              투표 생성
+            </Button>
+          </div>
+        </Form>
       </div>
     </div>
   );
