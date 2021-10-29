@@ -7,6 +7,10 @@ function Content2() {
   const demoUrl =
     "https://codesandbox.io/s/pie-chart-with-customized-active-shape-y93si";
   const [coronaGubun, setCoronaGubun] = useState([]);
+  const [mapName, setMapName] = useState("전체");
+  const [mapdefCnt, setMapdefCnt] = useState(0);
+  const [mapincDec, setMapincDec] = useState(0);
+  const [mapContent, setMapContent] = useState("");
 
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
@@ -149,10 +153,6 @@ function Content2() {
     );
   };
 
-  const [mapName, setMapName] = useState("");
-  const [mapdefCnt, setMapdefCnt] = useState(0);
-  const [mapincDec, setMapincDec] = useState(0);
-
   const mapdata = [
     { name: "서울", value: Number(coronaGubun[17]?.incDec) },
     { name: "부산", value: Number(coronaGubun[16]?.incDec) },
@@ -184,70 +184,95 @@ function Content2() {
       setMapName(coronaGubun[17].gubun);
       setMapdefCnt(coronaGubun[17].defCnt);
       setMapincDec(coronaGubun[17].incDec);
+      setMapContent("서울 전지역 4단계 (21.10.18~10.31.)");
     } else if (city === "부산") {
       setMapName(coronaGubun[16].gubun);
       setMapdefCnt(coronaGubun[16].defCnt);
       setMapincDec(coronaGubun[16].incDec);
+      setMapContent("부산 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "대구") {
       setMapName(coronaGubun[15].gubun);
       setMapdefCnt(coronaGubun[15].defCnt);
       setMapincDec(coronaGubun[15].incDec);
+      setMapContent("대구 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "인천") {
       setMapName(coronaGubun[14].gubun);
       setMapdefCnt(coronaGubun[14].defCnt);
       setMapincDec(coronaGubun[14].incDec);
+      setMapContent(
+        "인천 일부지역 4단계 (21.10.18~10.31.) 강화군, 옹진군 3단계 (21.10.18~10.31.)"
+      );
     } else if (city === "광주") {
       setMapName(coronaGubun[13].gubun);
       setMapdefCnt(coronaGubun[13].defCnt);
       setMapincDec(coronaGubun[13].incDec);
+      setMapContent("광주 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "대전") {
       setMapName(coronaGubun[12].gubun);
       setMapdefCnt(coronaGubun[12].defCnt);
       setMapincDec(coronaGubun[12].incDec);
+      setMapContent("대전 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "울산") {
       setMapName(coronaGubun[11].gubun);
       setMapdefCnt(coronaGubun[11].defCnt);
       setMapincDec(coronaGubun[11].incDec);
+      setMapContent("울산 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "세종") {
       setMapName(coronaGubun[10].gubun);
       setMapdefCnt(coronaGubun[10].defCnt);
       setMapincDec(coronaGubun[10].incDec);
+      setMapContent("세종 지역 3단계 (21.10.18~10.31.)");
     } else if (city === "경기") {
       setMapName(coronaGubun[9].gubun);
       setMapdefCnt(coronaGubun[9].defCnt);
       setMapincDec(coronaGubun[9].incDec);
+      setMapContent("경기 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "강원") {
       setMapName(coronaGubun[8].gubun);
       setMapdefCnt(coronaGubun[8].defCnt);
       setMapincDec(coronaGubun[8].incDec);
+      setMapContent(
+        "춘천시, 원주시, 강릉시 3단계 (21.10.18~10.31.) 동해시, 태백시, 속초시, 삼척시, 홍천군, 횡성군, 영월군, 평창군, 정선군, 철원군, 화천군, 양구군, 인제군, 고성군, 양양군 2단계 (21.10.18~10.31.)"
+      );
     } else if (city === "충북") {
       setMapName(coronaGubun[7].gubun);
       setMapdefCnt(coronaGubun[7].defCnt);
       setMapincDec(coronaGubun[7].incDec);
+      setMapContent("충북 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "충남") {
       setMapName(coronaGubun[6].gubun);
       setMapdefCnt(coronaGubun[6].defCnt);
       setMapincDec(coronaGubun[6].incDec);
+      setMapContent("충남 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "전북") {
       setMapName(coronaGubun[5].gubun);
       setMapdefCnt(coronaGubun[5].defCnt);
       setMapincDec(coronaGubun[5].incDec);
+      setMapContent(
+        "전북 일부지역 3단계 (21.10.18~10.31.) 정읍시, 남원시, 김제시, 완주군, 진안군, 무주군, 장수군, 임실군, 순창군, 고창군, 부안군 2단계 (21.10.18~10.31.)"
+      );
     } else if (city === "전남") {
       setMapName(coronaGubun[4].gubun);
       setMapdefCnt(coronaGubun[4].defCnt);
       setMapincDec(coronaGubun[4].incDec);
+      setMapContent("전남 전지역 3단계 (21.10.18~10.31.)");
     } else if (city === "경북") {
       setMapName(coronaGubun[3].gubun);
       setMapdefCnt(coronaGubun[3].defCnt);
       setMapincDec(coronaGubun[3].incDec);
+      setMapContent(
+        "경북 일부지역 3단계 (21.10.18~10.31.) 문경시, 상주시 2단계 (21.10.18~10.31.) 군위군, 의성군, 청송군, 영양군, 영덕군, 청도군, 고령군, 성주군, 예천군, 봉화군, 울릉군, 울진군 1단계 (21.10.18~10.31.)"
+      );
     } else if (city === "경남") {
       setMapName(coronaGubun[2].gubun);
       setMapdefCnt(coronaGubun[2].defCnt);
       setMapincDec(coronaGubun[2].incDec);
+      setMapContent("경남 전지역 3단계 (21.10.18~10.31.)");
     } else {
       setMapName(coronaGubun[1].gubun);
       setMapdefCnt(coronaGubun[1].defCnt);
       setMapincDec(coronaGubun[1].incDec);
+      setMapContent("제주 전지역 3단계 (21.10.18~10.31.)");
     }
 
     console.log(mapdata);
@@ -666,6 +691,7 @@ function Content2() {
           <h2>
             확진자 {mapdefCnt}명 (+{mapincDec})
           </h2>
+          <p>{mapContent}</p>
         </Col>
       </Row>
     </section>
