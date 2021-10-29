@@ -5,8 +5,7 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import SideBar from "./SideBar";
 
-function Page1(props) {
-  const boardId = props.match.params.boardId;
+function Page2(props) {
   const pageNum = props.match.params.pageNum;
   // const variable = { boardId: boardId };
   //NOTE 전체 페이지 갯수
@@ -34,7 +33,11 @@ function Page1(props) {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/board/${boardId}/view/0`).then(
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.get(`${USER_SERVER}/api/board/region/view/0`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
           console.log(response.data);
@@ -77,6 +80,8 @@ function Page1(props) {
     window.scrollTo(0, 0);
   };
 
+  console.log("page2");
+
   return (
     <div>
       <html>
@@ -103,7 +108,7 @@ function Page1(props) {
                         <strong
                           style={{ fontFamily: "Droid Sans", fontSize: "2rem" }}
                         >
-                          {post[0]?.boardName}
+                          {post.boardName}
                         </strong>
                         <p
                           style={{
@@ -111,7 +116,7 @@ function Page1(props) {
                             marginTop: "20px",
                           }}
                         >
-                          {post[0]?.boardDescription}
+                          {post.boardDescription}
                         </p>
                       </a>
 
@@ -149,10 +154,7 @@ function Page1(props) {
                             marginTop: "20px",
                           }}
                         >
-                          <a
-                            className="button"
-                            href={"/post/add/" + Number(boardId)}
-                          >
+                          <a className="button" href={"/post/add/region"}>
                             글쓰기
                           </a>
                         </div>
@@ -313,4 +315,4 @@ function Page1(props) {
   );
 }
 
-export default Page1;
+export default Page2;

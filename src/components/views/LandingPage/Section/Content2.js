@@ -39,83 +39,85 @@ function Content2() {
       } else {
         alert("코로나정보를 가져오는데 실패했습니다.");
       }
+      setMapdefCnt(response.data.coronaGubunDTOS[18]?.defCnt);
+      setMapincDec(response.data.coronaGubunDTOS[18]?.incDec);
     });
   }, []);
 
-  const renderActiveShape = (props) => {
-    const RADIAN = Math.PI / 180;
-    const {
-      cx,
-      cy,
-      midAngle,
-      innerRadius,
-      outerRadius,
-      startAngle,
-      endAngle,
-      fill,
-      percent,
-      value,
-    } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? "start" : "end";
+  // const renderActiveShape = (props) => {
+  //   const RADIAN = Math.PI / 180;
+  //   const {
+  //     cx,
+  //     cy,
+  //     midAngle,
+  //     innerRadius,
+  //     outerRadius,
+  //     startAngle,
+  //     endAngle,
+  //     fill,
+  //     percent,
+  //     value,
+  //   } = props;
+  //   const sin = Math.sin(-RADIAN * midAngle);
+  //   const cos = Math.cos(-RADIAN * midAngle);
+  //   const sx = cx + (outerRadius + 10) * cos;
+  //   const sy = cy + (outerRadius + 10) * sin;
+  //   const mx = cx + (outerRadius + 30) * cos;
+  //   const my = cy + (outerRadius + 30) * sin;
+  //   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  //   const ey = my;
+  //   const textAnchor = cos >= 0 ? "start" : "end";
 
-    return (
-      <g>
-        <Sector
-          cx={cx}
-          cy={cy}
-          innerRadius={innerRadius}
-          outerRadius={outerRadius}
-          startAngle={startAngle}
-          endAngle={endAngle}
-          fill={fill}
-        />
-        <Sector
-          cx={cx}
-          cy={cy}
-          startAngle={startAngle}
-          endAngle={endAngle}
-          innerRadius={outerRadius + 6}
-          outerRadius={outerRadius + 10}
-          fill={fill}
-        />
-        <path
-          d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-          stroke={fill}
-          fill="none"
-        />
-        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-        <text
-          x={ex + (cos >= 0 ? 1 : -1) * 12}
-          y={ey}
-          textAnchor={textAnchor}
-          fill="#333"
-        >{`${value}명`}</text>
-        <text
-          x={ex + (cos >= 0 ? 1 : -1) * 12}
-          y={ey}
-          dy={18}
-          textAnchor={textAnchor}
-          fill="#999"
-        >
-          {`(Rate ${(percent * 100).toFixed(2)}%)`}
-        </text>
-      </g>
-    );
-  };
+  //   return (
+  //     <g>
+  //       <Sector
+  //         cx={cx}
+  //         cy={cy}
+  //         innerRadius={innerRadius}
+  //         outerRadius={outerRadius}
+  //         startAngle={startAngle}
+  //         endAngle={endAngle}
+  //         fill={fill}
+  //       />
+  //       <Sector
+  //         cx={cx}
+  //         cy={cy}
+  //         startAngle={startAngle}
+  //         endAngle={endAngle}
+  //         innerRadius={outerRadius + 6}
+  //         outerRadius={outerRadius + 10}
+  //         fill={fill}
+  //       />
+  //       <path
+  //         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+  //         stroke={fill}
+  //         fill="none"
+  //       />
+  //       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+  //       <text
+  //         x={ex + (cos >= 0 ? 1 : -1) * 12}
+  //         y={ey}
+  //         textAnchor={textAnchor}
+  //         fill="#333"
+  //       >{`${value}명`}</text>
+  //       <text
+  //         x={ex + (cos >= 0 ? 1 : -1) * 12}
+  //         y={ey}
+  //         dy={18}
+  //         textAnchor={textAnchor}
+  //         fill="#999"
+  //       >
+  //         {`(Rate ${(percent * 100).toFixed(2)}%)`}
+  //       </text>
+  //     </g>
+  //   );
+  // };
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
 
-  const onPieEnter = (_, index) => {
-    setActiveIndex(index);
-  };
+  // const onPieEnter = (_, index) => {
+  //   setActiveIndex(index);
+  // };
 
   const COLORS = [
     "#FA1200",
@@ -282,8 +284,6 @@ function Content2() {
       setMapincDec(coronaGubun[1].incDec);
       setMapContent("제주 전지역 3단계 (21.10.18~10.31.)");
     }
-
-    console.log(mapdata);
   };
 
   return (
@@ -682,7 +682,7 @@ function Content2() {
                 cy="50%"
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={80}
+                outerRadius={130}
                 fill="#8884d8"
                 dataKey="value"
               >
@@ -690,7 +690,7 @@ function Content2() {
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
-                  />
+                  ></Cell>
                 ))}
               </Pie>
             </PieChart>

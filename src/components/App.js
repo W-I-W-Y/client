@@ -4,12 +4,14 @@ import { Route, Switch } from "react-router-dom";
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import CommunityPage from "./views/CommunityPage/CommunityPage";
 import CommunitySectionPage1 from "./views/CommunityPage/Section/Page1";
+import CommunitySectionPage2 from "./views/CommunityPage/Section/Page2";
 
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import CommunityUploadePage from "./views/CommunityUploadePage/CommunityUploadePage";
+import CommunityUploadRegionPage from "./views/CommunityUploadePage/CommunityUploadRegionPage";
 
 import PostPage from "./views/PostPage/PostPage.js";
 import PostViewByMember from "./views/ByMember/PostViewByMember";
@@ -43,6 +45,11 @@ function App() {
             path="/board/:boardId/view/:pageNum"
             component={CommunitySectionPage1}
           />
+          <Route
+            exact
+            path="/board/region/view/:pageNum"
+            component={CommunitySectionPage2}
+          />
           <Route exact path="/post/view/:postId" component={PostPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/join" component={RegisterPage} />
@@ -50,6 +57,11 @@ function App() {
             exact
             path="/post/add/:boardId"
             component={CommunityUploadePage}
+          />
+          <Route
+            exact
+            path="/post/add/region"
+            component={CommunityUploadRegionPage}
           />
           <Route
             exact
