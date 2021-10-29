@@ -54,43 +54,37 @@ function Content4() {
   ];
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
+    Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
+      const day = new Date();
+      const sunday = day.getTime() - 86400000 * 6;
+      console.log(sunday);
+      day.setTime(sunday);
+      const result = [day.toISOString().slice(5, 10)];
 
-    Axios.get(`${USER_SERVER}/api/corona`, { headers }).then(
-      (response, index) => {
-        const day = new Date();
-        const sunday = day.getTime() - 86400000 * 6;
-        console.log(sunday);
-        day.setTime(sunday);
-        const result = [day.toISOString().slice(5, 10)];
+      if (response.data !== null) {
+        response.data.vaccineChartDTOS.forEach((lists) => {
+          day.setTime(day.getTime() + 86400000);
 
-        if (response.data !== null) {
-          response.data.vaccineChartDTOS.forEach((lists) => {
-            day.setTime(day.getTime() + 86400000);
+          setVaccineChart((state) => [
+            ...state,
+            {
+              incFirstCnt: lists.incFirstCnt,
+              incSecondCnt: lists.incSecondCnt,
+              stdDay: day.toISOString().slice(5, 10),
+            },
+          ]);
+        });
 
-            setVaccineChart((state) => [
-              ...state,
-              {
-                incFirstCnt: lists.incFirstCnt,
-                incSecondCnt: lists.incSecondCnt,
-                stdDay: day.toISOString().slice(5, 10),
-              },
-            ]);
-          });
-
-          setVaccine({
-            firstCnt: response.data.vaccineDTO.firstCnt,
-            secondCnt: response.data.vaccineDTO.secondCnt,
-            incFirstCnt: response.data.vaccineDTO.incFirstCnt,
-            incSecondCnt: response.data.vaccineDTO.incSecondCnt,
-          });
-        } else {
-          alert("백신 정보를 가져오는데 실패했습니다.");
-        }
+        setVaccine({
+          firstCnt: response.data.vaccineDTO.firstCnt,
+          secondCnt: response.data.vaccineDTO.secondCnt,
+          incFirstCnt: response.data.vaccineDTO.incFirstCnt,
+          incSecondCnt: response.data.vaccineDTO.incSecondCnt,
+        });
+      } else {
+        alert("백신 정보를 가져오는데 실패했습니다.");
       }
-    );
+    });
   }, []);
 
   console.log(vaccineChart);
