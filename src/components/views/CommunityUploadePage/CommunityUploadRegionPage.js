@@ -78,19 +78,17 @@ function CommunityUploadRegionPage(props) {
       Authorization: `Bearer ` + localStorage.getItem("token"),
     };
 
-    console.log(typeof variable.content);
-
     Axios.post(`${USER_SERVER}/api/post/add/region`, variable, {
       headers,
     }).then((response) => {
       console.log(variable.content);
       console.log("포스트 확인");
       console.log(response);
-      if (response.data === "addPost") {
+      if (response.data === "addRegionPost") {
         message.success("성공적으로 업로드했습니다");
 
         setTimeout(() => {
-          props.history.push("../../board/region/view/0");
+          props.history.push("../../region");
           window.scrollTo(0, 0);
         }, 3000);
       } else {

@@ -6,6 +6,9 @@ import { useHistory } from "react-router-dom";
 import SideBar from "./SideBar";
 
 function Page2(props) {
+  const headers = {
+    Authorization: `Bearer ` + localStorage.getItem("token"),
+  };
   const pageNum = props.match.params.pageNum;
   // const variable = { boardId: boardId };
   //NOTE 전체 페이지 갯수
@@ -33,10 +36,6 @@ function Page2(props) {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
-
     Axios.get(`${USER_SERVER}/api/board/region/view/0`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
@@ -80,8 +79,6 @@ function Page2(props) {
     window.scrollTo(0, 0);
   };
 
-  console.log("page2");
-
   return (
     <div>
       <html>
@@ -108,7 +105,7 @@ function Page2(props) {
                         <strong
                           style={{ fontFamily: "Droid Sans", fontSize: "2rem" }}
                         >
-                          {post.boardName}
+                          {post[0]?.boardName}
                         </strong>
                         <p
                           style={{
@@ -116,7 +113,7 @@ function Page2(props) {
                             marginTop: "20px",
                           }}
                         >
-                          {post.boardDescription}
+                          {post[0]?.boardDescription}
                         </p>
                       </a>
 
@@ -154,7 +151,7 @@ function Page2(props) {
                             marginTop: "20px",
                           }}
                         >
-                          <a className="button" href={"/post/add/region"}>
+                          <a className="button" href="/add/region">
                             글쓰기
                           </a>
                         </div>

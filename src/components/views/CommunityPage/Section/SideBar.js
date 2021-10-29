@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { USER_SERVER } from "../../../Config";
-import { Button, message, Drawer, Icon } from "antd";
 // import { FormOutlined } from "@ant-design/icons";
 import Axios from "axios";
-import mypageImg from "../../../../images/my.png";
 import infoImg1 from "../../../../images/picture1.png";
 import infoImg2 from "../../../../images/picture2.png";
 import infoImg3 from "../../../../images/picture3.png";
@@ -130,7 +128,7 @@ function SideBar() {
                     </ul>
                   </li>
                   <li>
-                    <a href={"/board/region/view/0"}>지역게시판</a>
+                    <a href="/region">지역게시판</a>
                   </li>
                 </ul>
               </nav>
