@@ -15,43 +15,6 @@ function Content4() {
   const demoUrl = "https://codesandbox.io/s/stacked-bar-chart-s47i2";
   const [vaccine, setVaccine] = useState([]);
   const [vaccineChart, setVaccineChart] = useState([]);
-  const data = [
-    {
-      name: "10-04",
-      incFirstCnt: 4000,
-      incSecondCnt: 546733,
-    },
-    {
-      name: "10-05",
-      incFirstCnt: 3000,
-      incSecondCnt: 46342,
-    },
-    {
-      name: "10-06",
-      incFirstCnt: 2000,
-      incSecondCnt: 234353,
-    },
-    {
-      name: "10-07",
-      incFirstCnt: 2780,
-      incSecondCnt: 810334,
-    },
-    {
-      name: "10-08",
-      incFirstCnt: 1890,
-      incSecondCnt: 564364,
-    },
-    {
-      name: "10-09",
-      incFirstCnt: 2390,
-      incSecondCnt: 746353,
-    },
-    {
-      name: "10-10",
-      incFirstCnt: 43782,
-      incSecondCnt: 1098170,
-    },
-  ];
 
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
@@ -86,8 +49,6 @@ function Content4() {
       }
     });
   }, []);
-
-  console.log(vaccineChart);
 
   return (
     <section
@@ -137,11 +98,12 @@ function Content4() {
         </div>
 
         <div className="vaccineCovidStatus" style={{ width: "100%" }}>
-          <ResponsiveContainer width="100%" height={200}>
+          <p>1차 접종</p>
+          <ResponsiveContainer width="100%" height={180}>
             <AreaChart
               width={500}
               height={200}
-              data={data}
+              data={vaccineChart}
               margin={{
                 top: 10,
                 right: 30,
@@ -161,11 +123,12 @@ function Content4() {
               />
             </AreaChart>
           </ResponsiveContainer>
-          <ResponsiveContainer width="100%" height={200}>
+          <p>2차 접종</p>
+          <ResponsiveContainer width="100%" height={180}>
             <AreaChart
               width={500}
               height={200}
-              data={data}
+              data={vaccineChart}
               margin={{
                 top: 10,
                 right: 30,

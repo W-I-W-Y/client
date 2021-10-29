@@ -119,7 +119,7 @@ function Content1() {
         </div>
 
         <div className="dailyCovidStatus" style={{ width: "100%" }}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="97%" height="100%">
             <LineChart
               width={500}
               height={300}
@@ -127,22 +127,21 @@ function Content1() {
               margin={{
                 top: 10,
                 right: 0,
-                left: 0,
+                left: -10,
                 bottom: 10,
               }}
+              viewBox={(0, 0, 500, 600)}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="stdDay" />
               <YAxis yAxisId="left" />
-              {/* <YAxis yAxisId="right" orientation="right" /> */}
-              <Tooltip />
-              <Legend />
+
               <Line
                 yAxisId="left"
                 type="monotone"
                 dataKey="incDec"
                 stroke="#8884d8"
-                activeDot={{ r: 8 }}
+                activeDot={{ r: 10 }}
               />
               {/* <Line
                 yAxisId="right"

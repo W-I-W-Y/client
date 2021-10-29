@@ -222,7 +222,7 @@ function Text2() {
               </Col>
             ) : (
               <Col
-                cclassName="pointerClick2"
+                className="pointerClick2"
                 span={6}
                 style={{ display: "flex", justifyContent: "center" }}
                 onClick={() => {

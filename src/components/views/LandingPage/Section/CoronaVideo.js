@@ -14,9 +14,9 @@ function Content3() {
             height="250"
             src="https://www.youtube.com/embed/IFIMlZPa62Q"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </Col>
         <Col lg={8} md={12} xs={24} sm={24}>
@@ -26,9 +26,9 @@ function Content3() {
             height="250"
             src="https://www.youtube.com/embed/ZFUnG41xJOY"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </Col>
         <Col lg={8} md={12} xs={24} sm={24}>
@@ -38,9 +38,9 @@ function Content3() {
             height="250"
             src="https://www.youtube.com/embed/PQOS0CBbM80"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </Col>
       </Row>
