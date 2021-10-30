@@ -19,7 +19,7 @@ function Content4() {
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
       const day = new Date();
-      const sunday = day.getTime() - 86400000 * 6;
+      const sunday = day.getTime() - 86400000 * 7;
       console.log(sunday);
       day.setTime(sunday);
       const result = [day.toISOString().slice(5, 10)];

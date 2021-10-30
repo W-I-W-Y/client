@@ -21,7 +21,7 @@ function Content1() {
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/corona`).then((response, index) => {
       const day = new Date();
-      const sunday = day.getTime() - 86400000 * 8;
+      const sunday = day.getTime() - 86400000 * 7;
       console.log(sunday);
       day.setTime(sunday);
       const result = [day.toISOString().slice(5, 10)];
@@ -55,6 +55,8 @@ function Content1() {
       }
     });
   }, []);
+
+  console.log(coronaWeek);
 
   return (
     <section
@@ -140,7 +142,7 @@ function Content1() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="stdDay" />
               <YAxis yAxisId="left" />
-
+              <Tooltip />
               <Line
                 yAxisId="left"
                 type="monotone"
