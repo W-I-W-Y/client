@@ -130,7 +130,12 @@ function Content1() {
                 left: -10,
                 bottom: 10,
               }}
-              viewBox={(0, 0, 500, 600)}
+              viewBox={{
+                x: 0,
+                y: 0,
+                width: 500,
+                height: 500,
+              }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="stdDay" />

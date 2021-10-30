@@ -695,10 +695,38 @@ function Content2() {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-          <h2>
-            확진자 {mapdefCnt}명 (+{mapincDec})
+          <h2
+            style={{
+              fontFamily: "Droid Sans",
+              fontSize: "2rem",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            확진자 {mapdefCnt}명 (
+            <h2
+              style={{
+                fontFamily: "Droid Sans",
+                fontSize: "2rem",
+                color: "red",
+              }}
+            >
+              {" "}
+              +{mapincDec}
+            </h2>{" "}
+            )
           </h2>
-          <p>{mapContent}</p>
+          <p
+            style={{
+              fontFamily: "Droid Sans",
+              fontSize: "1rem",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {" "}
+            {mapContent}
+          </p>
         </Col>
       </Row>
     </section>
