@@ -2,13 +2,20 @@ import React, { useState, useEffect, PureComponent } from "react";
 import { Row, Col } from "antd";
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
-import { PieChart, Pie, Cell, Sector, ResponsiveContainer } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Sector,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 function Content2() {
   const demoUrl =
     "https://codesandbox.io/s/pie-chart-with-customized-active-shape-y93si";
   const [coronaToday, setCoronaToday] = useState([]);
   const [coronaGubun, setCoronaGubun] = useState([]);
-  const [mapName, setMapName] = useState("전체");
+  const [mapName, setMapName] = useState("전체 지역");
   const [mapdefCnt, setMapdefCnt] = useState(0);
   const [mapincDec, setMapincDec] = useState(0);
   const [mapContent, setMapContent] = useState("");
@@ -44,96 +51,27 @@ function Content2() {
     });
   }, []);
 
-  // const renderActiveShape = (props) => {
-  //   const RADIAN = Math.PI / 180;
-  //   const {
-  //     cx,
-  //     cy,
-  //     midAngle,
-  //     innerRadius,
-  //     outerRadius,
-  //     startAngle,
-  //     endAngle,
-  //     fill,
-  //     percent,
-  //     value,
-  //   } = props;
-  //   const sin = Math.sin(-RADIAN * midAngle);
-  //   const cos = Math.cos(-RADIAN * midAngle);
-  //   const sx = cx + (outerRadius + 10) * cos;
-  //   const sy = cy + (outerRadius + 10) * sin;
-  //   const mx = cx + (outerRadius + 30) * cos;
-  //   const my = cy + (outerRadius + 30) * sin;
-  //   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  //   const ey = my;
-  //   const textAnchor = cos >= 0 ? "start" : "end";
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  //   return (
-  //     <g>
-  //       <Sector
-  //         cx={cx}
-  //         cy={cy}
-  //         innerRadius={innerRadius}
-  //         outerRadius={outerRadius}
-  //         startAngle={startAngle}
-  //         endAngle={endAngle}
-  //         fill={fill}
-  //       />
-  //       <Sector
-  //         cx={cx}
-  //         cy={cy}
-  //         startAngle={startAngle}
-  //         endAngle={endAngle}
-  //         innerRadius={outerRadius + 6}
-  //         outerRadius={outerRadius + 10}
-  //         fill={fill}
-  //       />
-  //       <path
-  //         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-  //         stroke={fill}
-  //         fill="none"
-  //       />
-  //       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-  //       <text
-  //         x={ex + (cos >= 0 ? 1 : -1) * 12}
-  //         y={ey}
-  //         textAnchor={textAnchor}
-  //         fill="#333"
-  //       >{`${value}명`}</text>
-  //       <text
-  //         x={ex + (cos >= 0 ? 1 : -1) * 12}
-  //         y={ey}
-  //         dy={18}
-  //         textAnchor={textAnchor}
-  //         fill="#999"
-  //       >
-  //         {`(Rate ${(percent * 100).toFixed(2)}%)`}
-  //       </text>
-  //     </g>
-  //   );
-  // };
-
-  // const [activeIndex, setActiveIndex] = useState(0);
-
-  // const onPieEnter = (_, index) => {
-  //   setActiveIndex(index);
-  // };
+  const onPieEnter = (_, index) => {
+    setActiveIndex(index);
+  };
 
   const COLORS = [
-    "#FA1200",
-    "#00C49F",
-    "#01C49F",
-    "#00C43F",
-    "#00C29F",
-    "#10C49F",
-    "#FFBB28",
-    "#FF8042",
-    "#FF1042",
-    "#FF8072",
-    "#DF8042",
-    "#FB8042",
-    "#FA8042",
-    "#FT8042",
+    "#A0AFFF",
+    "#AAB9FF",
+    "#B4C3FF",
+    "#BECDFF",
+    "#5ACCFF",
+    "#6EE0FF",
+    "#CCE1FF",
+    "#E0EBFF",
+    "#90AFFF",
+    "#A4C3FF",
+    "#1E96FF",
+    "#1478FF",
+    "#648CFF",
+    "#1478CD",
   ];
 
   const RADIAN = Math.PI / 180;
@@ -147,8 +85,8 @@ function Content2() {
     index,
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    const x = cx + (radius + 80) * Math.cos(-midAngle * RADIAN);
+    const y = cy + (radius + 80) * Math.sin(-midAngle * RADIAN);
 
     return (
       <text
@@ -164,29 +102,29 @@ function Content2() {
   };
 
   const mapdata = [
-    { name: "서울", value: Number(coronaGubun[17]?.incDec) },
-    { name: "부산", value: Number(coronaGubun[16]?.incDec) },
-    { name: "대구", value: Number(coronaGubun[15]?.incDec) },
-    { name: "인천", value: Number(coronaGubun[14]?.incDec) },
-    { name: "광주", value: Number(coronaGubun[13]?.incDec) },
-    { name: "대전", value: Number(coronaGubun[12]?.incDec) },
-    { name: "울산", value: Number(coronaGubun[11]?.incDec) },
-    { name: "세종", value: Number(coronaGubun[10]?.incDec) },
-    { name: "경기", value: Number(coronaGubun[9]?.incDec) },
-    { name: "강원", value: Number(coronaGubun[8]?.incDec) },
+    { name: "서울", value: Number(coronaGubun[17]?.defCnt) },
+    { name: "부산", value: Number(coronaGubun[16]?.defCnt) },
+    { name: "대구", value: Number(coronaGubun[15]?.defCnt) },
+    { name: "인천", value: Number(coronaGubun[14]?.defCnt) },
+    { name: "광주", value: Number(coronaGubun[13]?.defCnt) },
+    { name: "대전", value: Number(coronaGubun[12]?.defCnt) },
+    { name: "울산", value: Number(coronaGubun[11]?.defCnt) },
+    { name: "세종", value: Number(coronaGubun[10]?.defCnt) },
+    { name: "경기", value: Number(coronaGubun[9]?.defCnt) },
+    { name: "강원", value: Number(coronaGubun[8]?.defCnt) },
     {
       name: "충청",
-      value: Number(coronaGubun[7]?.incDec + coronaGubun[6]?.incDec),
+      value: Number(coronaGubun[7]?.defCnt + coronaGubun[6]?.defCnt),
     },
     {
       name: "전라",
-      value: Number(coronaGubun[5]?.incDec + coronaGubun[4]?.incDec),
+      value: Number(coronaGubun[5]?.defCnt + coronaGubun[4]?.defCnt),
     },
     {
       name: "경상",
-      value: Number(coronaGubun[3]?.incDec + coronaGubun[2]?.incDec),
+      value: Number(coronaGubun[3]?.defCnt + coronaGubun[2]?.defCnt),
     },
-    { name: "제주", value: Number(coronaGubun[1]?.incDec) },
+    { name: "제주", value: Number(coronaGubun[1]?.defCnt) },
   ];
 
   const mapclick = (city) => {
@@ -655,46 +593,46 @@ function Content2() {
           }}
         >
           <h1>{mapName}</h1>
-          {/* <ResponsiveContainer width="100%" height="100%">
-            <PieChart width={800} height={800}>
-              <text x="50%" y="50%" dy={8} textAnchor="middle">
-                xdd
-              </text>
-              <Pie
-                activeIndex={activeIndex}
-                activeShape={renderActiveShape}
-                data={coronaGubun}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={80}
-                fill=""
-                dataKey="incDec"
-                onMouseEnter={onPieEnter}
-              />
-            </PieChart>
-          </ResponsiveContainer> */}
+
+          <p
+            style={{
+              fontFamily: "Droid Sans",
+              fontSize: "0.9em",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "40px",
+            }}
+          >
+            [전체확진자 비율(%)]
+          </p>
+
           <ResponsiveContainer width="100%" height="50%">
             <PieChart width={400} height={400}>
               <Pie
+                // activeIndex={activeIndex}
                 data={mapdata}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={130}
+                outerRadius={150}
                 fill="#8884d8"
                 dataKey="value"
+                // onMouseEnter={onPieEnter}
               >
                 {mapdata.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
+                    // label={renderCustomizedLabel}
+                    stroke="none"
                   ></Cell>
                 ))}
               </Pie>
+              <Tooltip />
             </PieChart>
           </ResponsiveContainer>
+
           <h2
             style={{
               fontFamily: "Droid Sans",
