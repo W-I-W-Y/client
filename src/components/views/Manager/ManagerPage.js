@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { Typography, Button, Form, message, Input, Icon, Row, Col } from "antd";
+import { Typography, Form, message, Input, Row, Col, Table } from "antd";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router-dom";
 
@@ -153,6 +153,19 @@ function ManagerPage() {
     setVoteContent(e.currentTarget.value);
   };
 
+  const columns = [
+    {
+      title: "게시판 제목",
+      dataIndex: "boardName",
+      key: "boardName",
+    },
+    {
+      title: "게시판 설명",
+      dataIndex: "description",
+      key: "description",
+    },
+  ];
+
   return (
     <div>
       <ul className="actions" id="actions-more">
@@ -188,12 +201,20 @@ function ManagerPage() {
             <Col lg={24} xs={24}>
               <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
                 <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-                  <Title level={2}>게시판 생성하기</Title>
+                  <Title
+                    level={2}
+                    style={{ fontFamily: "Droid Sans", fontSize: "1.7rem" }}
+                  >
+                    게시판 생성하기
+                  </Title>
                 </div>
 
                 <Form onSubmit={onAddSubmit}>
                   <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                    style={{
+                      display: "block",
+                      justifyContent: "space-between",
+                    }}
                   >
                     <br />
                     <br />
@@ -208,9 +229,18 @@ function ManagerPage() {
                     ></TextArea>
                     <br />
                     <br />
-                    <Button type="primary" size="large" onClick={onAddSubmit}>
+
+                    <a
+                      className="button"
+                      onClick={onAddSubmit}
+                      style={{
+                        fontFamily: "Droid Sans",
+                        fontSize: "0.7rem",
+                        margin: "10px",
+                      }}
+                    >
                       Submit
-                    </Button>
+                    </a>
                   </div>
                 </Form>
               </div>
@@ -221,79 +251,94 @@ function ManagerPage() {
             <Col lg={24} xs={24}>
               <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
                 <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-                  <Title level={2}>게시판 삭제하기</Title>
+                  <Title
+                    level={2}
+                    style={{ fontFamily: "Droid Sans", fontSize: "1.7rem" }}
+                  >
+                    게시판 삭제하기
+                  </Title>
                 </div>
 
-                <table className="tabel-list">
-                  <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
-                    <tr className="row align-items-sm-center text-center text-dark">
-                      <th className="col-sm-10">게시판 제목</th>
-                      <th className="col-sm-14">게시판 설명</th>
-                    </tr>
-                  </thead>
+                <Table
+                  dataSource={board}
+                  columns={columns}
+                  pagination={{
+                    total: 1000,
+                    pageSize: 1000,
+                    hideOnSinglePage: true,
+                  }}
+                />
 
-                  {board.map((board, index) => (
-                    <>
-                      <tbody
-                        key={index}
-                        className="table-content py-3 px-4 notice-wrapper row align-items-sm-center text-center text-dark important"
-                        style={{ cursor: "pointer" }}
-                      >
-                        <tr>
-                          {/* <Checkbox key={index} name="board" /> */}
-                          <td></td>
-                          <td id={index} className="col-sm-10 thtitle">
-                            {board.boardName}
-                          </td>
-                          <td id={index} className="col-sm-14">
-                            {board.description}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </>
-                  ))}
-                </table>
-                <select onChange={onBoardChange}>
-                  {board.map((board, index) => (
-                    <option key={index} value={board.boardName}>
-                      {board.boardName}
-                    </option>
-                  ))}
-                </select>
-                <Button type="primary" size="large" onClick={onSubmit}>
-                  삭제하기
-                </Button>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <select onChange={onBoardChange}>
+                    {board.map((board, index) => (
+                      <option key={index} value={board.boardName}>
+                        {board.boardName}
+                      </option>
+                    ))}
+                  </select>
+
+                  <a
+                    className="button"
+                    onClick={onSubmit}
+                    style={{
+                      fontFamily: "Droid Sans",
+                      fontSize: "0.7rem",
+                      margin: "10px",
+                    }}
+                  >
+                    DELETE
+                  </a>
+                </div>
               </div>
             </Col>
           </Row>
         )}
       </div>
-      <div>
-        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <Title level={2}>투표 생성하기</Title>
-        </div>
-        <Form onSubmit={onVoteSubmit}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "60%",
-              alignItems: "center",
-            }}
-          >
-            <br />
-            <br />
-            <label>투표 제목</label>
-            <Input onChange={onVoteChange} value={voteContent} />
-            <br />
-            <br />
+      <Row gutter={[16, 16]}>
+        <Col lg={24} xs={24}>
+          <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+            <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+              <Title
+                level={2}
+                style={{ fontFamily: "Droid Sans", fontSize: "1.7rem" }}
+              >
+                투표 생성하기
+              </Title>
+            </div>
+            <Form onSubmit={onVoteSubmit}>
+              <div
+                style={{
+                  display: "block",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <label>Vote Content</label>
+                <Input onChange={onVoteChange} value={voteContent} />
+                <br />
 
-            <Button type="primary" size="large" onClick={onVoteSubmit}>
-              투표 생성
-            </Button>
+                <a
+                  className="button"
+                  onClick={onVoteSubmit}
+                  style={{
+                    fontFamily: "Droid Sans",
+                    fontSize: "0.7rem",
+                    margin: "10px",
+                  }}
+                >
+                  SUBMIT
+                </a>
+              </div>
+            </Form>
           </div>
-        </Form>
-      </div>
+        </Col>
+      </Row>
     </div>
   );
 }
