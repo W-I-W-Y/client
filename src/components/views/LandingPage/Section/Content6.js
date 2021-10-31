@@ -30,13 +30,15 @@ function Content6() {
         alert("코로나정보를 가져오는데 실패했습니다.");
       }
 
+      console.log(response.data.coronaTodayDTO.incDec);
+
       let start = 0;
       let start2 = 0;
 
       let timer = setInterval(() => {
         if (
           start >=
-          (response.data.coronaTodayDTO.incDec / 100).toFixed(0) * 100
+          Math.floor(response.data.coronaTodayDTO.incDec / 100) * 100
         ) {
           start += 1;
         } else {
