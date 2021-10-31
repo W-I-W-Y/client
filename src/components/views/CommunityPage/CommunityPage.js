@@ -14,31 +14,35 @@ import { useHistory } from "react-router-dom";
 import trueimg from "../../../images/true.png";
 import falseimg from "../../../images/false.png";
 
-import votetitle from "../../../images/votetitle.png";
-
 function CommunityPage() {
   const [community, setCommunity] = useState([]);
   const [communityPost, setCommunityPost] = useState([]);
   const [vote, setVote] = useState([]);
 
+  const [isAgree, setIsAgree] = useState(false);
+  const [isDisAgree, setIsDisAgree] = useState(false);
+
   useEffect(() => {
-    // const headers = {
-    //   Authorization: `Bearer ` + localStorage.getItem("token"),
-    // };
-    Axios.get(`${USER_SERVER}/api/vote/view`).then((response, index) => {
-      console.log("투표확인");
-      console.log(response.data);
-      if (response.data !== null) {
-        setVote({
-          agree: response.data.agree,
-          disagree: response.data.disagree,
-          content: response.data.content,
-          createDate: response.data.createDate,
-        });
-      } else {
-        alert("투표 정보를 가져오는데 실패했습니다.");
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+    Axios.get(`${USER_SERVER}/api/vote/view`, { headers }).then(
+      (response, index) => {
+        console.log("투표확인");
+        console.log(response.data);
+        if (response.data !== null) {
+          setVote({
+            content: response.data.content,
+            createDate: response.data.createDate,
+            voteId: response.data.voteId,
+            agreeCnt: response.data.agreeCnt,
+            disagreeCnt: response.data.disagreeCnt,
+          });
+        } else {
+          alert("투표 정보를 가져오는데 실패했습니다.");
+        }
       }
-    });
+    );
 
     Axios.get(`${USER_SERVER}/api/community`).then((response, index) => {
       if (response.data !== null) {
@@ -68,6 +72,55 @@ function CommunityPage() {
       }
     });
   }, []);
+
+  const agreeClick = () => {
+    console.log("찬성");
+
+    const variable = {
+      voteId: vote.voteId,
+    };
+
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.patch(`${USER_SERVER}/api/vote/agree/${vote.voteId}`, variable, {
+      headers,
+    }).then((response) => {
+      if (response.data === "submitAgree") {
+        window.location.reload();
+      } else if (response.data === "cancelAgree") {
+        alert("투표를 취소했습니다.");
+        window.location.reload();
+      } else {
+        alert("찬성 투표 반영하지 못했습니다.");
+      }
+    });
+  };
+
+  const disagreeClick = () => {
+    console.log("반대");
+    const variable = {
+      voteId: vote.voteId,
+    };
+
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.patch(`${USER_SERVER}/api/vote/disagree/${vote.voteId}`, variable, {
+      headers,
+    }).then((response) => {
+      if (response.data === "submitDisagree") {
+        window.location.reload();
+      } else if (response.data === "cancelDisagree") {
+        alert("투표를 취소했습니다.");
+        window.location.reload();
+      } else {
+        alert("반대 투표 반영하지 못했습니다.");
+      }
+    });
+  };
 
   const history = useHistory();
   const detailPost = (id) => {
@@ -257,14 +310,10 @@ function CommunityPage() {
 
                 <section>
                   <div style={{ textAlign: "center" }}>
-                    <img
-                      src={votetitle}
-                      style={{
-                        marginBottom: "50px",
-                        width: "500px",
-                        height: "130px",
-                      }}
-                    ></img>
+                    <h1>
+                      {" "}
+                      <strong style={{ color: "#f56a6a" }}> 오늘의 투표</strong>
+                    </h1>
                     <h1
                       style={{
                         fontFamily: "Droid Sans",
@@ -285,65 +334,92 @@ function CommunityPage() {
                       marginLeft: "0px",
                     }}
                   >
-                    <div className="true" style={{ width: "40%" }}>
-                      <a>
-                        <h1
-                          style={{
-                            fontFamily: "Droid Sans",
-                            fontSize: "2rem",
-                            textAlign: "left",
-                            marginBottom: "30px",
-                          }}
-                        >
-                          <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
-                          40%(80명)
-                        </h1>
-                        <div
-                          style={{
-                            backgroundColor: "#FA6A90",
-                            height: "30px",
-                            position: "relative",
-                          }}
-                        ></div>
-                        <img
-                          src={trueimg}
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            position: "relative",
-                            top: "-74px",
-                            float: "right",
-                          }}
-                        />
-                      </a>
+                    <div
+                      className="true"
+                      style={{
+                        width: `${(
+                          (vote.agreeCnt / (vote.agreeCnt + vote.disagreeCnt)) *
+                          100
+                        ).toFixed(1)}%`,
+                        cursor: "pointer",
+                      }}
+                      onClick={agreeClick}
+                    >
+                      <h1
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          textAlign: "left",
+                          marginBottom: "30px",
+                        }}
+                      >
+                        <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
+                        {(
+                          (vote.agreeCnt / (vote.agreeCnt + vote.disagreeCnt)) *
+                          100
+                        ).toFixed(1)}
+                        %(
+                        {vote.agreeCnt}명)
+                      </h1>
+                      <div
+                        style={{
+                          backgroundColor: "#FA6A90",
+                          height: "30px",
+                          position: "relative",
+                        }}
+                      ></div>
+                      <img
+                        src={trueimg}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          position: "relative",
+                          top: "-74px",
+                          float: "right",
+                        }}
+                      />
                     </div>
-                    <div className="false" style={{ width: "60%" }}>
-                      <a>
-                        <h1
-                          style={{
-                            fontFamily: "Droid Sans",
-                            fontSize: "2rem",
-                            textAlign: "right",
-                            marginBottom: "30px",
-                          }}
-                        >
-                          60%(120명){" "}
-                          <strong style={{ color: "#6AA8FA" }}>반대</strong>
-                        </h1>
-                        <div
-                          style={{ backgroundColor: "#6AA8FA", height: "30px" }}
-                        ></div>
-                        <img
-                          src={falseimg}
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            position: "relative",
-                            top: "-74px",
-                            float: "left",
-                          }}
-                        />
-                      </a>
+                    <div
+                      className="false"
+                      style={{
+                        width: `${(
+                          (vote.disagreeCnt /
+                            (vote.agreeCnt + vote.disagreeCnt)) *
+                          100
+                        ).toFixed(1)}%`,
+                        cursor: "pointer",
+                      }}
+                      onClick={disagreeClick}
+                    >
+                      <h1
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          textAlign: "right",
+                          marginBottom: "30px",
+                        }}
+                      >
+                        {(
+                          (vote.disagreeCnt /
+                            (vote.agreeCnt + vote.disagreeCnt)) *
+                          100
+                        ).toFixed(1)}
+                        %({vote.disagreeCnt}명){" "}
+                        <strong style={{ color: "#6AA8FA" }}>반대</strong>
+                      </h1>
+                      <div
+                        style={{ backgroundColor: "#6AA8FA", height: "30px" }}
+                      ></div>
+                      <img
+                        src={falseimg}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          position: "relative",
+                          top: "-74px",
+                          float: "left",
+                        }}
+                      />
                     </div>
                   </Row>
                 </section>
