@@ -16,12 +16,19 @@ function PostViewByMember() {
         if (response.data !== null) {
           console.log(response.data);
           response.data.forEach((lists) => {
+            const newcontent = lists.content
+              .replace(/(<([^>]+)>)/gi, " ")
+              .replace(/&quot;/g, " ")
+              .replace(/\"n/, " ")
+              .replace(/&amp;/g, " ")
+              .replace(/&nbsp/g, " ")
+              .replace(";", "");
             setPost((state) => [
               ...state,
               {
                 id: lists.id,
                 postName: lists.postName,
-                content: lists.content,
+                content: newcontent,
                 calculateTime: lists.calculateTime,
                 createTime: lists.createTime,
                 viewCnt: lists.viewCnt,
