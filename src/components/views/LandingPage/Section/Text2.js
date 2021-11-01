@@ -58,6 +58,8 @@ function Text2() {
                   justifyContent: "center",
                   backgroundColor: "#fbaef5",
                   opacity: "0.7",
+                  marginTop: "2px",
+                  marginBottom: "2px",
                 }}
                 onClick={() => {
                   handlestep(1);
@@ -69,7 +71,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.15rem",
+                    fontSize: "1rem",
                   }}
                 >
                   화이자
@@ -79,7 +81,12 @@ function Text2() {
               <Col
                 className="pointerClick2"
                 span={6}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "2px",
+                  marginBottom: "2px",
+                }}
                 onClick={() => {
                   handlestep(1);
                 }}
@@ -90,7 +97,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.15rem",
+                    fontSize: "1rem",
                   }}
                 >
                   화이자
@@ -107,6 +114,8 @@ function Text2() {
                   justifyContent: "center",
                   backgroundColor: "#fbaef5",
                   opacity: "0.7",
+                  marginTop: "2px",
+                  marginBottom: "2px",
                 }}
                 onClick={() => {
                   handlestep(2);
@@ -118,7 +127,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.15rem",
+                    fontSize: "1rem",
                   }}
                 >
                   모더나
@@ -128,7 +137,12 @@ function Text2() {
               <Col
                 className="pointerClick2"
                 span={6}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "2px",
+                  marginBottom: "2px",
+                }}
                 onClick={() => {
                   handlestep(2);
                 }}
@@ -139,7 +153,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.15rem",
+                    fontSize: "1rem",
                   }}
                 >
                   모더나
@@ -155,6 +169,8 @@ function Text2() {
                   justifyContent: "center",
                   backgroundColor: "#fbaef5",
                   opacity: "0.7",
+                  marginTop: "2px",
+                  marginBottom: "2px",
                 }}
                 onClick={() => {
                   handlestep(3);
@@ -166,7 +182,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.11rem",
+                    fontSize: "0.9rem",
                   }}
                 >
                   아스트라제네카
@@ -176,7 +192,12 @@ function Text2() {
               <Col
                 className="pointerClick2"
                 span={6}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "2px",
+                  marginBottom: "2px",
+                }}
                 onClick={() => {
                   handlestep(3);
                 }}
@@ -187,7 +208,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.11rem",
+                    fontSize: "0.9rem",
                   }}
                 >
                   아스트라제네카
@@ -203,6 +224,8 @@ function Text2() {
                   justifyContent: "center",
                   backgroundColor: "#fbaef5",
                   opacity: "0.7",
+                  marginTop: "2px",
+                  marginBottom: "2px",
                 }}
                 onClick={() => {
                   handlestep(4);
@@ -214,7 +237,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.15rem",
+                    fontSize: "1rem",
                   }}
                 >
                   얀센
@@ -224,7 +247,12 @@ function Text2() {
               <Col
                 className="pointerClick2"
                 span={6}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "2px",
+                  marginBottom: "2px",
+                }}
                 onClick={() => {
                   handlestep(4);
                 }}
@@ -235,7 +263,7 @@ function Text2() {
                     textAlign: "center",
                     margin: "0",
                     cursor: "pointer",
-                    fontSize: "1.15rem",
+                    fontSize: "1rem",
                   }}
                 >
                   얀센

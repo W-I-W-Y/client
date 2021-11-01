@@ -46,7 +46,7 @@ function LandingPage() {
     <>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -61,7 +61,7 @@ function LandingPage() {
       </Row>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -122,7 +122,7 @@ function LandingPage() {
       </Row>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -157,7 +157,7 @@ function LandingPage() {
       </Row>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -172,7 +172,7 @@ function LandingPage() {
       </Row>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -188,7 +188,7 @@ function LandingPage() {
 
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -203,7 +203,7 @@ function LandingPage() {
       </Row>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
@@ -218,7 +218,7 @@ function LandingPage() {
       </Row>
       <Row
         className="antdrow"
-        style={{ paddingLeft: "10vw", paddingRight: "10vw", paddingTop: "2vw" }}
+        style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
       >
         <header className="major">
           <h2
