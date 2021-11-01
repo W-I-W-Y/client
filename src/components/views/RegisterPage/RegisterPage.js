@@ -5,9 +5,9 @@ import * as Yup from "yup";
 import { registerUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
 
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select, Typography } from "antd";
 // const { Option } = Select;
-
+const { Title } = Typography;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -89,9 +89,11 @@ function RegisterPage(props) {
 
         return (
           <div className="app">
-            <h2>Sign up</h2>
+            <Title level={2} style={{ marginBottom: "20px" }}>
+              Sing Up
+            </Title>
             <Form
-              style={{ minWidth: "375px" }}
+              style={{ minWidth: "375px", marginLeft: "-30px" }}
               {...formItemLayout}
               onSubmit={handleSubmit}
             >
@@ -245,13 +247,20 @@ function RegisterPage(props) {
               </Form.Item>
 
               <Form.Item {...tailFormItemLayout}>
-                <Button
+                <a
+                  className="button"
                   onClick={handleSubmit}
                   type="primary"
                   disabled={isSubmitting}
+                  style={{
+                    fontFamily: "Droid Sans",
+                    fontSize: "0.7rem",
+                    margin: "10px",
+                    minWidth: "50%",
+                  }}
                 >
                   Submit
-                </Button>
+                </a>
               </Form.Item>
             </Form>
           </div>

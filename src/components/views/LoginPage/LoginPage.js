@@ -160,12 +160,12 @@ function LoginPage(props) {
                 <a
                   className="login-form-forgot"
                   href="/reset_user"
-                  style={{ float: "right" }}
+                  style={{ float: "right", color: "#f56a6a" }}
                 >
                   forgot password
                 </a>
                 <div>
-                  <Button
+                  {/* <Button
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
@@ -174,9 +174,26 @@ function LoginPage(props) {
                     onSubmit={handleSubmit}
                   >
                     Log in
-                  </Button>
+                  </Button> */}
+                  <a
+                    className="button"
+                    onClick={handleSubmit}
+                    type="primary"
+                    disabled={isSubmitting}
+                    style={{
+                      fontFamily: "Droid Sans",
+                      fontSize: "0.7rem",
+                      margin: "10px",
+                      minWidth: "100%",
+                    }}
+                  >
+                    Log in
+                  </a>
                 </div>
-                Or <a href="/register">register now!</a>
+                Or{" "}
+                <a href="/join" style={{ color: "#f56a6a" }}>
+                  register now!
+                </a>
               </Form.Item>
             </form>
           </div>
