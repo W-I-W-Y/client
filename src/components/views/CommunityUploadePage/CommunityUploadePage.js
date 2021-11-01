@@ -123,7 +123,15 @@ function CommunityUploadePage(props) {
       <Col lg={20} xs={24}>
         <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <Title level={2}>게시글 작성하기</Title>
+            <Title
+              level={2}
+              style={{
+                fontFamily: "Droid Sans",
+                fontSize: "2.2rem",
+              }}
+            >
+              게시글 작성하기
+            </Title>
           </div>
 
           <Form onSubmit={onSubmit}>
@@ -204,9 +212,19 @@ function CommunityUploadePage(props) {
         </select> */}
             <br />
             <br />
-            <Button type="primary" size="large" onClick={onSubmit}>
+
+            <a
+              className="button"
+              onClick={onSubmit}
+              type="primary"
+              style={{
+                fontFamily: "Droid Sans",
+                fontSize: "0.7rem",
+                minWidth: "100%",
+              }}
+            >
               Submit
-            </Button>
+            </a>
           </Form>
         </div>
       </Col>
