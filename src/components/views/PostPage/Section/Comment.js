@@ -32,6 +32,10 @@ function Comment(props) {
                 username: commentOutputDTOS.username,
                 postName: commentOutputDTOS.postName,
                 isAuthor: commentOutputDTOS.author,
+                likes: commentOutputDTOS.likes,
+                hates: commentOutputDTOS.hates,
+                isLike: commentOutputDTOS.like,
+                isHate: commentOutputDTOS.hate,
               },
             ]);
           });
@@ -71,8 +75,12 @@ function Comment(props) {
       <hr />
 
       {commentList.map((commentList, index) => (
-        <React.Fragment>
-          <SingleComment commentList={commentList} postId={props.postId} />
+        <React.Fragment key={index}>
+          <SingleComment
+            key={index}
+            commentList={commentList}
+            postId={props.postId}
+          />
           {/* <ReplyComment
             parentCommentId={commentList.id}
             postId={props.postId}

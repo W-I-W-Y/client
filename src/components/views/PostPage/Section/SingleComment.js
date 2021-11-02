@@ -69,14 +69,14 @@ function SingleComment(props) {
     //   userId={localStorage.getItem("userId")}
     //   commentId={props.comment._id}
     // />,
-    // <CommentLikeDislikes
-    //   postId={props.postId}
-    //   commentList={props.commentList}
-    //   commentId={props.commentList.id}
-    // />,
-    <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
-      답글달기
-    </span>,
+    <CommentLikeDislikes
+      postId={props.postId}
+      commentList={props.commentList}
+      commentId={props.commentList.id}
+    />,
+    // <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
+    //   답글달기
+    // </span>,
   ];
 
   return (
@@ -85,7 +85,7 @@ function SingleComment(props) {
         <Comment
           actions={actions}
           author={props.commentList.username}
-          avatar={<Avatar src={profile} alt />}
+          avatar={<Avatar src={profile} alt="true" />}
           content={<p>{props.commentList.content}</p>}
         />
         {props.commentList.isAuthor ? (

@@ -40,8 +40,8 @@ function PostPage(props) {
     Axios.get(`${USER_SERVER}/api/post/view/${postId}`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
-          console.log("data check");
-          console.log(response.data);
+          // console.log("data check");
+          // console.log(response.data);
 
           setLike(response.data.like);
           setHate(response.data.hate);
@@ -132,7 +132,6 @@ function PostPage(props) {
     });
   };
 
-  console.log(isAuthor);
   return (
     <Row gutter={[16, 16]}>
       <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
