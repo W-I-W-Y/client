@@ -14,10 +14,17 @@ import { useHistory } from "react-router-dom";
 import trueimg from "../../../images/true.png";
 import falseimg from "../../../images/false.png";
 
+import ModalSetting from "./Section/ModalPage";
+
 function CommunityPage() {
   const [community, setCommunity] = useState([]);
   const [communityPost, setCommunityPost] = useState([]);
   const [vote, setVote] = useState([]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalClose = () => {
+    setModalOpen(!modalOpen);
+  };
 
   useEffect(() => {
     const headers = {
@@ -297,6 +304,21 @@ function CommunityPage() {
                         >
                           정보 알아보기
                         </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={modalClose}
+                          className="button big"
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "0.8rem",
+                          }}
+                        >
+                          내 주변 선별진료소 확인
+                        </a>
+                        {modalOpen && (
+                          <ModalSetting modalClose={modalClose}></ModalSetting>
+                        )}
                       </li>
                     </ul>
                   </div>
