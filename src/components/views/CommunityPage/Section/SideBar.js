@@ -139,6 +139,9 @@ function SideBar() {
                 </header>
                 <ul>
                   <li>
+                    <a href={"/member"}>내 정보 수정</a>
+                  </li>
+                  <li>
                     <a href={"/post/viewByMember/" + Number(0)}>내가 쓴 글</a>
                   </li>
                   <li>

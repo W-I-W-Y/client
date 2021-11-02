@@ -19,9 +19,6 @@ function CommunityPage() {
   const [communityPost, setCommunityPost] = useState([]);
   const [vote, setVote] = useState([]);
 
-  const [isAgree, setIsAgree] = useState(false);
-  const [isDisAgree, setIsDisAgree] = useState(false);
-
   useEffect(() => {
     const headers = {
       Authorization: `Bearer ` + localStorage.getItem("token"),

@@ -18,6 +18,7 @@ import PostViewByMember from "./views/ByMember/PostViewByMember";
 import CommentViewByMember from "./views/ByMember/CommentViewByMember";
 import LikeHateByMember from "./views/ByMember/LikeHateByMember";
 import ManagerPage from "./views/Manager/ManagerPage";
+import MemberPage from "./views/Member/MemberPage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -74,6 +75,7 @@ function App() {
             path="/post/likehateByMember"
             component={LikeHateByMember}
           />
+          <Route exact path="/member" component={MemberPage} />
           <Route exact path="/manager" component={ManagerPage} />
         </Switch>
       </div>
