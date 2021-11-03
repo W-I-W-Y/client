@@ -18,6 +18,8 @@ import CoronaVideo from "./Section/CoronaVideo";
 import Text1 from "./Section/Text1";
 import Text2 from "./Section/Text2";
 
+import svg from "../../../images/covid-image.svg";
+
 function LandingPage() {
   return (
     // {/* <div className="navbar-links">
@@ -44,6 +46,32 @@ function LandingPage() {
     //   </svg>
     // </div> */}
     <>
+      {/* <section className="scroll-section" id="scroll-section-0">
+        <h1>WIWY</h1>
+        <object
+          className="sticky-elem covid-logo"
+          data={svg}
+          type="image/svg+xml"
+        ></object>
+        <div className="sticky-elem main-message a">
+          <p>코로나에 대한</p>
+        </div>
+        <span className="sticky-elem ribbon-path">
+          <svg
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 700 450"
+          >
+            <path
+              className="st1"
+              d="M709,41.5c-194,38-387,122-455,159c-64.13,34.89-73.4,42.42,20,26c82.5-14.5,126.34-33.68,185-38 c47.5-3.5,69.22,7.98-11,39c-75,29-251,98-459,169"
+            ></path>
+          </svg>
+        </span>
+        <div className="sticky-elem main-message b">
+          <p>모든 것</p>
+        </div>
+      </section> */}
       <Row
         className="antdrow"
         style={{ paddingLeft: "15vw", paddingRight: "15vw", paddingTop: "2vw" }}
@@ -72,32 +100,7 @@ function LandingPage() {
             확진자 현황, 백신 접종 현황
           </h2>
         </header>
-        {/* <section className="scroll-section" id="scroll-section-0">
-              <h1>WIWY</h1>
-              <object
-                className="sticky-elem covid-logo"
-                data="../../../images/covid-image.svg"
-                type="image/svg+xml"
-              ></object>
-              <div className="sticky-elem main-message a">
-                <p>코로나에 대한</p>
-              </div>
-              <span className="sticky-elem ribbon-path">
-                <svg
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 700 450"
-                >
-                  <path
-                    className="st1"
-                    d="M709,41.5c-194,38-387,122-455,159c-64.13,34.89-73.4,42.42,20,26c82.5-14.5,126.34-33.68,185-38 c47.5-3.5,69.22,7.98-11,39c-75,29-251,98-459,169"
-                  ></path>
-                </svg>
-              </span>
-              <div className="sticky-elem main-message b">
-                <p>모든 것</p>
-              </div>
-            </section> */}
+
         <Col
           className="leftarea"
           xl={11}

@@ -90,7 +90,7 @@ function RegisterPage(props) {
         return (
           <div className="app">
             <Title level={2} style={{ marginBottom: "20px" }}>
-              Sing Up
+              Sign Up
             </Title>
             <Form
               style={{ minWidth: "375px", marginLeft: "-30px" }}

@@ -46,7 +46,11 @@ function App() {
             path="/board/:boardId/view/:pageNum"
             component={CommunitySectionPage1}
           />
-          <Route exact path="/region" component={CommunitySectionPage2} />
+          <Route
+            exact
+            path="/board/region/view/:pageNum"
+            component={CommunitySectionPage2}
+          />
           <Route exact path="/post/view/:postId" component={PostPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/join" component={RegisterPage} />

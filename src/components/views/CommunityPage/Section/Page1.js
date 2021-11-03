@@ -33,6 +33,7 @@ function Page1(props) {
 
   const [post, setPost] = useState([]);
   const [sidebar, setSidebar] = useState(true);
+  const [page, setPage] = useState([]);
 
   const changeState = () => {
     setSidebar(!sidebar);
@@ -40,7 +41,7 @@ function Page1(props) {
   };
 
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/board/${boardId}/view/0`).then(
+    Axios.get(`${USER_SERVER}/api/board/${boardId}/view/${pageNum}`).then(
       (response, index) => {
         if (response.data !== null) {
           console.log(response.data);
@@ -72,6 +73,21 @@ function Page1(props) {
           });
         } else {
           alert("게시글을 가져오는데 실패했습니다.");
+        }
+      }
+    );
+
+    Axios.get(`${USER_SERVER}/api/board/${boardId}/pagination`).then(
+      (response, index) => {
+        if (response.data !== null) {
+          console.log(response.data);
+          setPage({
+            totalElements: response.data.totalElements,
+            totalPages: response.data.totalPages,
+          });
+          setPageTotalNum(response.data.totalPages);
+        } else {
+          alert("페이지 정보를 가져오는데 실패했습니다.");
         }
       }
     );
@@ -252,16 +268,21 @@ function Page1(props) {
                       >
                         <article>
                           <div className="pagination">
-                            {/* <ul>
+                            <ul className="pagination">
                               {paginationNum.map((i, index) => {
                                 return (
-                                  <li key={index} onClick={paginationOnclick}>
-                                    {paginationNum[index]}
+                                  <li key={index}>
+                                    <a
+                                      href={"./" + (index + 1)}
+                                      className="page active"
+                                    >
+                                      {paginationNum[index]}
+                                    </a>
                                   </li>
                                 );
                               })}
-                            </ul> */}
-                            <ul className="pagination">
+                            </ul>
+                            {/* <ul className="pagination">
                               <li>
                                 <span className="button disabled">Prev</span>
                               </li>
@@ -303,7 +324,7 @@ function Page1(props) {
                                   Next
                                 </a>
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                         </article>
                       </div>

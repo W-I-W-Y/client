@@ -121,7 +121,7 @@ function SideBar(props) {
                     <ul>
                       {BoardName.map((BoardName, index) => (
                         <li key={index}>
-                          <a href={"/board/" + BoardName.id + "/view/0"}>
+                          <a href={"/board/" + BoardName.id + "/view/1"}>
                             {BoardName.boardName}
                           </a>
                         </li>

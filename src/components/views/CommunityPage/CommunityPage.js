@@ -190,7 +190,7 @@ function CommunityPage() {
                 <a
                   className="button"
                   href={
-                    "/board/" + Number(community.boardId) + "/view/" + Number(0)
+                    "/board/" + Number(community.boardId) + "/view/" + Number(1)
                   }
                   style={{
                     fontFamily: "Droid Sans",
