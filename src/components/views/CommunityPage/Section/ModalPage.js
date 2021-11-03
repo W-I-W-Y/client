@@ -14,8 +14,6 @@ const ModalPage = ({ modalClose }) => {
     Axios.get(`${USER_SERVER}/api/clinic/view`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
-          console.log("선별진료소");
-          console.log(response.data);
           response.data.forEach((lists) => {
             setClinic((state) => [
               ...state,
@@ -45,8 +43,6 @@ const ModalPage = ({ modalClose }) => {
       modalClose();
     }
   };
-
-  console.log(clinic);
 
   const columns = [
     {
@@ -104,11 +100,17 @@ const ModalPage = ({ modalClose }) => {
               내 주변 선별진료소 확인하기
             </strong>
           </h1>
+
           {/* <button className="modal__button" onClick={modalClose}>
             {" "}
             X
           </button> */}
         </div>
+        <p style={{ marginLeft: "20px" }}>
+          * 선정 유형 : 국민안심병원 선정유형 (A: 일반 호흡기 환자 진료를 위한
+          호흡기 전용 외래 설치 운영 병원, B: 호흡기 환자 전용 외래입원 진료가
+          가능한 선별진료소 운영 병원)
+        </p>
         <Table
           dataSource={clinic}
           columns={columns}
