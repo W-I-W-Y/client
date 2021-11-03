@@ -6,9 +6,6 @@ import { useHistory } from "react-router-dom";
 import SideBar from "./SideBar";
 
 function Page2(props) {
-  const headers = {
-    Authorization: `Bearer ` + localStorage.getItem("token"),
-  };
   const pageNum = props.match.params.pageNum;
   // const variable = { boardId: boardId };
   //NOTE 전체 페이지 갯수
@@ -28,51 +25,67 @@ function Page2(props) {
     paginationNum.push(i + 1);
   }
   const [sidebar, setSidebar] = useState(true);
+  const [page, setPage] = useState([]);
+
   const changeState = () => {
     setSidebar(!sidebar);
     console.log(sidebar);
   };
 
-  const paginationOnclick = (e) => {
-    console.log(Number(e.target.innerText) - 1);
-    setPagingNum(Number(e.target.innerText) - 1);
+  const headers = {
+    Authorization: `Bearer ` + localStorage.getItem("token"),
   };
 
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/board/region/view/0`, { headers }).then(
+    Axios.get(`${USER_SERVER}/api/board/region/view/${pageNum}`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        console.log(response.data);
+        response.data.forEach((lists) => {
+          const newcontent = lists.content
+            .replace(/(<([^>]+)>)/gi, " ")
+            .replace(/&quot;/g, " ")
+            .replace(/\"n/, " ")
+            .replace(/&amp;/g, " ")
+            .replace(/&nbsp/g, " ")
+            .replace(";", "");
+          setPost((state) => [
+            ...state,
+            {
+              id: lists.id,
+              postName: lists.postName,
+              content: newcontent,
+              calculateTime: lists.calculateTime,
+              createTime: lists.createTime,
+              viewCnt: lists.viewCnt,
+              likes: lists.likes,
+              hates: lists.hates,
+              username: lists.username,
+              boardName: lists.boardName,
+              comCounts: lists.comCounts,
+              boardDescription: lists.boardDescription,
+            },
+          ]);
+        });
+      } else {
+        alert("게시글을 가져오는데 실패했습니다.");
+      }
+    });
+
+    Axios.get(`${USER_SERVER}/api/board/region/pagination`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
           console.log(response.data);
-          response.data.forEach((lists) => {
-            const newcontent = lists.content
-              .replace(/(<([^>]+)>)/gi, " ")
-              .replace(/&quot;/g, " ")
-              .replace(/\"n/, " ")
-              .replace(/&amp;/g, " ")
-              .replace(/&nbsp/g, " ")
-              .replace(";", "");
-            setPost((state) => [
-              ...state,
-              {
-                id: lists.id,
-                postName: lists.postName,
-                content: newcontent,
-                calculateTime: lists.calculateTime,
-                createTime: lists.createTime,
-                viewCnt: lists.viewCnt,
-                likes: lists.likes,
-                hates: lists.hates,
-                username: lists.username,
-                boardName: lists.boardName,
-                comCounts: lists.comCounts,
-                boardDescription: lists.boardDescription,
-              },
-            ]);
+          setPage({
+            totalElements: response.data.totalElements,
+            totalPages: response.data.totalPages,
           });
+          setPageTotalNum(response.data.totalPages);
         } else {
-          alert("게시글을 가져오는데 실패했습니다.");
+          alert("페이지 정보를 가져오는데 실패했습니다.");
         }
       }
     );
