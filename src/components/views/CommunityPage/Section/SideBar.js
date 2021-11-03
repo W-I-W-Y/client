@@ -129,7 +129,7 @@ function SideBar(props) {
                     </ul>
                   </li>
                   <li>
-                    <a href="/board/region/view/1">지역게시판</a>
+                    <a href="/board/sido/view/1">지역게시판</a>
                   </li>
                 </ul>
               </nav>
@@ -143,12 +143,10 @@ function SideBar(props) {
                     <a href={"/member"}>내 정보 수정</a>
                   </li>
                   <li>
-                    <a href={"/post/viewByMember/" + Number(0)}>내가 쓴 글</a>
+                    <a href={"/post/viewByMember/1"}>내가 쓴 글</a>
                   </li>
                   <li>
-                    <a href={"/comment/viewByMember/" + Number(0)}>
-                      내가 쓴 댓글
-                    </a>
+                    <a href={"/comment/viewByMember/1"}>내가 쓴 댓글</a>
                   </li>
                   <li>
                     <a href="/post/likehateByMember">좋아요 싫어요 목록</a>

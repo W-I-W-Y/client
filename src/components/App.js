@@ -48,7 +48,7 @@ function App() {
           />
           <Route
             exact
-            path="/board/region/view/:pageNum"
+            path="/board/sido/view/:pageNum"
             component={CommunitySectionPage2}
           />
           <Route exact path="/post/view/:postId" component={PostPage} />

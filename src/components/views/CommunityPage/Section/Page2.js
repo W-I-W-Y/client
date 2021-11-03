@@ -32,14 +32,14 @@ function Page2(props) {
     console.log(sidebar);
   };
 
-  const headers = {
-    Authorization: `Bearer ` + localStorage.getItem("token"),
-  };
-
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/board/region/view/${pageNum}`, {
+    const headers = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+    };
+
+    Axios.get(`${USER_SERVER}/api/board/sido/view/${pageNum}`, {
       headers,
     }).then((response, index) => {
       if (response.data !== null) {
@@ -75,7 +75,7 @@ function Page2(props) {
       }
     });
 
-    Axios.get(`${USER_SERVER}/api/board/region/pagination`, { headers }).then(
+    Axios.get(`${USER_SERVER}/api/board/sido/pagination`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
           console.log(response.data);
