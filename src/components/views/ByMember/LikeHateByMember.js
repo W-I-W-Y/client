@@ -5,10 +5,28 @@ import SideBar from "../CommunityPage/Section/SideBar";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router";
 
-function LikeHateByMember() {
+function LikeHateByMember(props) {
+  const pageNum = props.match.params.pageNum;
+  const [pageTotalNum, setPageTotalNum] = useState(4);
+  const [pageTotalNum2, setPageTotalNum2] = useState(4);
+
+  const [page, setPage] = useState([]);
+  const [page2, setPage2] = useState([]);
+
   const [post, setPost] = useState([]);
   const [hatePost, setHatePost] = useState([]);
+  //SECTION pagination
+  const paginationNum = [];
+  const paginationNum2 = [];
 
+  // pageTotalNum
+
+  for (let i = 0; i < pageTotalNum; i++) {
+    paginationNum.push(i + 1);
+  }
+  for (let i = 0; i < pageTotalNum2; i++) {
+    paginationNum2.push(i + 1);
+  }
   const [sidebar, setSidebar] = useState(true);
 
   const changeState = () => {
@@ -90,6 +108,36 @@ function LikeHateByMember() {
         }
       }
     );
+
+    Axios.get(`${USER_SERVER}/api/post/likeByMember/pagination`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        console.log(response.data);
+        setPage({
+          totalElements: response.data.totalElements,
+          totalPages: response.data.totalPages,
+        });
+        setPageTotalNum(response.data.totalPages);
+      } else {
+        alert("페이지 정보를 가져오는데 실패했습니다.");
+      }
+    });
+
+    Axios.get(`${USER_SERVER}/api/post/hateByMember/pagination`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        console.log(response.data);
+        setPage2({
+          totalElements: response.data.totalElements,
+          totalPages: response.data.totalPages,
+        });
+        setPageTotalNum2(response.data.totalPages);
+      } else {
+        alert("페이지 정보를 가져오는데 실패했습니다.");
+      }
+    });
   }, []);
 
   const history = useHistory();
@@ -180,9 +228,8 @@ function LikeHateByMember() {
                     <table className="tabel-list">
                       <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
                         <tr className="row align-items-sm-center text-center text-dark">
-                          <Col span={16}>내용</Col>
-                          <Col span={4}>작성일</Col>
-                          <Col span={4}></Col>
+                          <Col span={18}>내용</Col>
+                          <Col span={6}>작성일</Col>
                         </tr>
                       </thead>
 
@@ -195,7 +242,7 @@ function LikeHateByMember() {
                           <tr style={{ cursor: "pointer" }}>
                             <Col
                               onClick={() => detailPost(post.id)}
-                              span={16}
+                              span={18}
                               style={{
                                 fontFamily: "Droid Sans",
                                 fontSize: "1rem",
@@ -246,17 +293,7 @@ function LikeHateByMember() {
                                 </li>
                               </ul>
                             </Col>
-                            <Col span={4}>{post.calculateTime}</Col>
-                            <Col span={4}>
-                              <button
-                                style={{ width: "95%", height: "52px" }}
-                                onClick={() => {
-                                  deletePost(post.id);
-                                }}
-                              >
-                                게시글 삭제하기
-                              </button>
-                            </Col>
+                            <Col span={6}>{post.calculateTime}</Col>
                           </tr>
                         </tbody>
                       ))}
@@ -273,16 +310,21 @@ function LikeHateByMember() {
                       >
                         <article>
                           <div className="pagination">
-                            {/* <ul>
+                            <ul className="pagination">
                               {paginationNum.map((i, index) => {
                                 return (
-                                  <li key={index} onClick={paginationOnclick}>
-                                    {paginationNum[index]}
+                                  <li key={index}>
+                                    <a
+                                      href={"./" + (index + 1)}
+                                      className="page active"
+                                    >
+                                      {paginationNum[index]}
+                                    </a>
                                   </li>
                                 );
                               })}
-                            </ul> */}
-                            <ul className="pagination">
+                            </ul>
+                            {/* <ul className="pagination">
                               <li>
                                 <span className="button disabled">Prev</span>
                               </li>
@@ -324,7 +366,7 @@ function LikeHateByMember() {
                                   Next
                                 </a>
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                         </article>
                       </div>
@@ -372,9 +414,8 @@ function LikeHateByMember() {
                     <table className="tabel-list">
                       <thead className="table-head py-3 px-4 d-none d-lg-block bg-light">
                         <tr className="row align-items-sm-center text-center text-dark">
-                          <Col span={16}>내용</Col>
-                          <Col span={4}>작성일</Col>
-                          <Col span={4}></Col>
+                          <Col span={18}>내용</Col>
+                          <Col span={6}>작성일</Col>
                         </tr>
                       </thead>
 
@@ -438,17 +479,7 @@ function LikeHateByMember() {
                                 </li>
                               </ul>
                             </Col>
-                            <Col span={4}>{hatePost.calculateTime}</Col>
-                            <Col span={4}>
-                              <button
-                                style={{ width: "95%", height: "52px" }}
-                                onClick={() => {
-                                  deletePost(hatePost.id);
-                                }}
-                              >
-                                게시글 삭제하기
-                              </button>
-                            </Col>
+                            <Col span={6}>{hatePost.calculateTime}</Col>
                           </tr>
                         </tbody>
                       ))}
@@ -465,16 +496,21 @@ function LikeHateByMember() {
                       >
                         <article>
                           <div className="pagination">
-                            {/* <ul>
-                              {paginationNum.map((i, index) => {
+                            <ul className="pagination">
+                              {paginationNum2.map((i, index) => {
                                 return (
-                                  <li key={index} onClick={paginationOnclick}>
-                                    {paginationNum[index]}
+                                  <li key={index}>
+                                    <a
+                                      href={"./" + (index + 1)}
+                                      className="page active"
+                                    >
+                                      {paginationNum2[index]}
+                                    </a>
                                   </li>
                                 );
                               })}
-                            </ul> */}
-                            <ul className="pagination">
+                            </ul>
+                            {/* <ul className="pagination">
                               <li>
                                 <span className="button disabled">Prev</span>
                               </li>
@@ -516,7 +552,7 @@ function LikeHateByMember() {
                                   Next
                                 </a>
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                         </article>
                       </div>

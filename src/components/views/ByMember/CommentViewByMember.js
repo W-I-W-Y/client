@@ -56,7 +56,7 @@ function CommentViewByMember(props) {
       }
     });
 
-    Axios.get(`${USER_SERVER}/api/post/likeByMember/pagination`, {
+    Axios.get(`${USER_SERVER}/api/comment/viewByMember/pagination`, {
       headers,
     }).then((response, index) => {
       if (response.data !== null) {
