@@ -33,7 +33,9 @@ function MemberPage() {
   const [userInfo, setUserInfo] = useState([]);
   const [newUsername, setNewUsername] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [newRegion, setNewRegion] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newnewPassword, setNewNewPassword] = useState("");
 
   useEffect(() => {
     const headers = {
@@ -49,6 +51,7 @@ function MemberPage() {
             username: response.data.username,
             password: response.data.password,
             email: response.data.email,
+            region: response.data.region,
           });
         } else {
           alert("회원 정보를 가져오는데 실패했습니다.");
@@ -59,18 +62,22 @@ function MemberPage() {
   const history = useHistory();
 
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setNewUsername(e.target.value);
   };
 
   const handleEmailChange = (e) => {
-    console.log(e.target.value);
     setNewEmail(e.target.value);
+  };
+  const handleRegionChange = (e) => {
+    setNewRegion(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    console.log(e.target.value);
     setNewPassword(e.target.value);
+  };
+
+  const handleNewPasswordChange = (e) => {
+    setNewNewPassword(e.target.value);
   };
 
   const handleSubmit = () => {
@@ -82,6 +89,8 @@ function MemberPage() {
       username: newUsername,
       password: newPassword,
       email: newEmail,
+      region: newRegion,
+      newPassword: newnewPassword,
     };
 
     Axios.patch(`${USER_SERVER}/api/member/modify`, variable, {
@@ -160,6 +169,84 @@ function MemberPage() {
 
         <Form.Item
           required
+          label="Region"
+          hasFeedback
+          // validateStatus={
+          //   errors.region && touched.region ? "error" : "success"
+          // }
+          // rules={[
+          //   {
+          //     required: true,
+          //   },
+          // ]}
+        >
+          <select
+            id="region"
+            name="region"
+            placeholder={userInfo.region}
+            onChange={handleRegionChange}
+            //   onBlur={handleBlur}
+            //   value={values.region}
+          >
+            <option name="region" value="서울">
+              서울
+            </option>
+            <option name="region" value="부산">
+              부산
+            </option>
+            <option name="region" value="대구">
+              대구
+            </option>
+            <option name="region" value="인천">
+              인천
+            </option>
+            <option name="region" value="광주">
+              광주
+            </option>
+            <option name="region" value="대전">
+              대전
+            </option>
+            <option name="region" value="울산">
+              울산
+            </option>
+            <option name="region" value="세종">
+              세종
+            </option>
+            <option name="region" value="경기">
+              경기
+            </option>
+            <option name="region" value="강원">
+              강원
+            </option>
+            <option name="region" value="충북">
+              충북
+            </option>
+            <option name="region" value="충남">
+              충남
+            </option>
+            <option name="region" value="전북">
+              전북
+            </option>
+            <option name="region" value="전남">
+              전남
+            </option>
+            <option name="region" value="경북">
+              경북
+            </option>
+            <option name="region" value="경남">
+              경남
+            </option>
+            <option name="region" value="제주">
+              제주
+            </option>
+          </select>
+          {/* {errors.region && touched.region && (
+                  <div className="input-feedback">{errors.region}</div>
+                )} */}
+        </Form.Item>
+
+        <Form.Item
+          required
           label="Password"
           hasFeedback
           //   validateStatus={
@@ -172,6 +259,32 @@ function MemberPage() {
             type="password"
             // value={values.password}
             onChange={handlePasswordChange}
+            // onBlur={handleBlur}
+            // className={
+            //   errors.password && touched.password
+            //     ? "text-input error"
+            //     : "text-input"
+            // }
+          />
+          {/* {errors.password && touched.password && (
+            <div className="input-feedback">{errors.password}</div>
+          )} */}
+        </Form.Item>
+
+        <Form.Item
+          required
+          label="NewPassword"
+          hasFeedback
+          //   validateStatus={
+          //     errors.password && touched.password ? "error" : "success"
+          //   }
+        >
+          <Input
+            id="password"
+            placeholder=""
+            type="password"
+            // value={values.password}
+            onChange={handleNewPasswordChange}
             // onBlur={handleBlur}
             // className={
             //   errors.password && touched.password

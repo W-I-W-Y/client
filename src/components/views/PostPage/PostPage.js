@@ -6,6 +6,7 @@ import LikeDislikes from "./Section/LikeDislikes";
 import Comment from "./Section/Comment";
 import profile from "../../../images/icon2.png";
 import SideBar from "../CommunityPage/Section/SideBar";
+import ad1 from "../../../images/ad1.png";
 
 const { TextArea } = Input;
 
@@ -133,114 +134,136 @@ function PostPage(props) {
   };
 
   return (
-    <Row gutter={[16, 16]}>
-      <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
-        <SideBar />
-      </Col>
-      <Col lg={20} xs={24}>
-        <div style={{ width: "90%", padding: "3rem 4rem" }}>
-          <img src="" />
-
-          <List.Item.Meta
-            avatar={<Avatar src={profile} />}
-            title={detailPost.username}
-            description={detailPost.createTime}
+    <div>
+      <html>
+        <head>
+          <title>코로나 시대 살아남기</title>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, user-scalable=no"
           />
+        </head>
 
-          <div
-            style={{
-              width: "100%",
-              height: "30vh",
-              margin: "20px",
-              padding: "10px",
-              border: "black solid 0.5px",
-            }}
-          >
-            {ismodify === false ? (
-              <p>{detailPost.postName}</p>
-            ) : (
-              <Input
-                onChange={onTitleChange}
-                value={postName}
-                placeholder={detailPost.postName}
-              />
-            )}
-            <hr />
-            {ismodify === false ? (
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: detailPost.content,
-                }}
-              ></p>
-            ) : (
-              <TextArea
-                onChange={onDescriptionChange}
-                value={content}
-                placeholder={detailPost.content}
-              ></TextArea>
-            )}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              justifyContent: "end",
-            }}
-          >
-            <List.Item
-              actions={[
-                <LikeDislikes
-                  postId={detailPost.id}
-                  likes={detailPost.likes}
-                  hates={detailPost.hates}
-                  isLike={like}
-                  isHate={hate}
-                />,
-              ]}
-            ></List.Item>
-          </div>
-          <div style={{ display: "flex" }}>
-            {isAuthor === true ? (
-              <div style={{ width: "100%" }}>
-                {ismodify === false ? (
-                  <button
-                    style={{ width: "20%", height: "52px" }}
-                    onClick={modifyPost}
-                  >
-                    게시글 수정하기
-                  </button>
-                ) : (
-                  <button
-                    style={{ width: "20%", height: "52px" }}
-                    onClick={savePost}
-                  >
-                    저장하기
-                  </button>
-                )}
+        <body>
+          <Row gutter={[16, 16]}>
+            <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
+              <SideBar />
+            </Col>
+            <Col lg={20} xs={24}>
+              <div id="wrapper">
+                <div id="main">
+                  <div className="inner" style={{ paddingTop: "50px" }}>
+                    {/* <div style={{ width: "90%", padding: "3rem 4rem" }}> */}
+                    <img src="" />
+
+                    <List.Item.Meta
+                      avatar={<Avatar src={profile} />}
+                      title={detailPost.username}
+                      description={detailPost.createTime}
+                    />
+
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "30vh",
+                        margin: "20px",
+                        padding: "10px",
+                        border: "black solid 0.5px",
+                      }}
+                    >
+                      {ismodify === false ? (
+                        <p>{detailPost.postName}</p>
+                      ) : (
+                        <Input
+                          onChange={onTitleChange}
+                          value={postName}
+                          placeholder={detailPost.postName}
+                        />
+                      )}
+                      <hr />
+                      {ismodify === false ? (
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: detailPost.content,
+                          }}
+                        ></p>
+                      ) : (
+                        <TextArea
+                          onChange={onDescriptionChange}
+                          value={content}
+                          placeholder={detailPost.content}
+                        ></TextArea>
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        width: "100%",
+                        justifyContent: "end",
+                      }}
+                    >
+                      <List.Item
+                        actions={[
+                          <LikeDislikes
+                            postId={detailPost.id}
+                            likes={detailPost.likes}
+                            hates={detailPost.hates}
+                            isLike={like}
+                            isHate={hate}
+                          />,
+                        ]}
+                      ></List.Item>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      {isAuthor === true ? (
+                        <div style={{ width: "100%" }}>
+                          {ismodify === false ? (
+                            <button
+                              style={{ width: "20%", height: "52px" }}
+                              onClick={modifyPost}
+                            >
+                              게시글 수정하기
+                            </button>
+                          ) : (
+                            <button
+                              style={{ width: "20%", height: "52px" }}
+                              onClick={savePost}
+                            >
+                              저장하기
+                            </button>
+                          )}
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+
+                      {isAuthor ? (
+                        <button
+                          style={{ width: "20%", height: "52px" }}
+                          onClick={deletePost}
+                        >
+                          게시글 삭제하기
+                        </button>
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+
+                    <img src={ad1} alt="" />
+                    <Comment
+                      postId={postId}
+                      // refreshFunction={refreshFunction}
+                    />
+                    {/* </div> */}
+                  </div>
+                </div>
               </div>
-            ) : (
-              <div></div>
-            )}
-
-            {isAuthor ? (
-              <button
-                style={{ width: "20%", height: "52px" }}
-                onClick={deletePost}
-              >
-                게시글 삭제하기
-              </button>
-            ) : (
-              <div></div>
-            )}
-          </div>
-
-          <Comment
-            postId={postId}
-            // refreshFunction={refreshFunction}
-          />
-        </div>
-      </Col>
-    </Row>
+            </Col>
+          </Row>
+        </body>
+      </html>
+    </div>
   );
 }
 
