@@ -165,7 +165,7 @@ function PostPage(props) {
 
                     <div
                       style={{
-                        width: "100%",
+                        width: "97%",
                         height: "30vh",
                         margin: "20px",
                         padding: "10px",
@@ -250,7 +250,15 @@ function PostPage(props) {
                       )}
                     </div>
 
-                    <img src={ad1} alt="" />
+                    <img
+                      src={ad1}
+                      alt=""
+                      style={{
+                        width: "97%",
+                        marginLeft: "20px",
+                        marginRight: "20px",
+                      }}
+                    />
                     <Comment
                       postId={postId}
                       // refreshFunction={refreshFunction}
