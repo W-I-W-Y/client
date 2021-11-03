@@ -27,26 +27,21 @@ function CommunityPage() {
   };
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-    };
-    Axios.get(`${USER_SERVER}/api/vote/view`, { headers }).then(
-      (response, index) => {
-        console.log("투표확인");
-        console.log(response.data);
-        if (response.data !== null) {
-          setVote({
-            content: response.data.content,
-            createDate: response.data.createDate,
-            voteId: response.data.voteId,
-            agreeCnt: response.data.agreeCnt,
-            disagreeCnt: response.data.disagreeCnt,
-          });
-        } else {
-          alert("투표 정보를 가져오는데 실패했습니다.");
-        }
+    Axios.get(`${USER_SERVER}/api/vote/view`).then((response, index) => {
+      console.log("투표확인");
+      console.log(response.data);
+      if (response.data !== null) {
+        setVote({
+          content: response.data.content,
+          createDate: response.data.createDate,
+          voteId: response.data.voteId,
+          agreeCnt: response.data.agreeCnt,
+          disagreeCnt: response.data.disagreeCnt,
+        });
+      } else {
+        alert("투표 정보를 가져오는데 실패했습니다.");
       }
-    );
+    });
 
     Axios.get(`${USER_SERVER}/api/community`).then((response, index) => {
       if (response.data !== null) {
@@ -77,6 +72,7 @@ function CommunityPage() {
     });
   }, []);
 
+  const history = useHistory();
   const agreeClick = () => {
     console.log("찬성");
 
@@ -96,6 +92,8 @@ function CommunityPage() {
       } else if (response.data === "cancelAgree") {
         alert("투표를 취소했습니다.");
         window.location.reload();
+      } else if (response.data === "nonMember") {
+        history.push("../../../login");
       } else {
         alert("찬성 투표 반영하지 못했습니다.");
       }
@@ -120,13 +118,14 @@ function CommunityPage() {
       } else if (response.data === "cancelDisagree") {
         alert("투표를 취소했습니다.");
         window.location.reload();
+      } else if (response.data === "nonMember") {
+        history.push("../../../login");
       } else {
         alert("반대 투표 반영하지 못했습니다.");
       }
     });
   };
 
-  const history = useHistory();
   const detailPost = (id) => {
     history.push("../../../post/view/" + id);
     window.scrollTo(0, 0);
