@@ -5,9 +5,18 @@ import SideBar from "../CommunityPage/Section/SideBar";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router";
 
-function PostViewByMember() {
+function PostViewByMember(props) {
+  const pageNum = props.match.params.pageNum;
+  const [pageTotalNum, setPageTotalNum] = useState(4);
   const [post, setPost] = useState([]);
+  const [page, setPage] = useState([]);
+  //SECTION pagination
+  const paginationNum = [];
+  // pageTotalNum
 
+  for (let i = 0; i < pageTotalNum; i++) {
+    paginationNum.push(i + 1);
+  }
   const [sidebar, setSidebar] = useState(true);
 
   const changeState = () => {
@@ -18,41 +27,56 @@ function PostViewByMember() {
     Authorization: `Bearer ` + localStorage.getItem("token"),
   };
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/post/viewByMember/0`, { headers }).then(
-      (response, index) => {
-        if (response.data !== null) {
-          console.log(response.data);
-          response.data.forEach((lists) => {
-            const newcontent = lists.content
-              .replace(/(<([^>]+)>)/gi, " ")
-              .replace(/&quot;/g, " ")
-              .replace(/\"n/, " ")
-              .replace(/&amp;/g, " ")
-              .replace(/&nbsp/g, " ")
-              .replace(";", "");
-            setPost((state) => [
-              ...state,
-              {
-                id: lists.id,
-                postName: lists.postName,
-                content: newcontent,
-                calculateTime: lists.calculateTime,
-                createTime: lists.createTime,
-                viewCnt: lists.viewCnt,
-                likes: lists.likes,
-                hates: lists.hates,
-                username: lists.username,
-                boardName: lists.boardName,
-                comCounts: lists.comCounts,
-                decription: lists.decription,
-              },
-            ]);
-          });
-        } else {
-          alert("내가 쓴 게시글을 가져오는데 실패했습니다.");
-        }
+    Axios.get(`${USER_SERVER}/api/post/viewByMember/${pageNum}`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        console.log(response.data);
+        response.data.forEach((lists) => {
+          const newcontent = lists.content
+            .replace(/(<([^>]+)>)/gi, " ")
+            .replace(/&quot;/g, " ")
+            .replace(/\"n/, " ")
+            .replace(/&amp;/g, " ")
+            .replace(/&nbsp/g, " ")
+            .replace(";", "");
+          setPost((state) => [
+            ...state,
+            {
+              id: lists.id,
+              postName: lists.postName,
+              content: newcontent,
+              calculateTime: lists.calculateTime,
+              createTime: lists.createTime,
+              viewCnt: lists.viewCnt,
+              likes: lists.likes,
+              hates: lists.hates,
+              username: lists.username,
+              boardName: lists.boardName,
+              comCounts: lists.comCounts,
+              decription: lists.decription,
+            },
+          ]);
+        });
+      } else {
+        alert("내가 쓴 게시글을 가져오는데 실패했습니다.");
       }
-    );
+    });
+
+    Axios.get(`${USER_SERVER}/api/post/viewByMember/pagination`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        console.log(response.data);
+        setPage({
+          totalElements: response.data.totalElements,
+          totalPages: response.data.totalPages,
+        });
+        setPageTotalNum(response.data.totalPages);
+      } else {
+        alert("페이지 정보를 가져오는데 실패했습니다.");
+      }
+    });
   }, []);
 
   const history = useHistory();
@@ -236,16 +260,21 @@ function PostViewByMember() {
                       >
                         <article>
                           <div className="pagination">
-                            {/* <ul>
+                            <ul className="pagination">
                               {paginationNum.map((i, index) => {
                                 return (
-                                  <li key={index} onClick={paginationOnclick}>
-                                    {paginationNum[index]}
+                                  <li key={index}>
+                                    <a
+                                      href={"./" + (index + 1)}
+                                      className="page active"
+                                    >
+                                      {paginationNum[index]}
+                                    </a>
                                   </li>
                                 );
                               })}
-                            </ul> */}
-                            <ul className="pagination">
+                            </ul>
+                            {/* <ul className="pagination">
                               <li>
                                 <span className="button disabled">Prev</span>
                               </li>
@@ -287,7 +316,7 @@ function PostViewByMember() {
                                   Next
                                 </a>
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                         </article>
                       </div>

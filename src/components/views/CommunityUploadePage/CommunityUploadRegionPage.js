@@ -83,7 +83,7 @@ function CommunityUploadRegionPage(props) {
       Authorization: `Bearer ` + localStorage.getItem("token"),
     };
 
-    Axios.post(`${USER_SERVER}/api/post/add/region`, variable, {
+    Axios.post(`${USER_SERVER}/api/post/add/sido`, variable, {
       headers,
     }).then((response) => {
       console.log(variable.content);
@@ -93,7 +93,7 @@ function CommunityUploadRegionPage(props) {
         message.success("성공적으로 업로드했습니다");
 
         setTimeout(() => {
-          props.history.push("../../region");
+          props.history.push("/sido/view/1");
           window.scrollTo(0, 0);
         }, 3000);
       } else {

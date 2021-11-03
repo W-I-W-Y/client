@@ -129,7 +129,7 @@ function SideBar(props) {
                     </ul>
                   </li>
                   <li>
-                    <a href="/board/sido/view/1">지역게시판</a>
+                    <a href="/sido/view/1">지역게시판</a>
                   </li>
                 </ul>
               </nav>

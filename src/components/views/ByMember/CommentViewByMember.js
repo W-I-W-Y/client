@@ -5,9 +5,18 @@ import SideBar from "../CommunityPage/Section/SideBar";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router";
 
-function CommentViewByMember() {
+function CommentViewByMember(props) {
+  const pageNum = props.match.params.pageNum;
+  const [pageTotalNum, setPageTotalNum] = useState(4);
+  const [page, setPage] = useState([]);
   const [comment, setComment] = useState([]);
+  //SECTION pagination
+  const paginationNum = [];
+  // pageTotalNum
 
+  for (let i = 0; i < pageTotalNum; i++) {
+    paginationNum.push(i + 1);
+  }
   const [sidebar, setSidebar] = useState(true);
 
   const changeState = () => {
@@ -21,41 +30,55 @@ function CommentViewByMember() {
   //   pageNum: Number(0),
   // };
   useEffect(() => {
-    Axios.get(`${USER_SERVER}/api/comment/viewByMember/0`, { headers }).then(
-      (response, index) => {
-        if (response.data !== null) {
-          response.data.forEach((lists) => {
-            setComment((state) => [
-              ...state,
-              {
-                id: lists.id,
-                content: lists.content,
-                calculateTime: lists.calculateTime,
-                createTime: lists.createTime,
-                username: lists.username,
-                postName: lists.postName,
-                likes: lists.likes,
-                hates: lists.hates,
-                author: lists.author,
-                postId: lists.postId,
-              },
-            ]);
-          });
-          console.log("데이터 받아오는데 성공");
-        } else {
-          alert("내가 쓴 게시글을 가져오는데 실패했습니다.");
-        }
+    Axios.get(`${USER_SERVER}/api/comment/viewByMember/${pageNum}`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        response.data.forEach((lists) => {
+          setComment((state) => [
+            ...state,
+            {
+              id: lists.id,
+              content: lists.content,
+              calculateTime: lists.calculateTime,
+              createTime: lists.createTime,
+              username: lists.username,
+              postName: lists.postName,
+              likes: lists.likes,
+              hates: lists.hates,
+              author: lists.author,
+              postId: lists.postId,
+            },
+          ]);
+        });
+      } else {
+        alert("내가 쓴 게시글을 가져오는데 실패했습니다.");
       }
-    );
+    });
+
+    Axios.get(`${USER_SERVER}/api/post/likeByMember/pagination`, {
+      headers,
+    }).then((response, index) => {
+      if (response.data !== null) {
+        console.log(response.data);
+        setPage({
+          totalElements: response.data.totalElements,
+          totalPages: response.data.totalPages,
+        });
+        setPageTotalNum(response.data.totalPages);
+      } else {
+        alert("페이지 정보를 가져오는데 실패했습니다.");
+      }
+    });
   }, []);
+
+  console.log(pageTotalNum);
 
   const history = useHistory();
   const detailPost = (id) => {
     history.push("../../../post/view/" + id);
     window.scrollTo(0, 0);
   };
-
-  console.log("이건?");
 
   const deleteComment = (Id) => {
     const headers = {
@@ -223,16 +246,21 @@ function CommentViewByMember() {
                       >
                         <article>
                           <div className="pagination">
-                            {/* <ul>
+                            <ul className="pagination">
                               {paginationNum.map((i, index) => {
                                 return (
-                                  <li key={index} onClick={paginationOnclick}>
-                                    {paginationNum[index]}
+                                  <li key={index}>
+                                    <a
+                                      href={"./" + (index + 1)}
+                                      className="page active"
+                                    >
+                                      {paginationNum[index]}
+                                    </a>
                                   </li>
                                 );
                               })}
-                            </ul> */}
-                            <ul className="pagination">
+                            </ul>
+                            {/* <ul className="pagination">
                               <li>
                                 <span className="button disabled">Prev</span>
                               </li>
@@ -274,7 +302,7 @@ function CommentViewByMember() {
                                   Next
                                 </a>
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                         </article>
                       </div>

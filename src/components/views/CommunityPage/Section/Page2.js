@@ -39,7 +39,7 @@ function Page2(props) {
       Authorization: `Bearer ` + localStorage.getItem("token"),
     };
 
-    Axios.get(`${USER_SERVER}/api/board/sido/view/${pageNum}`, {
+    Axios.get(`${USER_SERVER}/api/sido/view/${pageNum}`, {
       headers,
     }).then((response, index) => {
       if (response.data !== null) {
@@ -75,7 +75,7 @@ function Page2(props) {
       }
     });
 
-    Axios.get(`${USER_SERVER}/api/board/sido/pagination`, { headers }).then(
+    Axios.get(`${USER_SERVER}/api/sido/pagination`, { headers }).then(
       (response, index) => {
         if (response.data !== null) {
           console.log(response.data);
@@ -169,7 +169,7 @@ function Page2(props) {
                             marginTop: "20px",
                           }}
                         >
-                          <a className="button" href="/add/region">
+                          <a className="button" href="/add/sido">
                             글쓰기
                           </a>
                         </div>
@@ -263,16 +263,21 @@ function Page2(props) {
                       >
                         <article>
                           <div className="pagination">
-                            {/* <ul>
+                            <ul className="pagination">
                               {paginationNum.map((i, index) => {
                                 return (
-                                  <li key={index} onClick={paginationOnclick}>
-                                    {paginationNum[index]}
+                                  <li key={index}>
+                                    <a
+                                      href={"./" + (index + 1)}
+                                      className="page active"
+                                    >
+                                      {paginationNum[index]}
+                                    </a>
                                   </li>
                                 );
                               })}
-                            </ul> */}
-                            <ul className="pagination">
+                            </ul>
+                            {/* <ul className="pagination">
                               <li>
                                 <span className="button disabled">Prev</span>
                               </li>
@@ -314,7 +319,7 @@ function Page2(props) {
                                   Next
                                 </a>
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                         </article>
                       </div>
