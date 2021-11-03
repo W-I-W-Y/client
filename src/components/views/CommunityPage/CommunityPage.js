@@ -21,9 +21,16 @@ function CommunityPage() {
   const [communityPost, setCommunityPost] = useState([]);
   const [vote, setVote] = useState([]);
 
+  const [sidebar, setSidebar] = useState(true);
+
   const [modalOpen, setModalOpen] = useState(false);
   const modalClose = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const changeState = () => {
+    setSidebar(!sidebar);
+    console.log(sidebar);
   };
 
   useEffect(() => {
@@ -220,241 +227,511 @@ function CommunityPage() {
         </head>
         <body>
           <div id="wrapper">
-            <div id="main">
-              <div className="inner">
-                <header id="header">
-                  <a
-                    href="community.html"
-                    className="logo"
-                    style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}
-                  >
-                    <strong>코로나 시대</strong> 살아남기
-                  </a>
-                  <ul className="icons">
-                    <li>
-                      <a href="#" className="icon fa-twitter">
-                        <span className="label">Twitter</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="icon fa-facebook">
-                        <span className="label">Facebook</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="icon fa-snapchat-ghost">
-                        <span className="label">Snapchat</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="icon fa-instagram">
-                        <span className="label">Instagram</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="icon fa-medium">
-                        <span className="label">Medium</span>
-                      </a>
-                    </li>
-                  </ul>
-                </header>
-
-                <section id="banner">
-                  <div className="content">
-                    <header>
-                      <h1
-                        style={{
-                          fontFamily: "Droid Sans",
-                          fontSize: "2rem",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        코로나 시대를 살아가는 여러분들을 위한
-                        <strong style={{ color: "#f56a6a" }}>
-                          {" "}
-                          COVID-19 정보 제공 서비스
-                        </strong>
-                      </h1>
-                      <p
-                        style={{ fontFamily: "Droid Sans", fontSize: "1.3rem" }}
-                      >
-                        확진자 정보, 백신접종 정보, 국내외 발생 현황, 전세계
-                        확진 현황
-                      </p>
-                    </header>
-                    <p style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}>
-                      저희 서비스를 이용하시면{" "}
-                      <strong>확진환자, 격리해제, 격리중, 사망자의 현황</strong>
-                      을 알 수 있고, <strong>백신접종 현황</strong>을 알 수
-                      있습니다. 또한 <strong>시도별 확진자 수</strong>를 확인할
-                      수 있으며, <strong>국내뿐만 아니라 국외 발생동향</strong>
-                      도 알 수 있습니다. 더 나아가 코로나 백신 접종 현황까지 한
-                      눈에 확인 가능합니다.
-                    </p>
-                    <ul className="actions">
+            {sidebar ? (
+              <div id="main">
+                <div className="inner">
+                  <header id="header">
+                    <a
+                      href="community.html"
+                      className="logo"
+                      style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}
+                    >
+                      <strong>코로나 시대</strong> 살아남기
+                    </a>
+                    <ul className="icons">
                       <li>
-                        <a
-                          href="/"
-                          className="button big"
-                          style={{
-                            fontFamily: "Droid Sans",
-                            fontSize: "0.8rem",
-                          }}
-                        >
-                          정보 알아보기
+                        <a href="#" className="icon fa-twitter">
+                          <span className="label">Twitter</span>
                         </a>
                       </li>
                       <li>
-                        <a
-                          onClick={modalClose}
-                          className="button big"
-                          style={{
-                            fontFamily: "Droid Sans",
-                            fontSize: "0.8rem",
-                          }}
-                        >
-                          내 주변 선별진료소 확인
+                        <a href="#" className="icon fa-facebook">
+                          <span className="label">Facebook</span>
                         </a>
-                        {modalOpen && (
-                          <ModalSetting modalClose={modalClose}></ModalSetting>
-                        )}
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-snapchat-ghost">
+                          <span className="label">Snapchat</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-instagram">
+                          <span className="label">Instagram</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-medium">
+                          <span className="label">Medium</span>
+                        </a>
                       </li>
                     </ul>
-                  </div>
-                  <span className="image object">
-                    <img src={covidLogo} alt="" />
-                  </span>
-                </section>
-
-                <section>
-                  <div style={{ textAlign: "center" }}>
-                    <h1>
-                      {" "}
-                      <strong style={{ color: "#f56a6a" }}> 오늘의 투표</strong>
-                    </h1>
-                    <h1
-                      style={{
-                        fontFamily: "Droid Sans",
-                        fontSize: "2rem",
-                        textAlign: "center",
-                        marginBottom: "30px",
-                      }}
-                    >
-                      "{vote.content}"
-                    </h1>
-                  </div>
-                  <br />
-                  <Row
-                    gutter={16}
-                    style={{
-                      display: "flex",
-                      marginRight: "0px",
-                      marginLeft: "0px",
-                    }}
-                  >
-                    <div
-                      className="true"
-                      style={{
-                        width: `${(
-                          (vote.agreeCnt / (vote.agreeCnt + vote.disagreeCnt)) *
-                          100
-                        ).toFixed(1)}%`,
-                        cursor: "pointer",
-                      }}
-                      onClick={agreeClick}
-                    >
-                      <h1
-                        style={{
-                          fontFamily: "Droid Sans",
-                          fontSize: "2rem",
-                          textAlign: "left",
-                          marginBottom: "30px",
-                        }}
-                      >
-                        <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
-                        {(
-                          (vote.agreeCnt / (vote.agreeCnt + vote.disagreeCnt)) *
-                          100
-                        ).toFixed(1)}
-                        %(
-                        {vote.agreeCnt}명)
-                      </h1>
-                      <div
-                        style={{
-                          backgroundColor: "#FA6A90",
-                          height: "30px",
-                          position: "relative",
-                        }}
-                      ></div>
-                      <img
-                        src={trueimg}
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          position: "relative",
-                          top: "-74px",
-                          float: "right",
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="false"
-                      style={{
-                        width: `${(
-                          (vote.disagreeCnt /
-                            (vote.agreeCnt + vote.disagreeCnt)) *
-                          100
-                        ).toFixed(1)}%`,
-                        cursor: "pointer",
-                      }}
-                      onClick={disagreeClick}
-                    >
-                      <h1
-                        style={{
-                          fontFamily: "Droid Sans",
-                          fontSize: "2rem",
-                          textAlign: "right",
-                          marginBottom: "30px",
-                        }}
-                      >
-                        {(
-                          (vote.disagreeCnt /
-                            (vote.agreeCnt + vote.disagreeCnt)) *
-                          100
-                        ).toFixed(1)}
-                        %({vote.disagreeCnt}명){" "}
-                        <strong style={{ color: "#6AA8FA" }}>반대</strong>
-                      </h1>
-                      <div
-                        style={{ backgroundColor: "#6AA8FA", height: "30px" }}
-                      ></div>
-                      <img
-                        src={falseimg}
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          position: "relative",
-                          top: "-74px",
-                          float: "left",
-                        }}
-                      />
-                    </div>
-                  </Row>
-                </section>
-                <section>
-                  <header className="major">
-                    <h2
-                      style={{ fontFamily: "Droid Sans", fontSize: "1.8rem" }}
-                    >
-                      게시판
-                    </h2>
                   </header>
 
-                  <Row gutter={16}>{renderCards}</Row>
-                </section>
+                  <section id="banner">
+                    <div className="content">
+                      <header>
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          코로나 시대를 살아가는 여러분들을 위한
+                          <strong style={{ color: "#f56a6a" }}>
+                            {" "}
+                            COVID-19 정보 제공 서비스
+                          </strong>
+                        </h1>
+                        <p
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "1.3rem",
+                          }}
+                        >
+                          확진자 정보, 백신접종 정보, 국내외 발생 현황, 전세계
+                          확진 현황
+                        </p>
+                      </header>
+                      <p
+                        style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}
+                      >
+                        저희 서비스를 이용하시면{" "}
+                        <strong>
+                          확진환자, 격리해제, 격리중, 사망자의 현황
+                        </strong>
+                        을 알 수 있고, <strong>백신접종 현황</strong>을 알 수
+                        있습니다. 또한 <strong>시도별 확진자 수</strong>를
+                        확인할 수 있으며,{" "}
+                        <strong>국내뿐만 아니라 국외 발생동향</strong>도 알 수
+                        있습니다. 더 나아가 코로나 백신 접종 현황까지 한 눈에
+                        확인 가능합니다.
+                      </p>
+                      <ul className="actions">
+                        <li>
+                          <a
+                            href="/"
+                            className="button big"
+                            style={{
+                              fontFamily: "Droid Sans",
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            정보 알아보기
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            onClick={modalClose}
+                            className="button big"
+                            style={{
+                              fontFamily: "Droid Sans",
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            내 주변 선별진료소 확인
+                          </a>
+                          {modalOpen && (
+                            <ModalSetting
+                              modalClose={modalClose}
+                            ></ModalSetting>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
+                    <span className="image object">
+                      <img src={covidLogo} alt="" />
+                    </span>
+                  </section>
+
+                  <section>
+                    <div style={{ textAlign: "center" }}>
+                      <h1>
+                        {" "}
+                        <strong style={{ color: "#f56a6a" }}>
+                          {" "}
+                          오늘의 투표
+                        </strong>
+                      </h1>
+                      <h1
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          textAlign: "center",
+                          marginBottom: "30px",
+                        }}
+                      >
+                        "{vote.content}"
+                      </h1>
+                    </div>
+                    <br />
+                    <Row
+                      gutter={16}
+                      style={{
+                        display: "flex",
+                        marginRight: "0px",
+                        marginLeft: "0px",
+                      }}
+                    >
+                      <div
+                        className="true"
+                        style={{
+                          width: `${(
+                            (vote.agreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}%`,
+                          cursor: "pointer",
+                        }}
+                        onClick={agreeClick}
+                      >
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            textAlign: "left",
+                            marginBottom: "30px",
+                          }}
+                        >
+                          <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
+                          {(
+                            (vote.agreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}
+                          %(
+                          {vote.agreeCnt}명)
+                        </h1>
+                        <div
+                          style={{
+                            backgroundColor: "#FA6A90",
+                            height: "30px",
+                            position: "relative",
+                          }}
+                        ></div>
+                        <img
+                          src={trueimg}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            position: "relative",
+                            top: "-74px",
+                            float: "right",
+                          }}
+                        />
+                      </div>
+                      <div
+                        className="false"
+                        style={{
+                          width: `${(
+                            (vote.disagreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}%`,
+                          cursor: "pointer",
+                        }}
+                        onClick={disagreeClick}
+                      >
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            textAlign: "right",
+                            marginBottom: "30px",
+                          }}
+                        >
+                          {(
+                            (vote.disagreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}
+                          %({vote.disagreeCnt}명){" "}
+                          <strong style={{ color: "#6AA8FA" }}>반대</strong>
+                        </h1>
+                        <div
+                          style={{ backgroundColor: "#6AA8FA", height: "30px" }}
+                        ></div>
+                        <img
+                          src={falseimg}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            position: "relative",
+                            top: "-74px",
+                            float: "left",
+                          }}
+                        />
+                      </div>
+                    </Row>
+                  </section>
+                  <section>
+                    <header className="major">
+                      <h2
+                        style={{ fontFamily: "Droid Sans", fontSize: "1.8rem" }}
+                      >
+                        게시판
+                      </h2>
+                    </header>
+
+                    <Row gutter={16}>{renderCards}</Row>
+                  </section>
+                </div>
               </div>
-            </div>
-            <SideBar />
+            ) : (
+              <div id="main" style={{ width: "100%" }}>
+                <div
+                  className="inner"
+                  style={{ width: "127%", transform: "translate(-192px,10px)" }}
+                >
+                  <header id="header">
+                    <a
+                      href="community.html"
+                      className="logo"
+                      style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}
+                    >
+                      <strong>코로나 시대</strong> 살아남기
+                    </a>
+                    <ul className="icons">
+                      <li>
+                        <a href="#" className="icon fa-twitter">
+                          <span className="label">Twitter</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-facebook">
+                          <span className="label">Facebook</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-snapchat-ghost">
+                          <span className="label">Snapchat</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-instagram">
+                          <span className="label">Instagram</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="icon fa-medium">
+                          <span className="label">Medium</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </header>
+
+                  <section id="banner">
+                    <div className="content">
+                      <header>
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          코로나 시대를 살아가는 여러분들을 위한
+                          <strong style={{ color: "#f56a6a" }}>
+                            {" "}
+                            COVID-19 정보 제공 서비스
+                          </strong>
+                        </h1>
+                        <p
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "1.3rem",
+                          }}
+                        >
+                          확진자 정보, 백신접종 정보, 국내외 발생 현황, 전세계
+                          확진 현황
+                        </p>
+                      </header>
+                      <p
+                        style={{ fontFamily: "Droid Sans", fontSize: "1.1rem" }}
+                      >
+                        저희 서비스를 이용하시면{" "}
+                        <strong>
+                          확진환자, 격리해제, 격리중, 사망자의 현황
+                        </strong>
+                        을 알 수 있고, <strong>백신접종 현황</strong>을 알 수
+                        있습니다. 또한 <strong>시도별 확진자 수</strong>를
+                        확인할 수 있으며,{" "}
+                        <strong>국내뿐만 아니라 국외 발생동향</strong>도 알 수
+                        있습니다. 더 나아가 코로나 백신 접종 현황까지 한 눈에
+                        확인 가능합니다.
+                      </p>
+                      <ul className="actions">
+                        <li>
+                          <a
+                            href="/"
+                            className="button big"
+                            style={{
+                              fontFamily: "Droid Sans",
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            정보 알아보기
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            onClick={modalClose}
+                            className="button big"
+                            style={{
+                              fontFamily: "Droid Sans",
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            내 주변 선별진료소 확인
+                          </a>
+                          {modalOpen && (
+                            <ModalSetting
+                              modalClose={modalClose}
+                            ></ModalSetting>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
+                    <span className="image object">
+                      <img src={covidLogo} alt="" />
+                    </span>
+                  </section>
+
+                  <section>
+                    <div style={{ textAlign: "center" }}>
+                      <h1>
+                        {" "}
+                        <strong style={{ color: "#f56a6a" }}>
+                          {" "}
+                          오늘의 투표
+                        </strong>
+                      </h1>
+                      <h1
+                        style={{
+                          fontFamily: "Droid Sans",
+                          fontSize: "2rem",
+                          textAlign: "center",
+                          marginBottom: "30px",
+                        }}
+                      >
+                        "{vote.content}"
+                      </h1>
+                    </div>
+                    <br />
+                    <Row
+                      gutter={16}
+                      style={{
+                        display: "flex",
+                        marginRight: "0px",
+                        marginLeft: "0px",
+                      }}
+                    >
+                      <div
+                        className="true"
+                        style={{
+                          width: `${(
+                            (vote.agreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}%`,
+                          cursor: "pointer",
+                        }}
+                        onClick={agreeClick}
+                      >
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            textAlign: "left",
+                            marginBottom: "30px",
+                          }}
+                        >
+                          <strong style={{ color: "#FA6A90" }}>찬성</strong>{" "}
+                          {(
+                            (vote.agreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}
+                          %(
+                          {vote.agreeCnt}명)
+                        </h1>
+                        <div
+                          style={{
+                            backgroundColor: "#FA6A90",
+                            height: "30px",
+                            position: "relative",
+                          }}
+                        ></div>
+                        <img
+                          src={trueimg}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            position: "relative",
+                            top: "-74px",
+                            float: "right",
+                          }}
+                        />
+                      </div>
+                      <div
+                        className="false"
+                        style={{
+                          width: `${(
+                            (vote.disagreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}%`,
+                          cursor: "pointer",
+                        }}
+                        onClick={disagreeClick}
+                      >
+                        <h1
+                          style={{
+                            fontFamily: "Droid Sans",
+                            fontSize: "2rem",
+                            textAlign: "right",
+                            marginBottom: "30px",
+                          }}
+                        >
+                          {(
+                            (vote.disagreeCnt /
+                              (vote.agreeCnt + vote.disagreeCnt)) *
+                            100
+                          ).toFixed(1)}
+                          %({vote.disagreeCnt}명){" "}
+                          <strong style={{ color: "#6AA8FA" }}>반대</strong>
+                        </h1>
+                        <div
+                          style={{ backgroundColor: "#6AA8FA", height: "30px" }}
+                        ></div>
+                        <img
+                          src={falseimg}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            position: "relative",
+                            top: "-74px",
+                            float: "left",
+                          }}
+                        />
+                      </div>
+                    </Row>
+                  </section>
+                  <section>
+                    <header className="major">
+                      <h2
+                        style={{ fontFamily: "Droid Sans", fontSize: "1.8rem" }}
+                      >
+                        게시판
+                      </h2>
+                    </header>
+
+                    <Row gutter={16}>{renderCards}</Row>
+                  </section>
+                </div>
+              </div>
+            )}
+            <SideBar sidebar={sidebar} changeState={changeState} />
           </div>
         </body>
       </html>

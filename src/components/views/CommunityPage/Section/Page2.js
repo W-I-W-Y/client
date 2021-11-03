@@ -27,6 +27,11 @@ function Page2(props) {
   for (let i = 0; i < pageTotalNum; i++) {
     paginationNum.push(i + 1);
   }
+  const [sidebar, setSidebar] = useState(true);
+  const changeState = () => {
+    setSidebar(!sidebar);
+    console.log(sidebar);
+  };
 
   const paginationOnclick = (e) => {
     console.log(Number(e.target.innerText) - 1);
@@ -94,7 +99,7 @@ function Page2(props) {
         <body>
           <Row gutter={[16, 16]}>
             <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
-              <SideBar />
+              <SideBar sidebar={sidebar} changeState={changeState} />
             </Col>
             <Col lg={20} xs={24}>
               <div id="wrapper">

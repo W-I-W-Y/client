@@ -9,7 +9,7 @@ import $ from "jquery";
 
 import "../../NavBar/Sections/Navbar.css";
 
-function SideBar() {
+function SideBar(props) {
   const [board, setBoard] = useState([]);
   const [BoardName, setBoardName] = useState([]);
 
@@ -66,6 +66,7 @@ function SideBar() {
   }, []);
 
   const toggleMenu = () => {
+    props.changeState();
     if (xPosition < 0) {
       setX(0);
     } else {

@@ -20,6 +20,11 @@ function CommunityUploadRegionPage(props) {
   const [category, setCategory] = useState("Film & Animation");
   const [filePath, setFilePath] = useState("");
 
+  const [sidebar, setSidebar] = useState(true);
+  const changeState = () => {
+    setSidebar(!sidebar);
+    console.log(sidebar);
+  };
   const onTitleChange = (e) => {
     setPostName(e.currentTarget.value);
   };
@@ -100,7 +105,7 @@ function CommunityUploadRegionPage(props) {
   return (
     <Row gutter={[16, 16]}>
       <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
-        <SideBar />
+        <SideBar sidebar={sidebar} changeState={changeState} />
       </Col>
       <Col lg={20} xs={24}>
         <div style={{ maxWidth: "700px", margin: "2rem auto" }}>

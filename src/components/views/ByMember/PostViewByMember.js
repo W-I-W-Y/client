@@ -7,6 +7,13 @@ import { useHistory } from "react-router";
 
 function PostViewByMember() {
   const [post, setPost] = useState([]);
+
+  const [sidebar, setSidebar] = useState(true);
+
+  const changeState = () => {
+    setSidebar(!sidebar);
+    console.log(sidebar);
+  };
   const headers = {
     Authorization: `Bearer ` + localStorage.getItem("token"),
   };
@@ -89,7 +96,7 @@ function PostViewByMember() {
         <body>
           <Row gutter={[16, 16]}>
             <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
-              <SideBar />
+              <SideBar sidebar={sidebar} changeState={changeState} />
             </Col>
             <Col lg={20} xs={24}>
               <div id="wrapper">

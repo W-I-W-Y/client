@@ -3971,6 +3971,60 @@ button:disabled,
   }
 }
 
+@media screen and (max-width: 1080px) {
+  #sidebar {
+    box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+  }
+  #sidebar {
+    box-shadow: 0 0 2em 0 rgba(208, 207, 207, 0.175);
+    height: 1350px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+  }
+
+  #sidebar.inactive {
+    box-shadow: none;
+  }
+
+  #sidebar > .inner {
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+  }
+
+  #sidebar > .inner:after {
+    content: "";
+    display: block;
+    height: 4em;
+    width: 100%;
+  }
+
+  #sidebar .toggle {
+    text-indent: 6em;
+    width: 6em;
+  }
+
+  #sidebar .toggle:before {
+    font-size: 1.5rem;
+    margin-left: -0.4375em;
+  }
+
+  body.is-loading #sidebar {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 736px) {
   #sidebar .toggle {
     text-indent: 7.25em;
@@ -4492,6 +4546,48 @@ button:disabled,
 }
 .thtitle {
   text-align: left;
+}
+@media (min-width: 560px) and (max-width: 1080px) {
+  .toggle-menu {
+    display: inline !important;
+    height: 50px;
+    border-top-right-radius: 10rem;
+    border-bottom-right-radius: 9rem;
+    width: 10px;
+    position: absolute;
+    outline: none;
+    z-index: 1;
+    background-color: rgba(255, 215, 248, 0.693);
+    border-left: 0;
+    box-shadow: none !important;
+  }
+  .board {
+    border: 0.2px solid rgb(167, 164, 164);
+    border-top: none;
+    margin-bottom: 30px;
+    width: 287px;
+  }
+  #actions-more {
+    width: 286px !important;
+  }
+}
+.side-bar {
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid;
+  border-radius: 0;
+  border-color: rgba(64, 194, 133, 0.693);
+  background-color: rgb(255, 255, 255);
+  transition: 0.8s ease;
+}
+
+.toggle-menu {
+  display: none;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+  min-height: 500px;
 }
 @media (min-width: 0px) and (max-width: 480px) {
   .toggle-menu {

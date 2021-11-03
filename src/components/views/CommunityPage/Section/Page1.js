@@ -32,6 +32,12 @@ function Page1(props) {
   };
 
   const [post, setPost] = useState([]);
+  const [sidebar, setSidebar] = useState(true);
+
+  const changeState = () => {
+    setSidebar(!sidebar);
+    console.log(sidebar);
+  };
 
   useEffect(() => {
     Axios.get(`${USER_SERVER}/api/board/${boardId}/view/0`).then(
@@ -92,7 +98,7 @@ function Page1(props) {
         <body>
           <Row gutter={[16, 16]}>
             <Col lg={4} xs={24} style={{ zIndex: "1000" }}>
-              <SideBar />
+              <SideBar sidebar={sidebar} changeState={changeState} />
             </Col>
             <Col lg={20} xs={24}>
               <div id="wrapper">
