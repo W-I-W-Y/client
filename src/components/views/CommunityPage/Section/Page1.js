@@ -122,11 +122,11 @@ function Page1(props) {
                   <div className="inner">
                     <header id="header">
                       <a href="#" className="logo">
-                        <strong
+                        {/* <strong
                           style={{ fontFamily: "Droid Sans", fontSize: "2rem" }}
                         >
                           {post[0]?.boardName}
-                        </strong>
+                        </strong> */}
                         <p
                           style={{
                             fontFamily: "Droid Sans",
