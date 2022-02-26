@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { Row, Col } from "antd";
+import { Row, Col } from "react-bootstrap";
 import SideBar from "../CommunityPage/Section/SideBar";
 import { USER_SERVER } from "../../Config";
 import { useHistory } from "react-router";

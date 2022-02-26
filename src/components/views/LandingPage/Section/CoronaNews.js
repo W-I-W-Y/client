@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
-import { Row, Col } from "antd";
+import { Row, Col } from "react-bootstrap";
 import coronaNews1 from "../../../../images/coronaNews1.jpeg";
 import coronaNews2 from "../../../../images/coronaNews2.jpeg";
 import coronaNews3 from "../../../../images/coronaNews3.jpeg";

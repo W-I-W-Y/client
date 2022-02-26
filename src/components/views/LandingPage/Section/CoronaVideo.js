@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
-import { Row, Col } from "antd";
+import { Row, Col } from "react-bootstrap";
 
 function Content3() {
   return (

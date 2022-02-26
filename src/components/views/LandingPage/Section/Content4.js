@@ -1,5 +1,5 @@
 import React, { useEffect, useState, PureComponent } from "react";
-import { Row, Col } from "antd";
+import { Row, Col } from "react-bootstrap";
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import {
