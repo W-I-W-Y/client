@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Tooltip } from "antd"; //Icon
+import { Tooltip } from "antd";
+import Icon from "@ant-design/icons";
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { useHistory } from "react-router";
