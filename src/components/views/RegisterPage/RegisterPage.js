@@ -247,7 +247,7 @@ function RegisterPage(props) {
               </Form.Item>
 
               <Form.Item {...tailFormItemLayout}>
-                <a
+                <Button
                   className="button"
                   onClick={handleSubmit}
                   type="primary"
@@ -260,7 +260,7 @@ function RegisterPage(props) {
                   }}
                 >
                   Submit
-                </a>
+                </Button>
               </Form.Item>
             </Form>
           </div>

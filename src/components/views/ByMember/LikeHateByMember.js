@@ -324,49 +324,6 @@ function LikeHateByMember(props) {
                                 );
                               })}
                             </ul>
-                            {/* <ul className="pagination">
-                              <li>
-                                <span className="button disabled">Prev</span>
-                              </li>
-                              <li>
-                                <a href="#" className="page active">
-                                  1
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" className="page">
-                                  2
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" className="page">
-                                  3
-                                </a>
-                              </li>
-                              <li>
-                                <span>&hellip;</span>
-                              </li>
-                              <li>
-                                <a href="#" className="page">
-                                  8
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" className="page">
-                                  9
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" className="page">
-                                  10
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" className="button">
-                                  Next
-                                </a>
-                              </li>
-                            </ul> */}
                           </div>
                         </article>
                       </div>
