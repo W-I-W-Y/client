@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Form, Icon, Input, Button, Checkbox, Typography } from "antd";
+import { Form, Input, Button, Checkbox, Typography } from "antd"; //Icon
 import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { USER_SERVER } from "../../Config";
@@ -92,9 +92,9 @@ function LoginPage(props) {
               <Form.Item required>
                 <Input
                   id="username"
-                  prefix={
+                  /*prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
+                  }*/
                   placeholder="Enter your Name"
                   type="username"
                   value={values.username}
@@ -114,9 +114,9 @@ function LoginPage(props) {
               <Form.Item required>
                 <Input
                   id="password"
-                  prefix={
+                  /*prefix={
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
+                  }*/
                   placeholder="Enter your password"
                   type="password"
                   value={values.password}

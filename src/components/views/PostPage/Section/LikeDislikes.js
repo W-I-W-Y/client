@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tooltip, Icon } from "antd";
+import { Tooltip } from "antd"; //Icon
 import Axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { useHistory } from "react-router";
@@ -95,26 +95,12 @@ function LikeDislikes(props) {
   return (
     <>
       <span key="comment-basic-like">
-        <Tooltip title="Like">
-          <Icon
-            type="like"
-            theme={props.isLike === true ? "filled" : "outlined"}
-            onClick={onLike}
-          />
-        </Tooltip>
         <span style={{ paddingLeft: "8px", cursor: "auto" }}>
           {props.likes}
         </span>
       </span>
       &nbsp;&nbsp;
       <span key="comment-basic-like">
-        <Tooltip title="Dislike">
-          <Icon
-            type="dislike"
-            theme={props.isHate === true ? "filled" : "outlined"}
-            onClick={onDisLike}
-          />
-        </Tooltip>
         <span style={{ paddingLeft: "8px", cursor: "auto" }}>
           {props.hates}
         </span>
@@ -125,3 +111,21 @@ function LikeDislikes(props) {
 }
 
 export default LikeDislikes;
+
+/* <Tooltip title="Like">
+          <Icon
+            type="like"
+            theme={props.isLike === true ? "filled" : "outlined"}
+            onClick={onLike}
+          />
+        </Tooltip>
+
+
+         <Tooltip title="Dislike">
+          <Icon
+            type="dislike"
+            theme={props.isHate === true ? "filled" : "outlined"}
+            onClick={onDisLike}
+          />
+        </Tooltip>
+*/
